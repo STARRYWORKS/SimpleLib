@@ -1,0 +1,813 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+
+<title>simplelib with jQuery</title>
+
+<link rel="stylesheet" type="text/css" href="css/reset.css" media="all" />
+<link rel="stylesheet" type="text/css" href="css/index.css" media="all" />
+<link type="text/css" rel="stylesheet" href="css/SyntaxHighlighter.css" />
+
+<script type="text/javascript" src="js/jquery-1.4.1.min.js"></script>
+<script type="text/javascript" src="../src/simplelib.js?accordion,rollOver,scroll,rollOver,tab,toolTip,imgSwap,lightBox,ie6PositionFixed,fixHeight,ie6PngFix,textHint,overlayOthers,showIfScroll,trimmedScroll"></script>
+<script type="text/javascript" src="js/syntaxHighlighter/shCore.js"></script>
+<script type="text/javascript" src="js/syntaxHighlighter/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/syntaxHighlighter/shBrushXml.js"></script>
+<script type="text/javascript" src="js/syntaxHighlighter/shBrushCss.js"></script>
+	
+<script type="text/javascript">
+$(window).load(function(){
+	dp.SyntaxHighlighter.ClipboardSwf = 'js/syntaxHighlighter/clipboard.swf';
+	dp.SyntaxHighlighter.HighlightAll('code');
+});
+
+</script>
+
+<style type="text/css">
+.overlay { background-color:#ffffff; }
+.overlayOthers li { float:left; padding-right:10px; }
+.overlayOthers a { text-decoration:none; }
+div#imgSwap div.sample ul li { float:left; padding-right:10px; }
+</style>
+
+</head>
+
+<body>
+<div id="Wrapper">
+	<h1><img src="images/logo.gif" alt="simplelib with jQuery" width="300" height="80" /></h1>
+	<div class="funcs">
+		<h2><img src="images/title-outline.gif" alt="概要" width="800" height="85" /></h2>
+		<div class="func">
+			<h3><img src="images/title-outline-01.gif" alt="title-outline-01" width="800" height="20" /></h3>
+			<p>
+				SimpleLibとはjQueryを利用した様々なプラグインを動的にロードして、ウェブサイトを構築する上でよく使う機能を一元管理しするためのツールです。<br />
+				各プラグインを別ファイルにし、必要なファイルだけをロードします。
+			</p>
+			<h3><img src="images/title-outline-02.gif" alt="title-outline-02" width="800" height="20" /></h3>
+			<p>現在、以下のようなプラグインがあります。</p>
+			<table>
+				<tbody>
+					<tr>
+						<th><a href="#accordion" class="scroll">accordion</a></th>
+						<td>シンプルなアコーディオンナビゲーション</td>
+					</tr>
+					<tr>
+						<th>fixHeight</th>
+						<td>要素の高さを揃える</td>
+					</tr>
+					<tr>
+						<th><a href="#ie6PngFix" class="scroll">ie6PngFix</a></th>
+						<td>Internet Explorer 6でも透過PNGを使えるようにする</td>
+					</tr>
+					<tr>
+						<th><a href="#ie6PositionFixed" class="scroll">ie6PositionFixed</a></th>
+						<td>Internet Explorer 6でもCSSの position:fixed を使えるようにする</td>
+					</tr>
+					<tr>
+						<th><a href="#imgSwap" class="scroll">imgSwap</a></th>
+						<td>a要素をクリックして、既存のimg要素の画像を切り替える</td>
+					</tr>
+					<tr>
+						<th><a href="#lightBox" class="scroll">lightBox</a></th>
+						<td><a href="http://leandrovieira.com/projects/jquery/lightbox/" target="_blank">jQuery lightBoxプラグイン</a>を読み込む</td>
+					</tr>
+					<tr>
+						<th><a href="#overlayOthers" class="scroll">overlayOthers</a></th>
+						<td>指定した要素の子のa要素にロールオーバーすると他のa要素にcssで背景色や背景画像を指定できる半透明の要素をかぶせる</td>
+					</tr>
+					<tr>
+						<th><a href="#rollOver" class="scroll">rollOver</a></th>
+						<td>マウスオーバー／マウスアウトで画像を切り替える</td>
+					</tr>
+					<tr>
+						<th><a href="#scroll" class="scroll">scroll</a></th>
+						<td>スムーススクロール</td>
+					</tr>
+					<tr>
+						<th>showIfScroll</th>
+						<td>指定した要素をスクロールバーが表示されるとき（ドキュメントの高さがウィンドウの高さを超えるとき）だけ表示する</td>
+					</tr>
+					<tr>
+						<th>tab</th>
+						<td>シンプルなタブナビゲーション</td>
+					</tr>
+					<tr>
+						<th><a href="#textHint" class="scroll">textHint</a></th>
+						<td>未入力で非選択時のテキストボックスにヒントを表示する</td>
+					</tr>
+					<tr>
+						<th>toolTip</th>
+						<td>シンプルなツールチップ</td>
+					</tr>
+					<tr>
+						<th><a href="#trimmedScroll" class="scroll">trimmedScroll</a></th>
+						<td>img要素を含むa要素にロールオーバーすると別の画像をそのimg要素のサイズにトリミングしてスクロールしながら表示する</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<h2><img src="images/title-usage.gif" alt="使い方" width="800" height="85" /></h2>
+		
+		<div class="func">
+			<h3 id="usage01"><img src="images/title-usage-01.gif" alt="title-usage-01" width="800" height="20" /></h3>
+			<p>scriptタグでjQueryを読み込んだ後に、simplelib.jsを読み込みます。その際、src属性にsimplelib.jsのパス指定のあとに「?」（半角クエスチョンマーク）をつけて、読み込むプラグインを「,」（半角カンマ）区切りで指定します。</p>
+			<h4>例</h4>
+			<pre name="code" class="xml">
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/jquery-1.3.2.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/simplelib.js?rollOver,scroll,ie6PngFix&quot;&gt;&lt;/script&gt;
+			</pre>
+			<p>
+				※プラグインのスペル間違いやpluginsフォルダにプラグインファイルが存在しない場合などはコンソールにエラーメッセージが出力されます。
+				コンソールはSafariの開発メニューやFirefoxのプラグインFirebugなどを利用すると確認できます。
+			</p>
+			
+			<h3 id="usage02"><img src="images/title-usage-02.gif" alt="title-usage-02" width="800" height="20" /></h3>
+			<p>
+				SimpleLibでは各プラグインのオプション設定を一元管理して設定することができます。<br />
+				設定をカスタマイズするにはsimplelib.jsを読み込む前にJavaScriptで「SimpleLibSettings」というオブジェクトを定義して、オプション設定を記述します。<br />
+				プラグインごとのオプション設定は<a href="#plugins" class="scroll">各プラグインの使い方</a>で説明します。
+			</p>
+			<h4>例</h4>
+			<pre name="code" class="xml">
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/jquery-1.4.1.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+var SimpleLibSettings = {
+	//rollOverプラグインを発動させるセレクタを変更
+	rollOver: { selector:".hover" },
+	//imgSwapプラグインをクリックではなく、マウスオーバーで発動させるように変更
+	imgSwap: { trigger:"mouseover" }
+};
+&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/simplelib.js?rollOver,imgSwap&quot;&gt;&lt;/script&gt;
+			</pre>
+		</div>
+		
+		<h2 id="plugins"><img src="images/title-plugins.gif" alt="プラグイン" width="800" height="85" /></h2>
+		
+		<!-- div#accordion -->
+		<div class="plugin" id="accordion">
+			<h3>accordion - シンプルなアコーディオン</h3>
+			<p>
+				HTMLの記述だけで実現できるシンプルなアコーディオンナビです。入れ子もできます。
+			</p>
+			<h4>基本的な使い方</h4>
+			<ol>
+				<li>アコーディオン全体を包括する親要素に「accordion」というクラスを付与してください。</li>
+				<li>開閉させるためのボタンとして機能するa要素に「handle」というクラスを付与してください。</li>
+				<li>「handle」というクラスを付与したa要素のhref属性に開閉させる対象の要素のidを「#id名」のように指定してください。</li>
+			</ol>
+			<h4>その他の設定</h4>
+			<ul>
+				<li>
+					あらかじめ開いた状態にしておきたいa要素に「selected」というクラスをつけておくと、その対象の要素が開いた状態になります。<br />
+				</li>
+				<li>選択されている状態のa要素には「selected」というクラスが付与されるので、CSSで見た目の設定ができます。</li>
+			</ul>
+			<h4>オプション設定</h4>
+			<table>
+				<thead>
+					<tr>
+						<th>オプション</th>
+						<th>デフォルト</th>
+						<th>設定内容</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>selector</th>
+						<td>.accordion</td>
+						<td>アコーディオンをグループ化するための親要素のセレクタ</td>
+					</tr>
+					<tr>
+						<th>handleSelector</th>
+						<td>.handle</td>
+						<td>開閉させるためのボタンとして機能するa要素のセレクタ</td>
+					</tr>
+					<tr>
+						<th>selectedClass</th>
+						<td>selected</td>
+						<td>選択状態の要素に付与するクラス</td>
+					</tr>
+					<tr>
+						<th>time</th>
+						<td>300</td>
+						<td>開閉するアニメーションの時間（ミリ秒）</td>
+					</tr>
+				</tbody>
+			</table>
+			<h4>サンプル</h4>
+			<div class="sample">
+				<div class="accordion">
+					<dl>
+						<dt><a href="#Panel01" class="handle selected">ハンドル１</a></dt>
+						<dd id="Panel01">
+							<p>
+								パネル１。これはダミーテキストです。これはダミーテキストです。
+								これはダミーテキストです。これはダミーテキストです。
+								これはダミーテキストです。
+							</p>
+						</dd>
+						<dt><a href="#Panel02" class="handle">ハンドル２</a></dt>
+						<dd id="Panel02">
+							<p>
+								パネル２。ハンドル２にはあらかじめ「selected」というクラスが付与されています。
+								これはダミーテキストです。これはダミーテキストです。これはダミーテキストです。
+								これはダミーテキストです。これはダミーテキストです。
+							</p>
+						</dd>
+						<dt><a href="#Panel03" class="handle">ハンドル３</a></dt>
+						<dd id="Panel03">
+							<p>
+								パネル３。これはダミーテキストです。これはダミーテキストです。
+								これはダミーテキストです。これはダミーテキストです。
+								これはダミーテキストです。
+							</p>
+						</dd>
+					</dl>
+				</div>
+			</div>
+			<h4>サンプルコード</h4>
+			<pre name="code" class="xml">
+	&lt;div class=&quot;accordion&quot;&gt;
+		&lt;dl&gt;
+			&lt;dt&gt;&lt;a href=&quot;#Panel01&quot; class=&quot;handle selected&quot;&gt;&#12495;&#12531;&#12489;&#12523;&#65297;&lt;/a&gt;&lt;/dt&gt;
+			&lt;dd id=&quot;Panel01&quot;&gt;
+				&lt;p&gt;
+					&#12497;&#12493;&#12523;&#65297;&#12290;&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;
+					&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;
+					&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;
+				&lt;/p&gt;
+			&lt;/dd&gt;
+			&lt;dt&gt;&lt;a href=&quot;#Panel02&quot; class=&quot;handle&quot;&gt;&#12495;&#12531;&#12489;&#12523;&#65298;&lt;/a&gt;&lt;/dt&gt;
+			&lt;dd id=&quot;Panel02&quot;&gt;
+				&lt;p&gt;
+					&#12497;&#12493;&#12523;&#65298;&#12290;&#12495;&#12531;&#12489;&#12523;&#65298;&#12395;&#12399;&#12354;&#12425;&#12363;&#12376;&#12417;&#12300;selected&#12301;&#12392;&#12356;&#12358;&#12463;&#12521;&#12473;&#12364;&#20184;&#19982;&#12373;&#12428;&#12390;&#12356;&#12414;&#12377;&#12290;
+					&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;
+					&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;
+				&lt;/p&gt;
+			&lt;/dd&gt;
+			&lt;dt&gt;&lt;a href=&quot;#Panel03&quot; class=&quot;handle&quot;&gt;&#12495;&#12531;&#12489;&#12523;&#65299;&lt;/a&gt;&lt;/dt&gt;
+			&lt;dd id=&quot;Panel03&quot;&gt;
+				&lt;p&gt;
+					&#12497;&#12493;&#12523;&#65299;&#12290;&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;
+					&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;
+					&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;
+				&lt;/p&gt;
+			&lt;/dd&gt;
+		&lt;/dl&gt;
+	&lt;/div&gt;
+&lt;/pre&gt;
+		</div>
+		<!-- /div#accordion -->
+		
+		<!-- div#ie6PngFix -->
+		<div class="plugin" id="ie6PngFix">
+			<h3>ie6PngFix</h3>
+			<p>
+				<a href="http://jquery.khurshid.com/ifixpng.php" target="_blank">jQuery.ifixpng</a>というプラグインを読み込んで、Internet Explorer 6でも透過PNGを利用できるようにします。
+			</p>
+			<h4>基本的な使い方</h4>
+			<ol>
+				<li>透過させたいimg要素に「pngfix」というクラスを付与してください。</li>
+			</ol>
+			<h4>オプション設定</h4>
+			<table>
+				<thead>
+					<tr>
+						<th>オプション</th>
+						<th>デフォルト</th>
+						<th>設定内容</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>selector</th>
+						<td>.pngfix</td>
+						<td>プラグインを発動させる要素のセレクタ</td>
+					</tr>
+				</tbody>
+			</table>
+			<h4>サンプル</h4>
+			<div class="sample">
+				<div style="background-image:url(images/ie6pngfix-bg.gif); padding:90px 80px 60px 80px;">
+					<img src="images/ie6pngfix-img.png" alt="PNG" width="600" height="100" class="pngfix" />
+				</div>
+			</div>
+			<h4>サンプルコード</h4>
+			<pre name="code" class="xml">
+&lt;div style=&quot;background-image:url(images/ie6pngfix-bg.gif); padding:90px 80px 60px 80px;&quot;&gt;
+	&lt;img src=&quot;images/ie6pngfix-img.png&quot; alt=&quot;PNG&quot; width=&quot;600&quot; height=&quot;100&quot; class=&quot;pngfix&quot; /&gt;
+&lt;/div&gt;
+			</pre>
+		</div>
+		<!-- /div#ie6PngFix -->
+		
+
+		<!-- div#ie6PositionFixed -->
+		<div class="plugin" id="ie6PositionFixed">
+			<h3>ie6PositionFixed</h3>
+			<p>
+				<a href="http://d.hatena.ne.jp/cyokodog/20090323/jQueryExFixed" target="_blank">jQuery.exFixed</a>というプラグインを利用して、Internet Explorer 6でもCSSのposition:fixedを利用できるようにします。
+			</p>
+			<h4>基本的な使い方</h4>
+			<ol>
+				<li>position:fixedを指定する要素に「exfixed」というクラスを付与してください。</li>
+			</ol>
+			<h4>オプション設定</h4>
+			<table>
+				<thead>
+					<tr>
+						<th>オプション</th>
+						<th>デフォルト</th>
+						<th>設定内容</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>selector</th>
+						<td>.exfixed, .exFixed</td>
+						<td>プラグインを発動させる要素のセレクタ</td>
+					</tr>
+				</tbody>
+			</table>
+			<h4>サンプル</h4>
+			<div class="sample">
+				このページの中央下にあるこの画像（<img src="images/pagetop.gif" alt="このページの先頭へ" width="20" height="20" />）のようになります。
+				<div style="position:fixed; bottom:0px; left:50%;" class="exfixed">
+					<a href="#" class="scroll rollover"><img src="images/pagetop.gif" alt="このページの先頭へ" width="40" height="40" /></a>
+				</div>
+			</div>
+			<h4>サンプルコード</h4>
+			<pre name="code" class="xml">
+&lt;div style=&quot;position:fixed; bottom:0px; left:50%;&quot; class=&quot;exfixed&quot;&gt;
+	&lt;a href=&quot;#&quot; class=&quot;scroll rollover&quot;&gt;&lt;img src=&quot;images/pagetop.gif&quot; alt=&quot;&#12371;&#12398;&#12506;&#12540;&#12472;&#12398;&#20808;&#38957;&#12408;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;
+&lt;/div&gt;
+			</pre>
+		</div>
+		<!-- /div#ie6PositionFixed -->
+
+
+
+		<!-- div#imgSwap -->
+		<div class="plugin" id="imgSwap">
+			<h3>imgSwap</h3>
+			<p>
+				a要素をクリックして、既存のimg要素の画像を切り替えます。
+			</p>
+			<h4>基本的な使い方</h4>
+			<ol>
+				<li>a要素に「imgSwap」というクラスを付与します。</li>
+				<li>a要素のhref属性に表示したい画像のURLの後に「#」と画像を切り替えたいimg要素のidを指定します。</li>
+			</ol>
+			<h4>オプション設定</h4>
+			<table>
+				<thead>
+					<tr>
+						<th>オプション</th>
+						<th>デフォルト</th>
+						<th>設定内容</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>selector</th>
+						<td>.imgswap, .imgSwap</td>
+						<td>プラグインを発動させる要素のセレクタ</td>
+					</tr>
+					<tr>
+						<th>trigger</th>
+						<td>click</td>
+						<td>画像の切り替えを実行するイベント（mouseoverを指定するとロールオーバーで切り替わる）</td>
+					</tr>
+					<tr>
+						<th>attribute</th>
+						<td>href</td>
+						<td>画像のURLを指定する属性</td>
+					</tr>
+					<tr>
+						<th>othersClass</th>
+						<td>others</td>
+						<td>あるa要素にロールオーバーした時にその他のa要素に付与されるクラス</td>
+					</tr>
+					<tr>
+						<th>scrolling</th>
+						<td>false</td>
+						<td>trueを指定すると画像を切り替えるときに対象のimg要素が画面内に収まっていない場合、img要素の位置までスクロールする</td>
+					</tr>
+					<tr>
+						<th>scrollingTime</th>
+						<td>400</td>
+						<td>scrollingオプションがtrueのとき、目的位置までスクロールする時間（ミリ秒）</td>
+					</tr>
+				</tbody>
+			</table>
+			<h4>サンプル</h4>
+			<div class="sample">
+				<ul class="clearfix">
+					<li><a href="images/sanei-pict01.jpg#MainImg" class="imgSwap"><img src="images/sanei-pict01m.jpg" alt="" width="40" height="40" /></a></li>
+					<li><a href="images/sanei-pict02.jpg#MainImg" class="imgSwap"><img src="images/sanei-pict02m.jpg" alt="" width="40" height="40" /></a></li>
+					<li><a href="images/sanei-pict03.jpg#MainImg" class="imgSwap"><img src="images/sanei-pict03m.jpg" alt="" width="40" height="40" /></a></li>
+					<li><a href="images/sanei-pict04.jpg#MainImg" class="imgSwap"><img src="images/sanei-pict04m.jpg" alt="" width="40" height="40" /></a></li>
+					<li><a href="images/sanei-pict05.jpg#MainImg" class="imgSwap"><img src="images/sanei-pict05m.jpg" alt="" width="40" height="40" /></a></li>
+				</ul>
+				<div>
+					<img src="images/sanei-pict01.jpg" alt="" id="MainImg" width="600" height="992" />
+				</div>
+			</div>
+			<h4>サンプルコード：HTML</h4>
+			<pre name="code" class="xml">
+&lt;ul class=&quot;clearfix&quot;&gt;
+	&lt;li&gt;&lt;a href=&quot;images/sanei-pict01.jpg#MainImg&quot; class=&quot;imgSwap&quot;&gt;&lt;img src=&quot;images/sanei-pict01m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;images/sanei-pict02.jpg#MainImg&quot; class=&quot;imgSwap&quot;&gt;&lt;img src=&quot;images/sanei-pict02m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;images/sanei-pict03.jpg#MainImg&quot; class=&quot;imgSwap&quot;&gt;&lt;img src=&quot;images/sanei-pict03m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;images/sanei-pict04.jpg#MainImg&quot; class=&quot;imgSwap&quot;&gt;&lt;img src=&quot;images/sanei-pict04m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;images/sanei-pict05.jpg#MainImg&quot; class=&quot;imgSwap&quot;&gt;&lt;img src=&quot;images/sanei-pict05m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div&gt;
+	&lt;img src=&quot;images/sanei-pict01.jpg&quot; alt=&quot;&quot; id=&quot;MainImg&quot; width=&quot;600&quot; height=&quot;992&quot; /&gt;
+&lt;/div&gt;
+			</pre>
+		</div>
+		<!-- /div#imgSwap -->
+
+
+
+
+		<!-- div#lightBox -->
+		<div class="plugin" id="lightBox">
+			<h3>lightBox</h3>
+			<p>
+				<a href="http://leandrovieira.com/projects/jquery/lightbox/" target="_blank">jQuery lightBoxプラグイン</a>を読み込みます。
+			</p>
+			<h4>基本的な使い方</h4>
+			<ol>
+				<li>a要素に「lightBox」というクラスを付与します。</li>
+			</ol>
+			<h4>オプション設定</h4>
+			<table>
+				<thead>
+					<tr>
+						<th>オプション</th>
+						<th>デフォルト</th>
+						<th>設定内容</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>selector</th>
+						<td>.lightBox</td>
+						<td>プラグインを発動させる要素のセレクタ</td>
+					</tr>
+					<tr>
+						<th>その他</th>
+						<td colspan="2">jQuery lightBoxのオプションを利用できます。</td>
+					</tr>
+				</tbody>
+			</table>
+			<h4>サンプル</h4>
+			<div class="sample">
+				<a href="images/sanei-pict01.jpg" class="lightBox"><img src="images/sanei-pict01m.jpg" alt="" width="40" height="40" /></a>
+			</div>
+			<h4>サンプルコード：HTML</h4>
+			<pre name="code" class="xml">
+&lt;a href=&quot;images/sanei-pict01.jpg&quot; class=&quot;lightBox&quot;&gt;&lt;img src=&quot;images/sanei-pict01m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;
+			</pre>
+		</div>
+		<!-- /div#lightBox -->
+
+
+
+
+
+
+
+		<!-- div#overlayOthers -->
+		<div class="plugin" id="overlayOthers">
+			<h3>overlayOthers</h3>
+			<p>
+				指定した要素の子孫のa要素にロールオーバーすると、他のa要素にcssで背景色や背景画像を指定できる半透明の要素がかぶさります。
+			</p>
+			<h4>基本的な使い方</h4>
+			<ol>
+				<li>複数のa要素を子孫に持つ要素に「overlayOthers」というクラスを付与します。</li>
+				<li>CSSで「overlay」というクラスを持つ要素の背景を指定します。</li>
+			</ol>
+			<h4>オプション設定</h4>
+			<table>
+				<thead>
+					<tr>
+						<th>オプション</th>
+						<th>デフォルト</th>
+						<th>設定内容</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>selector</th>
+						<td>.overlayOthers</td>
+						<td>プラグインを発動させる要素のセレクタ</td>
+					</tr>
+					<tr>
+						<th>opacity</th>
+						<td>0.8</td>
+						<td>かぶさる要素の不透明度</td>
+					</tr>
+					<tr>
+						<th>exceptionSelector</th>
+						<td>.overlayException</td>
+						<td>対象から除外するa要素につけるクラス</td>
+					</tr>
+					<tr>
+						<th>othersClass</th>
+						<td>others</td>
+						<td>あるa要素にロールオーバーした時にその他のa要素に付与されるクラス</td>
+					</tr>
+					<tr>
+						<th>overClass</th>
+						<td>over</td>
+						<td>ロールオーバーしたa要素に付与されるクラス</td>
+					</tr>
+					<tr>
+						<th>time</th>
+						<td>400</td>
+						<td>ロールオーバーしたときに指定された不透明度までフェードする時間（ミリ秒）</td>
+					</tr>
+					<tr>
+						<th>afterTime</th>
+						<td>0</td>
+						<td>0以外を指定すると指定された不透明度までフェードした後にさらにここで指定した時間をかけて完全に不透明になる</td>
+					</tr>
+				</tbody>
+			</table>
+			<h4>サンプル</h4>
+			<div class="sample">
+				<ul class="overlayOthers clearfix">
+					<li><a href="#"><img src="images/sanei-pict01m.jpg" alt="" width="40" height="40" /></a></li>
+					<li><a href="#"><img src="images/sanei-pict02m.jpg" alt="" width="40" height="40" /></a></li>
+					<li><a href="#"><img src="images/sanei-pict03m.jpg" alt="" width="40" height="40" /></a></li>
+					<li><a href="#"><img src="images/sanei-pict04m.jpg" alt="" width="40" height="40" /></a></li>
+					<li><a href="#"><img src="images/sanei-pict05m.jpg" alt="" width="40" height="40" /></a></li>
+				</ul>
+			</div>
+			<h4>サンプルコード：HTML</h4>
+			<pre name="code" class="xml">
+&lt;ul class=&quot;overlayOthers&quot;&gt;
+	&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/sanei-pict01m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/sanei-pict02m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/sanei-pict03m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/sanei-pict04m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/sanei-pict05m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+			</pre>
+			<h4>サンプルコード：CSS</h4>
+			<pre name="code" class="css">
+.overlay { background-color:#ffffff; }
+			</pre>
+		</div>
+		<!-- /div#overlayOthers -->
+
+
+
+
+		<!-- div#rollOver -->
+		<div class="plugin" id="rollOver">
+			<h3>rollOver</h3>
+			<p>
+				マウスオーバーで画像を切り替えます。
+			</p>
+			<h4>基本的な使い方</h4>
+			<ol>
+				<li>切り替えたい画像を含むa要素の「rollOver」というクラスを付与し、元の画像ファイル名に「-over」を付けたマウスオーバー用の画像を用意しておきます。</li>
+			</ol>
+			<h4>オプション設定</h4>
+			<table>
+				<thead>
+					<tr>
+						<th>オプション</th>
+						<th>デフォルト</th>
+						<th>設定内容</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>selector</th>
+						<td>.rollover, .rollOver</td>
+						<td>プラグインを発動させる要素のセレクタ</td>
+					</tr>
+				</tbody>
+			</table>
+			<h4>サンプル</h4>
+			<div class="sample">
+				<a href="#" class="scroll rollover"><img src="images/pagetop.gif" alt="このページの先頭へ" width="40" height="40" /></a>
+			</div>
+			<h4>サンプルコード</h4>
+			<pre name="code" class="xml">
+&lt;a href=&quot;#&quot; class=&quot;scroll rollover&quot;&gt;&lt;img src=&quot;images/pagetop.gif&quot; alt=&quot;&#12371;&#12398;&#12506;&#12540;&#12472;&#12398;&#20808;&#38957;&#12408;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;
+			</pre>
+		</div>
+		<!-- /div#rollOver -->
+
+
+
+		<!-- div#scroll -->
+		<div class="plugin" id="scroll">
+			<h3>scroll</h3>
+			<p>
+				指定した要素の位置までアニメーションしながらスクロールします。
+			</p>
+			<h4>基本的な使い方</h4>
+			<ol>
+				<li>a要素のhref属性にスクロールする先の要素のidを「#id名」のように指定し、「scroll」というクラスを付与します。</li>
+				<li>ページの先頭までスクロールする場合はhref属性を「#」にします。</li>
+			</ol>
+			<h4>オプション設定</h4>
+			<table>
+				<thead>
+					<tr>
+						<th>オプション</th>
+						<th>デフォルト</th>
+						<th>設定内容</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>selector</th>
+						<td>.scroll</td>
+						<td>スムーススクロールを発動させる要素のセレクタ</td>
+					</tr>
+					<tr>
+						<th>time</th>
+						<td>600</td>
+						<td>スクロールする時間（ミリ秒）</td>
+					</tr>
+				</tbody>
+			</table>
+			<h4>サンプル</h4>
+			<div class="sample">
+				<div>
+					<ul>
+						<li><a href="#usage01" class="scroll">使い方1</a></li>
+						<li><a href="#usage02" class="scroll">使い方2</a></li>
+						<li><a href="#" class="scroll">ページの先頭へ</a></li>
+					</ul>
+				</div>
+			</div>
+			<h4>サンプルコード</h4>
+			<pre name="code" class="xml">
+&lt;div&gt;
+	&lt;ul&gt;
+		&lt;li&gt;&lt;a href=&quot;#usage01&quot; class=&quot;scroll&quot;&gt;&#20351;&#12356;&#26041;1&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href=&quot;#usage02&quot; class=&quot;scroll&quot;&gt;&#20351;&#12356;&#26041;2&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href=&quot;#&quot; class=&quot;scroll&quot;&gt;&#12506;&#12540;&#12472;&#12398;&#20808;&#38957;&#12408;&lt;/a&gt;&lt;/li&gt;
+	&lt;/ul&gt;
+&lt;/div&gt;
+			</pre>
+		</div>
+		<!-- /div#scroll -->
+
+		<!-- div#textHint -->
+		<div class="plugin" id="textHint">
+			<h3>textHint</h3>
+			<p>
+				未入力で非選択時のテキストボックスおよびテキストエリアにヒントを表示します。
+			</p>
+			<h4>基本的な使い方</h4>
+			<ol>
+				<li>テキストボックスやテキストエリアに、「hint」というクラスを付与します。</li>
+				<li>その要素のtitle属性にヒントのテキストを設定します。</li>
+				<li>
+					非選択時には「blur」というクラスが付与されるのでCSSでスタイルを設定します。<br />
+				</li>
+			</ol>
+			<h4>オプション設定</h4>
+			<table>
+				<thead>
+					<tr>
+						<th>オプション</th>
+						<th>デフォルト</th>
+						<th>設定内容</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>selector</th>
+						<td>input.hint, textarea.hint</td>
+						<td>プラグインを発動させる要素のセレクタ</td>
+					</tr>
+					<tr>
+						<th>attribute</th>
+						<td>title</td>
+						<td>ヒントを設定する属性</td>
+					</tr>
+					<tr>
+						<th>blurClass</th>
+						<td>blur</td>
+						<td>非選択時に付与されるクラス</td>
+					</tr>
+				</tbody>
+			</table>
+			<h4>サンプル</h4>
+			<div class="sample">
+				<form>
+					<input type="text" class="hint" size="30" value="" title="キーワードを入力してください" />
+					<input type="submit" value="検索" />
+				</form>
+			</div>
+			<h4>サンプルコード：HTML</h4>
+			<pre name="code" class="xml">
+&lt;form&gt;
+	&lt;input type=&quot;text&quot; class=&quot;hint&quot; size=&quot;30&quot; value=&quot;&quot; title=&quot;&#12461;&#12540;&#12527;&#12540;&#12489;&#12434;&#20837;&#21147;&#12375;&#12390;&#12367;&#12384;&#12373;&#12356;&quot; /&gt;
+	&lt;input type=&quot;submit&quot; value=&quot;&#26908;&#32034;&quot; /&gt;
+&lt;/form&gt;
+			</pre>
+			<h4>サンプルコード：CSS</h4>
+			<pre name="code" class="css">
+input.blur, textarea.blur { color:#cccccc; }
+			</pre>
+		</div>
+		<!-- /div#textHint -->
+
+
+		<!-- div#trimmedScroll -->
+		<div class="plugin" id="trimmedScroll">
+			<h3>trimmedScroll</h3>
+			<p>
+				img要素を含むa要素にロールオーバーすると別の画像を元のimg要素のサイズにトリミングしてスクロールしながら表示します。
+			</p>
+			<h4>基本的な使い方</h4>
+			<ol>
+				<li>img要素を含むa要素に「trimmedScroll」というクラスを付与します。</li>
+				<li>元の画像と同じ幅で高さが大きい画像を用意して、元の画像のファイル名の後に「-scroll」を付けた名前で同じディレクトリにアップします。</li>
+			</ol>
+			<h4>オプション設定</h4>
+			<table>
+				<thead>
+					<tr>
+						<th>オプション</th>
+						<th>デフォルト</th>
+						<th>設定内容</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>selector</th>
+						<td>.trimmedScroll</td>
+						<td>プラグインを発動させる要素のセレクタ</td>
+					</tr>
+					<tr>
+						<th>scrollTimePerPixcel</th>
+						<td>20</td>
+						<td>1ピクセル当たりのスクロール時間（ミリ秒）</td>
+					</tr>
+					<tr>
+						<th>fadeTime</th>
+						<td>1000</td>
+						<td>元の画像をフェードアウトさせる時間（ミリ秒）</td>
+					</tr>
+					<tr>
+						<th>scrollImgClass</th>
+						<td>scroll</td>
+						<td>スクロールさせる画像に付与するクラス</td>
+					</tr>
+				</tbody>
+			</table>
+			<h4>サンプル</h4>
+			<div class="sample">
+				<a href="#" class="trimmedScroll"><img src="images/tonan01-thumbnail.jpg" alt="" width="300" height="60" /></a>
+			</div>
+			<h4>サンプルコード：HTML</h4>
+			<pre name="code" class="xml">
+&lt;a href=&quot;#&quot; class=&quot;trimmedScroll&quot;&gt;&lt;img src=&quot;images/tonan01-thumbnail.jpg&quot; alt=&quot;&quot; width=&quot;300&quot; height=&quot;60&quot; /&gt;&lt;/a&gt;
+			</pre>
+		</div>
+		<!-- /div#textHint -->
+
+	
+		<h2><img src="images/title-download.gif" alt="ダウンロード" width="800" height="85" /></h2>
+		<div class="func">
+			<p>ライセンスはMITライセンスです。プラグインで取り込んでいる外部のライブラリについてはそれぞれのライセンスをご確認ください。</p>
+			<h3><img src="images/title-download-01.gif" alt="simplelib.js本体と全てのプラグインをまとめてダウンロード" width="800" height="20" /></h3>
+			<p>準備中</p>
+			<h3><img src="images/title-download-02.gif" alt="指定したプラグインを１つのjsファイルとしてダウンロード" width="800" height="20" /></h3>
+			<p>準備中</p>
+		</div>
+	</div>
+	
+	<div id="Copyright"><p>Copyright 2010 STARRYWORKS inc. All rights reserved.</p></div>
+</div>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-1800512-4");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>
