@@ -23,6 +23,6 @@ SimpleLib.extend( "ie6PngFix", {
 	},
 	init: function() {
 		$.ifixpng.pixel = SimpleLib.ie6PngFix.settings.pixelGIF;
-		$( function(){ $(SimpleLib.ie6PngFix.settings.selector).ifixpng(); });
+		$(window).load( function(){ $(SimpleLib.ie6PngFix.settings.selector).ifixpng(); });
 	}
 });

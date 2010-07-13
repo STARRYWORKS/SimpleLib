@@ -22,6 +22,6 @@ SimpleLib.extend( "ie6PositionFixed", {
 		selector:".exfixed, .exFixed"
 	},
 	init: function() {
-		$( function(){ $(SimpleLib.ie6PositionFixed.settings.selector).exFixed() } );
+		$(window).load( function(){ $(SimpleLib.ie6PositionFixed.settings.selector).exFixed() } );
 	}
 });
