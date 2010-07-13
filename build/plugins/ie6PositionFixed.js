@@ -18,3 +18,4 @@
 /* SimpleLib Plugin */
 
 SimpleLib.extend("ie6PositionFixed",{settings:{selector:".exfixed, .exFixed"},init:function(){$(window).load(function(){$(SimpleLib.ie6PositionFixed.settings.selector).exFixed()})}});
+

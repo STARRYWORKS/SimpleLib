@@ -44,7 +44,7 @@ div#imgSwap div.sample ul li { float:left; padding-right:10px; }
 			<h3><img src="images/title-outline-01.gif" alt="title-outline-01" width="800" height="20" /></h3>
 			<p>
 				SimpleLibとはjQueryを利用した様々なプラグインを動的にロードして、ウェブサイトを構築する上でよく使う機能を一元管理しするためのツールです。<br />
-				各プラグインを別ファイルにし、必要なファイルだけをロードします。<a href="#Download" class="scroll">ダウンロード</a>はこのページの一番下にあります。（現在準備中）
+				各プラグインを別ファイルにし、必要なファイルだけをロードします。<a href="#download" class="scroll">ダウンロード</a>はこのページの一番下にあります。（現在準備中）
 			</p>
 			<h3><img src="images/title-outline-02.gif" alt="title-outline-02" width="800" height="20" /></h3>
 			<p>現在、以下のようなプラグインがあります。</p>
@@ -786,16 +786,41 @@ input.blur, textarea.blur { color:#cccccc; }
 		</div>
 		<!-- /div#textHint -->
 
-	
-		<h2 id="Download"><img src="images/title-download.gif" alt="ダウンロード" width="800" height="85" /></h2>
-		<div class="func">
-			<p>ライセンスはMITライセンスです。プラグインで取り込んでいる外部のライブラリについてはそれぞれのライセンスをご確認ください。</p>
-			<p>現在準備中ですが、開発中のものは<a href="http://wiki.github.com/STARRYWORKS/SimpleLib/" target="_blank">github</a>からダウンロードしたりフォークしたりできます。</p>
-			<h3><img src="images/title-download-01.gif" alt="simplelib.js本体と全てのプラグインをまとめてダウンロード" width="800" height="20" /></h3>
-			<p>準備中</p>
-			<h3><img src="images/title-download-02.gif" alt="指定したプラグインを１つのjsファイルとしてダウンロード" width="800" height="20" /></h3>
-			<p>準備中</p>
+		<!-- div#download -->
+		<div id="download">
+			<h2><img src="images/title-download.gif" alt="ダウンロード" width="800" height="85" /></h2>
+			<div class="func">
+				<p>ライセンスはMITライセンスです。プラグインで取り込んでいる外部のライブラリについてはそれぞれのライセンスをご確認ください。</p>
+				<p>現在準備中ですが、開発中のものは<a href="http://wiki.github.com/STARRYWORKS/SimpleLib/" target="_blank">github</a>からダウンロードしたりフォークしたりできます。</p>
+				<h3><img src="images/title-download-01.gif" alt="simplelib.js本体と全てのプラグインをまとめてダウンロード" width="800" height="20" /></h3>
+				<p>
+					こちらからダウンロードしてください。<br />
+					<a href="build/simplelib.zip">simplelib.zip [ 29KB ]</a>
+				</p>
+				<h3><img src="images/title-download-02.gif" alt="指定したプラグインを１つのjsファイルとしてダウンロード" width="800" height="20" /></h3>
+				<p>必要なプラグインを選択してダウンロードボタンをクリックしてください。</p>
+				<form action="../compiler/" method="post">
+					<ul class="clearfix">
+						<li><label><input type="checkbox" name="plugins[]" value="accordion" /> accordion</label></li>
+						<li><label><input type="checkbox" name="plugins[]" value="fixHeight" /> fixHeight</label></li>
+						<li><label><input type="checkbox" name="plugins[]" value="imgSwap" /> imgSwap</label></li>
+						<li><label><input type="checkbox" name="plugins[]" value="lightBox" /> lightBox</label></li>
+						<li><label><input type="checkbox" name="plugins[]" value="overlayOthers" /> overlayOthers</label></li>
+						<li><label><input type="checkbox" name="plugins[]" value="rollOver" /> rollOver</label></li>
+						<li><label><input type="checkbox" name="plugins[]" value="scroll" /> scroll</label></li>
+						<li><label><input type="checkbox" name="plugins[]" value="showIfScroll" /> showIfScroll</label></li>
+						<li><label><input type="checkbox" name="plugins[]" value="tab" /> tab</label></li>
+						<li><label><input type="checkbox" name="plugins[]" value="textHint" /> textHint</label></li>
+						<li><label><input type="checkbox" name="plugins[]" value="tooltip" /> tooltip</label></li>
+						<li><label><input type="checkbox" name="plugins[]" value="trimmedScroll" /> trimmedScroll</label></li>
+					</ul>
+					<div>
+						<input type="submit" value="ダウンロード" />
+					</div>
+				</form>
+			</div>
 		</div>
+		<!-- /div#download -->
 	</div>
 	
 	<div id="Copyright"><p>Copyright 2010 STARRYWORKS inc. All rights reserved.</p></div>

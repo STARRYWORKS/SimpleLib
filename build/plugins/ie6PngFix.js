@@ -17,3 +17,4 @@
 /* SimpleLib Plugin */
 
 SimpleLib.extend("ie6PngFix",{settings:{selector:".pngfix, .pngFix",pixelGIF:SimpleLib.jsDir+"plugins/ie6PngFix/pixel.gif"},init:function(){$.ifixpng.pixel=SimpleLib.ie6PngFix.settings.pixelGIF;$(window).load(function(){$(SimpleLib.ie6PngFix.settings.selector).ifixpng()})}});
+

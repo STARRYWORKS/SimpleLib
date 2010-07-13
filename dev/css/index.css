@@ -90,6 +90,23 @@ em { font-style:italic; }
 input.blur, textarea.blur { color:#cccccc; }
 
 
+/* Download */
+
+div#download form ul {
+	width: 800px;
+	margin: 15px 0px;
+}
+
+div#download form ul li {
+	display:inline;
+	width: 150px;
+	float:left;
+}
+
+div#download form div {
+	text-align: center;
+}
+
 
 /* clearfix */
 

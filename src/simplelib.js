@@ -1,6 +1,8 @@
 /*
  * SimpleLib with jQuery
  *
+ * http://lab.starryworks.jp/js/simplelib/
+ *
  * Copyright (c) 2009 STARRYWORKS inc.
  * http://www.starryworks.co.jp/
  *

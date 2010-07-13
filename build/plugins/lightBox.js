@@ -17,3 +17,4 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 
 SimpleLib.extend("lightBox",{settings:{selector:".lightBox",imageLoading:SimpleLib.jsDir+"plugins/lightBox/lightbox-ico-loading.gif",imageBtnClose:SimpleLib.jsDir+"plugins/lightBox/lightbox-btn-close.gif",imageBtnPrev:SimpleLib.jsDir+"plugins/lightBox/lightbox-btn-prev.gif",imageBtnNext:SimpleLib.jsDir+"plugins/lightBox/lightbox-btn-next.gif",cssPath:SimpleLib.jsDir+"plugins/lightBox/jquery.lightbox-0.5.css",containerResizeSpeed:250},init:function(){$(function(){$(SimpleLib.lightBox.settings.selector).lightBox(SimpleLib.lightBox.settings)});
 $("head").append('<link rel="stylesheet" type="text/css" href="'+SimpleLib.lightBox.settings.cssPath+'" />')}});
+
