@@ -50,18 +50,13 @@ $.fn.textHint = function( i_options ) {
 }
 
 
-/*
- * SimpleLib Plugin
- *
- */
-if ( typeof("SimpleLib") != "undefined" ) {
-	var pluginInfo = {
-		settings: {
-			selector:"input.hint, textarea.hint"
-		},
-		init: function() {
-			$( function(){ $(SimpleLib.textHint.settings.selector).textHint( SimpleLib.textHint.settings ) } );
-		}
-	};
-	SimpleLib.extend( "textHint", pluginInfo );
-}
+/* SimpleLib Plugin */
+
+SimpleLib.extend( "textHint", {
+	settings: {
+		selector:"input.hint, textarea.hint"
+	},
+	init: function() {
+		$( function(){ $(SimpleLib.textHint.settings.selector).textHint( SimpleLib.textHint.settings ) } );
+	}
+});

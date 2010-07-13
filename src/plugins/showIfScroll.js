@@ -22,18 +22,13 @@ $.fn.showIfScroll = function( i_options ){
 	return this;
 };
 
-/*
- * SimpleLib Plugin
- *
- */
-if ( typeof("SimpleLib") != "undefined" ) {
-	var pluginInfo = {
-		settings: {
-			selector:".showIfScroll"
-		},
-		init: function() {
-			$( function(){ $(SimpleLib.showIfScroll.settings.selector).showIfScroll( SimpleLib.showIfScroll.settings ) } );
-		}
-	};
-	SimpleLib.extend( "showIfScroll", pluginInfo );
-}
+/* SimpleLib Plugin */
+
+SimpleLib.extend( "showIfScroll", {
+	settings: {
+		selector:".showIfScroll"
+	},
+	init: function() {
+		$( function(){ $(SimpleLib.showIfScroll.settings.selector).showIfScroll( SimpleLib.showIfScroll.settings ) } );
+	}
+});

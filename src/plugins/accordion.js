@@ -64,18 +64,13 @@ $.fn.simpleAccordion = function( i_options ) {
 }
 
 
-/*
- * SimpleLib Plugin
- *
- */
-if ( typeof("SimpleLib") != "undefined" ) {
-	var pluginInfo = {
+/* SimpleLib Plugin */
+
+SimpleLib.extend( "accordion", {
 		settings: {
 			selector:".accordion"
 		},
 		init: function() {
 			$( function(){ $(SimpleLib.accordion.settings.selector).simpleAccordion( SimpleLib.accordion.settings ) } );
 		}
-	};
-	SimpleLib.extend( "accordion", pluginInfo );
-}
+});

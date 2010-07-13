@@ -32,20 +32,13 @@ $.fn.imgSwap = function( i_options ){
 	});
 };
 
+/* SimpleLib Plugin */
 
-
-/*
- * SimpleLib Plugin
- *
- */
-if ( typeof("SimpleLib") != "undefined" ) {
-	var pluginInfo = {
-		settings :{
-			selector:".imgswap, .imgSwap"
-		},
-		init: function() {
-			$( function(){ $(SimpleLib.imgSwap.settings.selector).imgSwap( SimpleLib.imgSwap.settings ) } );
-		}
-	};
-	SimpleLib.extend( "imgSwap", pluginInfo );
-}
+SimpleLib.extend( "imgSwap", {
+	settings :{
+		selector:".imgswap, .imgSwap"
+	},
+	init: function() {
+		$( function(){ $(SimpleLib.imgSwap.settings.selector).imgSwap( SimpleLib.imgSwap.settings ) } );
+	}
+});

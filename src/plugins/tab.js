@@ -43,18 +43,13 @@ $.fn.simpleTab = function( i_options ){
 	return this;
 };
 
-/*
- * SimpleLib Plugin
- *
- */
-if ( typeof("SimpleLib") != "undefined" ) {
-	var pluginInfo = {
-		settings: {
-			selector:".tabSet"
-		},
-		init: function() {
-			$( function(){ $(SimpleLib.tab.settings.selector).simpleTab( SimpleLib.tab.settings ) } );
-		}
-	};
-	SimpleLib.extend( "tab", pluginInfo );
-}
+/* SimpleLib Plugin */
+
+SimpleLib.extend( "tab", {
+	settings: {
+		selector:".tabSet"
+	},
+	init: function() {
+		$( function(){ $(SimpleLib.tab.settings.selector).simpleTab( SimpleLib.tab.settings ) } );
+	}
+});

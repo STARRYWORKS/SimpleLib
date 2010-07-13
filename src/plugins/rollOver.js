@@ -34,18 +34,12 @@ $.fn.simpleRollOver = function( i_options ){
 	return this;
 };
 
-/*
- * SimpleLib Plugin
- *
- */
-if ( typeof("SimpleLib") != "undefined" ) {
-	var pluginInfo = {
-		settings: {
-			selector:".rollover, .rollOver"
-		},
-		init: function() {
-			$( function(){ $(SimpleLib.rollOver.settings.selector).simpleRollOver( SimpleLib.rollOver.settings ) } );
-		}
-	};
-	SimpleLib.extend( "rollOver", pluginInfo );
-}
+/* SimpleLib Plugin */
+SimpleLib.extend( "rollOver", {
+	settings: {
+		selector:".rollover, .rollOver"
+	},
+	init: function() {
+		$( function(){ $(SimpleLib.rollOver.settings.selector).simpleRollOver( SimpleLib.rollOver.settings ) } );
+	}
+});

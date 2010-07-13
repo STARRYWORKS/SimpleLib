@@ -109,18 +109,13 @@ $.fn.simpleTooltip = function( i_options ) {
 }
 
 
-/*
- * SimpleLib Plugin
- *
- */
-if ( typeof("SimpleLib") != "undefined" ) {
-	var pluginInfo = {
-		settings: {
-			selector:"a[class*='toolTip']"
-		},
-		init: function() {
-			$( function(){ $(SimpleLib.toolTip.settings.selector).simpleTooltip( SimpleLib.toolTip.settings ) } );
-		}
-	};
-	SimpleLib.extend( "toolTip", pluginInfo );
-}
+/* SimpleLib Plugin */
+
+SimpleLib.extend( "toolTip", {
+	settings: {
+		selector:"a[class*='toolTip']"
+	},
+	init: function() {
+		$( function(){ $(SimpleLib.toolTip.settings.selector).simpleTooltip( SimpleLib.toolTip.settings ) } );
+	}
+});

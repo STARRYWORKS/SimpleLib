@@ -15,18 +15,13 @@
 
 
 
-/*
- * SimpleLib Plugin
- *
- */
-if ( typeof("SimpleLib") != "undefined" ) {
-	var pluginInfo = {
-		settings: {
-			selector:".exfixed, .exFixed"
-		},
-		init: function() {
-			$( function(){ $(SimpleLib.ie6PositionFixed.settings.selector).exFixed() } );
-		}
-	};
-	SimpleLib.extend( "ie6PositionFixed", pluginInfo );
-}
+/* SimpleLib Plugin */
+
+SimpleLib.extend( "ie6PositionFixed", {
+	settings: {
+		selector:".exfixed, .exFixed"
+	},
+	init: function() {
+		$( function(){ $(SimpleLib.ie6PositionFixed.settings.selector).exFixed() } );
+	}
+});

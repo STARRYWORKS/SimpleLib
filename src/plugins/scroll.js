@@ -29,18 +29,13 @@ $.fn.simpleScroll = function( i_options ){
 };
 
 
-/*
- * SimpleLib Plugin
- *
- */
-if ( typeof("SimpleLib") != "undefined" ) {
-	var pluginInfo = {
-		settings: {
-			selector:".scroll"
-		},
-		init: function() {
-			$( function(){ $(SimpleLib.scroll.settings.selector).simpleScroll( SimpleLib.scroll.settings ) } );
-		}
-	};
-	SimpleLib.extend( "scroll", pluginInfo );
-}
+/* SimpleLib Plugin */
+
+SimpleLib.extend( "scroll", {
+	settings: {
+		selector:".scroll"
+	},
+	init: function() {
+		$( function(){ $(SimpleLib.scroll.settings.selector).simpleScroll( SimpleLib.scroll.settings ) } );
+	}
+});

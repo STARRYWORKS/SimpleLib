@@ -64,18 +64,13 @@ $.fn.trimmedScroll = function( i_options ) {
 
 
 
-/*
- * SimpleLib Plugin
- *
- */
-if ( typeof("SimpleLib") != "undefined" ) {
-	var pluginInfo = {
-		settings: {
-			selector:".trimmedScroll"
-		},
-		init: function() {
-			$( function(){ $(SimpleLib.trimmedScroll.settings.selector).trimmedScroll( SimpleLib.trimmedScroll.settings ) } );
-		}
-	};
-	SimpleLib.extend( "trimmedScroll", pluginInfo );
-}
+/* SimpleLib Plugin */
+
+SimpleLib.extend( "trimmedScroll", {
+	settings: {
+		selector:".trimmedScroll"
+	},
+	init: function() {
+		$( function(){ $(SimpleLib.trimmedScroll.settings.selector).trimmedScroll( SimpleLib.trimmedScroll.settings ) } );
+	}
+});

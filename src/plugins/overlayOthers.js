@@ -14,8 +14,7 @@ $.fn.overlayOthers = function( i_options ) {
 		exceptionSelector:".overlayException",
 		othersClass:"others",
 		overClass:"over",
-		time:400,
-		afterTime:0
+		time:400
 	};
 	var options = $.extend( true, defaults, i_options );
 	
@@ -26,12 +25,12 @@ $.fn.overlayOthers = function( i_options ) {
 		
 		$targets.each(function(){
 			if ( $(this).find("span.overlay").length > 0 ) return;
-			var $overlay = $('<span class="overlay" style="display:block;position:absolute;margin:0px;padding:0px;z-index:99;">&nbsp;</span>').prependTo(this);
+			var $overlay = $('<span class="overlay" style="display:block;position:absolute;margin:0px;padding:0px;z-index:1;">&nbsp;</span>').prependTo(this);
 			if ( ( $overlay.css("background-color") == "rgba(0, 0, 0, 0)" || $overlay.css("background-color") == "rgb(0, 0, 0)" || $overlay.css("background-color") == "transparent" ) && ( $overlay.css("background-image") == "none" ) ) {
 				$overlay.css("background-color","#ffffff");
 			}
-/* 			$overlay.after('<span style="display:block;"></span>') */
 			$overlay.hide();
+			$(this).data("$overlay",$overlay);
 		});
 		
 		$targets.hover(
@@ -40,17 +39,16 @@ $.fn.overlayOthers = function( i_options ) {
 				$targets.addClass(options.othersClass);
 				$targets.each(function(){
 				
-				
-					var $overlay = $(this).find("span.overlay");
-					$overlay.css("width",$(this).width()+"px");
-					$overlay.css("height",$(this).height()+"px");
+					var $overlay = $(this).data("$overlay");
+					$(this).css("display","block");
+					$overlay.width($(this).width());
+					$overlay.height($(this).height());
 					if ( $overlay.css("display") == "none" ) $overlay.css({opacity:0});
-					$overlay.css("display","block").stop().animate( {opacity:options.opacity}, options.time, function() {
-						if ( options.afterTime ) $(this).css("display","block").stop().animate( {opacity:1}, options.afterTime );
-					} );
+					$overlay.css("display","block").stop().animate( {opacity:options.opacity}, options.time );
 				});
 				$(this).removeClass(options.othersClass);
-				$(this).find("span.overlay").css("display","block").stop().animate({opacity:0},0).hide();
+				var $overlay = $(this).data("$overlay");
+				$overlay.css("display","block").stop().animate({opacity:0},0).hide();
 				$(this).addClass(options.overClass);
 				$parent.addClass(options.overClass);
 			},
@@ -70,18 +68,13 @@ $.fn.overlayOthers = function( i_options ) {
 }
 
 
-/*
- * SimpleLib Plugin
- *
- */
-if ( typeof("SimpleLib") != "undefined" ) {
-	var pluginInfo = {
-		settings: {
-			selector:".overlayOthers"
-		},
-		init: function() {
-			$( function(){ $(SimpleLib.overlayOthers.settings.selector).overlayOthers( SimpleLib.overlayOthers.settings ) } );
-		}
-	};
-	SimpleLib.extend( "overlayOthers", pluginInfo );
-}
+/* SimpleLib Plugin */
+
+SimpleLib.extend( "overlayOthers", {
+	settings: {
+		selector:".overlayOthers"
+	},
+	init: function() {
+		$( function(){ $(SimpleLib.overlayOthers.settings.selector).overlayOthers( SimpleLib.overlayOthers.settings ) } );
+	}
+});
