@@ -34,7 +34,7 @@
 			
 			if ( !$(this).data("fixHeightChildren") ) return;
 			var $children = $(this).data("fixHeightChildren");
-			if ( !$children.find(":visible").length ) return;
+			if ( !$children.filter(":visible").length ) return;
 			
 			//$children‚ÌYÀ•W‚ª“¯‚¶‚à‚Ì‚Í“¯‚¶‚‚³‚É
 			var childrenGroup = [];
