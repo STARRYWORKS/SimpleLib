@@ -34,6 +34,7 @@ $.fn.simpleRollOver = function( i_options ){
 	return this;
 };
 
+
 /* SimpleLib Plugin */
 SimpleLib.extend( "rollOver", {
 	settings: {
