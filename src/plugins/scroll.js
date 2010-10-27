@@ -20,7 +20,10 @@ $.fn.simpleScroll = function( i_options ){
 	$(this).click(function(){ 
 		var key = $(this).attr('href');
 		var dest = 0;
-		if(key != "#") dest = $(key).offset().top;
+		if(key != "#") {
+			if ( $(key).length == 0 ) return false;
+			dest = $(key).offset().top;
+		}
 		$("html,body").animate( {scrollTop:dest}, options.time );
 		return false;
 	});
