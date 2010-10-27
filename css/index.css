@@ -1,5 +1,8 @@
 @charset "utf-8";
 
+body {
+	line-height:1.3em;
+}
 a, a:link { color:#0000cc; }
 a:hover, a:focus { color:#666666; }
 
