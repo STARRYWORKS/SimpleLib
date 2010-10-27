@@ -12,19 +12,13 @@
 <link type="text/css" rel="stylesheet" href="css/SyntaxHighlighter.css" />
 
 <script type="text/javascript" src="js/jquery-1.4.1.min.js"></script>
-<script type="text/javascript" src="src/simplelib.js?accordion,rollOver,scroll,rollOver,tab,toolTip,imgSwap,lightBox,ie6PositionFixed,fixHeight,ie6PngFix,textHint,overlayOthers,showIfScroll,trimmedScroll"></script>
+<script type="text/javascript" src="src/simplelib.js?accordion,rollOver,scroll,rollOver,tab,toolTip,imgSwap,lightBox,ie6PositionFixed,fixHeight,ie6PngFix,textHint,overlayOthers,showIfScroll,trimmedScroll,checkAll"></script>
 <script type="text/javascript" src="js/syntaxHighlighter/shCore.js"></script>
 <script type="text/javascript" src="js/syntaxHighlighter/shBrushJScript.js"></script>
 <script type="text/javascript" src="js/syntaxHighlighter/shBrushXml.js"></script>
 <script type="text/javascript" src="js/syntaxHighlighter/shBrushCss.js"></script>
 	
 <script type="text/javascript">
-$(document).ready(function(){
-	$("#SelectAll").change(function(){
-		$("#DownLoadForm").find("input").attr("checked", $(this).is(':checked') ? "checked" : "" );
-	});
-});
-
 $(window).load(function(){
 	dp.SyntaxHighlighter.ClipboardSwf = 'js/syntaxHighlighter/clipboard.swf';
 	dp.SyntaxHighlighter.HighlightAll('code');
@@ -78,6 +72,10 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 						<td>シンプルなアコーディオンナビゲーション</td>
 					</tr>
 					<tr>
+						<th><a href="#checkAll" class="scroll">checkAll</a></th>
+						<td>チェックボックスの一括選択</td>
+					</tr>
+					<tr>
 						<th><a href="#fixHeight" class="scroll">fixHeight</a></th>
 						<td>要素の高さを揃える</td>
 					</tr>
@@ -114,7 +112,7 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 						<td>指定した要素をスクロールバーが表示されるとき（ドキュメントの高さがウィンドウの高さを超えるとき）だけ表示する</td>
 					</tr>
 					<tr>
-						<th>tab</th>
+						<th><a href="#tab" class="scroll">tab</a></th>
 						<td>シンプルなタブナビゲーション</td>
 					</tr>
 					<tr>
@@ -226,24 +224,24 @@ var SimpleLibSettings = {
 			<div class="sample">
 				<div class="accordion">
 					<dl>
-						<dt><a href="#Panel01" class="handle selected">ハンドル１</a></dt>
-						<dd id="Panel01">
+						<dt><a href="#AccordionPanel01" class="handle selected">ハンドル１</a></dt>
+						<dd id="AccordionPanel01">
 							<p>
 								パネル１。これはダミーテキストです。これはダミーテキストです。
 								これはダミーテキストです。これはダミーテキストです。
 								これはダミーテキストです。
 							</p>
 						</dd>
-						<dt><a href="#Panel02" class="handle">ハンドル２</a></dt>
-						<dd id="Panel02">
+						<dt><a href="#AccordionPanel02" class="handle">ハンドル２</a></dt>
+						<dd id="AccordionPanel02">
 							<p>
 								パネル２。ハンドル２にはあらかじめ「selected」というクラスが付与されています。
 								これはダミーテキストです。これはダミーテキストです。これはダミーテキストです。
 								これはダミーテキストです。これはダミーテキストです。
 							</p>
 						</dd>
-						<dt><a href="#Panel03" class="handle">ハンドル３</a></dt>
-						<dd id="Panel03">
+						<dt><a href="#AccordionPanel03" class="handle">ハンドル３</a></dt>
+						<dd id="AccordionPanel03">
 							<p>
 								パネル３。これはダミーテキストです。これはダミーテキストです。
 								これはダミーテキストです。これはダミーテキストです。
@@ -257,24 +255,24 @@ var SimpleLibSettings = {
 			<pre name="code" class="xml">
 	&lt;div class=&quot;accordion&quot;&gt;
 		&lt;dl&gt;
-			&lt;dt&gt;&lt;a href=&quot;#Panel01&quot; class=&quot;handle selected&quot;&gt;&#12495;&#12531;&#12489;&#12523;&#65297;&lt;/a&gt;&lt;/dt&gt;
-			&lt;dd id=&quot;Panel01&quot;&gt;
+			&lt;dt&gt;&lt;a href=&quot;#AccordionPanel01&quot; class=&quot;handle selected&quot;&gt;&#12495;&#12531;&#12489;&#12523;&#65297;&lt;/a&gt;&lt;/dt&gt;
+			&lt;dd id=&quot;AccordionPanel01&quot;&gt;
 				&lt;p&gt;
 					&#12497;&#12493;&#12523;&#65297;&#12290;&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;
 					&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;
 					&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;
 				&lt;/p&gt;
 			&lt;/dd&gt;
-			&lt;dt&gt;&lt;a href=&quot;#Panel02&quot; class=&quot;handle&quot;&gt;&#12495;&#12531;&#12489;&#12523;&#65298;&lt;/a&gt;&lt;/dt&gt;
-			&lt;dd id=&quot;Panel02&quot;&gt;
+			&lt;dt&gt;&lt;a href=&quot;#AccordionPanel02&quot; class=&quot;handle&quot;&gt;&#12495;&#12531;&#12489;&#12523;&#65298;&lt;/a&gt;&lt;/dt&gt;
+			&lt;dd id=&quot;AccordionPanel02&quot;&gt;
 				&lt;p&gt;
 					&#12497;&#12493;&#12523;&#65298;&#12290;&#12495;&#12531;&#12489;&#12523;&#65298;&#12395;&#12399;&#12354;&#12425;&#12363;&#12376;&#12417;&#12300;selected&#12301;&#12392;&#12356;&#12358;&#12463;&#12521;&#12473;&#12364;&#20184;&#19982;&#12373;&#12428;&#12390;&#12356;&#12414;&#12377;&#12290;
 					&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;
 					&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;
 				&lt;/p&gt;
 			&lt;/dd&gt;
-			&lt;dt&gt;&lt;a href=&quot;#Panel03&quot; class=&quot;handle&quot;&gt;&#12495;&#12531;&#12489;&#12523;&#65299;&lt;/a&gt;&lt;/dt&gt;
-			&lt;dd id=&quot;Panel03&quot;&gt;
+			&lt;dt&gt;&lt;a href=&quot;#AccordionPanel03&quot; class=&quot;handle&quot;&gt;&#12495;&#12531;&#12489;&#12523;&#65299;&lt;/a&gt;&lt;/dt&gt;
+			&lt;dd id=&quot;AccordionPanel03&quot;&gt;
 				&lt;p&gt;
 					&#12497;&#12493;&#12523;&#65299;&#12290;&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;
 					&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;&#12371;&#12428;&#12399;&#12480;&#12511;&#12540;&#12486;&#12461;&#12473;&#12488;&#12391;&#12377;&#12290;
@@ -286,6 +284,65 @@ var SimpleLibSettings = {
 			</pre>
 		</div>
 		<!-- /div#accordion -->
+
+
+		<!-- div#accordion -->
+		<div class="plugin" id="checkAll">
+			<h3>checkAll - チェックボックスの一括選択</h3>
+			<p>
+				対象のチェックボックスを一括で選択／解除できるチェックボックスを作成します。
+			</p>
+			<h4>基本的な使い方</h4>
+			<ol>
+				<li>
+					すべてのチェックボックスを選択する機能を持たせたいinput要素（checkbox）に「checkAll」というクラスを付与します。<br />
+					（同じformの親要素内のチェックボックスが対象になります）
+				</li>
+				<li>「checkAll」クラスを付与したinput要素のvalue属性に対象要素のセレクタを設定すると、対象のチェックボックスを選択できます。</li>
+			</ol>
+			<h4>オプション設定</h4>
+			<table>
+				<thead>
+					<tr>
+						<th>オプション</th>
+						<th>デフォルト</th>
+						<th>設定内容</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>selector</th>
+						<td>.checkAll</td>
+						<td>プラグインを発動させる要素のセレクタ</td>
+					</tr>
+				</tbody>
+			</table>
+			<h4>サンプル</h4>
+			<div class="sample">
+				<form>
+					選択してください。<label><input type="checkbox" class="checkAll" /> 全てを選択</label>
+					<ul>
+						<li><label><input type="checkbox" /> XHTML</label></li>
+						<li><label><input type="checkbox" /> CSS</label></li>
+						<li><label><input type="checkbox" /> JavaScript</label></li>
+						<li><label><input type="checkbox" /> ActionScript</label></li>
+					</ul>
+				</form>
+			</div>
+			<h4>サンプルコード：HTML</h4>
+			<pre name="code" class="xml">
+&lt;form&gt;
+	&#36984;&#25246;&#12375;&#12390;&#12367;&#12384;&#12373;&#12356;&#12290;&lt;label&gt;&lt;input type=&quot;checkbox&quot; class=&quot;checkAll&quot; /&gt; &#20840;&#12390;&#12434;&#36984;&#25246;&lt;/label&gt;
+	&lt;ul&gt;
+		&lt;li&gt;&lt;label&gt;&lt;input type=&quot;checkbox&quot; /&gt; XHTML&lt;/label&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;label&gt;&lt;input type=&quot;checkbox&quot; /&gt; CSS&lt;/label&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;label&gt;&lt;input type=&quot;checkbox&quot; /&gt; JavaScript&lt;/label&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;label&gt;&lt;input type=&quot;checkbox&quot; /&gt; ActionScript&lt;/label&gt;&lt;/li&gt;
+	&lt;/ul&gt;
+&lt;/form&gt;
+			</pre>
+		</div>
+		<!-- /div#checkAll -->
 
 
 		<!-- div#fixHeight -->
@@ -359,11 +416,11 @@ var SimpleLibSettings = {
 		<div class="plugin" id="ie6PngFix">
 			<h3>ie6PngFix</h3>
 			<p>
-				<a href="http://jquery.khurshid.com/ifixpng.php" target="_blank">jQuery.ifixpng</a>というプラグインを読み込んで、Internet Explorer 6でも透過PNGを利用できるようにします。
+				jQueryの<a href="http://plugins.jquery.com/project/iepngfix" target="_blank">IE PNG FIX</a>というプラグインを読み込んで、Internet Explorer 6でも透過PNGを利用できるようにします。
 			</p>
 			<h4>基本的な使い方</h4>
 			<ol>
-				<li>透過させたいimg要素に「pngfix」というクラスを付与してください。</li>
+				<li>背景を透過させたい要素や透過させたいimg要素に「pngfix」というクラスを付与してください。src属性の拡張子が「png」のimg要素やinput要素はデフォルトのセレクタで自動的に透過するようになっています。</li>
 			</ol>
 			<h4>オプション設定</h4>
 			<table>
@@ -377,8 +434,11 @@ var SimpleLibSettings = {
 				<tbody>
 					<tr>
 						<th>selector</th>
-						<td>.pngfix</td>
-						<td>プラグインを発動させる要素のセレクタ</td>
+						<td>img[src$=png], input[src$=png], .pngfix</td>
+						<td>
+							プラグインを発動させる要素のセレクタ
+							<br />（jQueryを利用しているので一部のCSS3セレクタが利用できます）
+						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -406,7 +466,7 @@ var SimpleLibSettings = {
 			</p>
 			<h4>基本的な使い方</h4>
 			<ol>
-				<li>position:fixedを指定する要素に「exfixed」というクラスを付与してください。</li>
+				<li>position:fixedを指定する要素に「fixed」というクラスを付与してください。</li>
 			</ol>
 			<h4>オプション設定</h4>
 			<table>
@@ -420,7 +480,7 @@ var SimpleLibSettings = {
 				<tbody>
 					<tr>
 						<th>selector</th>
-						<td>.exfixed, .exFixed</td>
+						<td>.fixed</td>
 						<td>プラグインを発動させる要素のセレクタ</td>
 					</tr>
 				</tbody>
@@ -428,13 +488,13 @@ var SimpleLibSettings = {
 			<h4>サンプル</h4>
 			<div class="sample">
 				このページの中央下にあるこの画像（<img src="./images/pagetop.gif" alt="このページの先頭へ" width="20" height="20" />）のようになります。
-				<div style="position:fixed; bottom:0px; left:50%;" class="exfixed">
+				<div style="position:fixed; bottom:0px; left:50%;" class="fixed">
 					<a href="#" class="scroll rollover"><img src="./images/pagetop.gif" alt="このページの先頭へ" width="40" height="40" /></a>
 				</div>
 			</div>
 			<h4>サンプルコード</h4>
 			<pre name="code" class="xml">
-&lt;div style=&quot;position:fixed; bottom:0px; left:50%;&quot; class=&quot;exfixed&quot;&gt;
+&lt;div style=&quot;position:fixed; bottom:0px; left:50%;&quot; class=&quot;fixed&quot;&gt;
 	&lt;a href=&quot;#&quot; class=&quot;scroll rollover&quot;&gt;&lt;img src=&quot;images/pagetop.gif&quot; alt=&quot;&#12371;&#12398;&#12506;&#12540;&#12472;&#12398;&#20808;&#38957;&#12408;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;
 &lt;/div&gt;
 			</pre>
@@ -822,6 +882,153 @@ input.blur, textarea.blur { color:#cccccc; }
 			</pre>
 		</div>
 		<!-- /div#textHint -->
+		
+		
+		<!-- div#tab -->
+		<div class="plugin" id="tab">
+			<h3>tab</h3>
+			<p>
+				タブ機能
+			</p>
+			<h4>基本的な使い方</h4>
+			<ol>
+				<li>タブと表示を切り替える対象要素を含む親要素に「tabSet」というクラスを付与します。</li>
+				<li>
+					「tab」というクラスを付与したa要素のhref属性に表示を切り替える対象要素のセレクタを設定します。<br />
+					（例）タブ：&lt;a href=&quot;#Panel01&quot; class=&quot;tab&quot;&gt;
+					　切り替える対象要素：&lt;div id=&quot;Panel01&quot;&gt;
+					
+				</li>
+				<li>タブに「selected」というクラスを付与すると、そのタブがあらかじめ選択状態になります。</li>
+			</ol>
+			<h4>オプション設定</h4>
+			<table>
+				<thead>
+					<tr>
+						<th>オプション</th>
+						<th>デフォルト</th>
+						<th>設定内容</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>selector</th>
+						<td>.tabSet</td>
+						<td>タブと表示を切り替える対象要素を含む親要素のセレクタ</td>
+					</tr>
+					<tr>
+						<th>tabSelector</th>
+						<td>a.tab</td>
+						<td>タブ要素のセレクタ</td>
+					</tr>
+					<tr>
+						<th>selectedClass</th>
+						<td>selected</td>
+						<td>選択されたタブに付与するクラス</td>
+					</tr>
+					<tr>
+						<th>trigger</th>
+						<td>click</td>
+						<td>
+							タブ切り替えのトリガー<br />
+							（click/mouseover/focusなどjQueryで扱えるイベント）
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<h4>サンプル</h4>
+			<div class="sample">
+				<div class="tabSet">
+					<ul class="clearfix">
+						<li><a href="#TabPanel01" class="tab">タブ１</a></li>
+						<li><a href="#TabPanel02" class="tab">タブ２</a></li>
+						<li><a href="#TabPanel03" class="tab selected">タブ３</a></li>
+					</ul>
+					<div>
+						<div class="panel clearfix" id="TabPanel01">
+							<img src="./images/sanei-pict01m.jpg" alt="" width="40" height="40" />
+							コンテンツ１
+						</div>
+						<div class="panel clearfix" id="TabPanel02">
+							<img src="./images/sanei-pict02m.jpg" alt="" width="40" height="40" />
+							コンテンツ２
+						</div>
+						<div class="panel clearfix" id="TabPanel03">
+							<img src="./images/sanei-pict03m.jpg" alt="" width="40" height="40" />
+							コンテンツ３
+						</div>
+					</div>
+				</div>
+			</div>
+			<h4>サンプルコード：HTML</h4>
+			<pre name="code" class="xml">
+&lt;div class=&quot;tabSet&quot;&gt;
+	&lt;ul class=&quot;clearfix&quot;&gt;
+		&lt;li&gt;&lt;a href=&quot;#TabPanel01&quot; class=&quot;tab&quot;&gt;&#12479;&#12502;&#65297;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href=&quot;#TabPanel02&quot; class=&quot;tab&quot;&gt;&#12479;&#12502;&#65298;&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href=&quot;#TabPanel03&quot; class=&quot;tab selected&quot;&gt;&#12479;&#12502;&#65299;&lt;/a&gt;&lt;/li&gt;
+	&lt;/ul&gt;
+	&lt;div&gt;
+		&lt;div class=&quot;panel clearfix&quot; id=&quot;TabPanel01&quot;&gt;
+			&lt;img src=&quot;./images/sanei-pict01m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;
+			&#12467;&#12531;&#12486;&#12531;&#12484;&#65297;
+		&lt;/div&gt;
+		&lt;div class=&quot;panel clearfix&quot; id=&quot;TabPanel02&quot;&gt;
+			&lt;img src=&quot;./images/sanei-pict02m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;
+			&#12467;&#12531;&#12486;&#12531;&#12484;&#65298;
+		&lt;/div&gt;
+		&lt;div class=&quot;panel clearfix&quot; id=&quot;TabPanel03&quot;&gt;
+			&lt;img src=&quot;./images/sanei-pict03m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;
+			&#12467;&#12531;&#12486;&#12531;&#12484;&#65299;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+			</pre>
+			
+			<h4>サンプルコード：CSS</h4>
+			<pre name="code" class="css">
+div.tabSet ul {
+	display:block;
+}
+
+div.tabSet ul li {
+	display:block;
+	float:left;
+	margin:0px;
+	padding:0px;
+}
+
+div.tabSet ul li a {
+	display:block;
+	padding:5px;
+	background-color: #ccc;
+	color:#333;
+	margin-right:5px;
+}
+
+div.tabSet ul li a:hover {
+	background-color: #666;
+	color:#fff;
+}
+
+div.tabSet ul li a.selected,
+div.tabSet ul li a.selected:hover {
+	background-color: #fff;
+	color:#333;
+}
+
+div.tabSet div.panel {
+	background-color: #fff;
+	padding:15px;
+}
+
+div.tabSet div.panel img {
+	float:left;
+	padding-right:10px;
+}
+			</pre>
+		</div>
+		<!-- /div#tab -->
 
 
 		<!-- div#trimmedScroll -->
@@ -890,8 +1097,8 @@ input.blur, textarea.blur { color:#cccccc; }
 					<a href="./build/simplelib.zip">simplelib.zip [ 29KB ]</a>
 				</p>
 				<h3><img src="images/title-download-02.gif" alt="指定したプラグインを１つのjsファイルとしてダウンロード" width="800" height="20" /></h3>
-				<p>必要なプラグインを選択してダウンロードボタンをクリックしてください。 <label><input type="checkbox" id="SelectAll" /> 全て選択</label></p>
-				<form action="./compiler/" method="post" id="DownLoadForm">
+				<form action="./compiler/" method="post">
+				<p>必要なプラグインを選択してダウンロードボタンをクリックしてください。 <label><input type="checkbox" class="checkAll" /> 全て選択</label></p>
 					<ul class="clearfix">
 						<li><label><input type="checkbox" name="plugins[]" value="accordion" /> accordion</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="fixHeight" /> fixHeight</label></li>
@@ -926,7 +1133,7 @@ input.blur, textarea.blur { color:#cccccc; }
 		<script type="text/javascript" src="http://static.mixi.jp/js/share.js"></script>
 	</div>
 	
-	<div id="Copyright"><p>Copyright 2010 STARRYWORKS inc. All rights reserved.</p></div>
+	<div id="Copyright"><p>Copyright 2010 <a href="http://www.starryworks.co.jp/" target="_blank">STARRYWORKS inc</a>. All rights reserved.</p></div>
 </div>
 
 <script type="text/javascript">

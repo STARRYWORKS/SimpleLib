@@ -21,13 +21,14 @@ $.fn.simpleTab = function( i_options ){
 	var $selected = null;
 	
 	$tabs.bind( options.trigger, function(){
+		var $this = $(this);
 		$tabs.each(function(){
+			if ( this == $this[0] ) return;
 			$($(this).attr("href")).hide();
 			$(this).removeClass(options.selectedClass);
 		});
-		
-		$($(this).attr("href")).show();
-		$(this).addClass(options.selectedClass);
+		$($this.attr("href")).show();
+		$this.addClass(options.selectedClass);
 		return false;
 	});
 	

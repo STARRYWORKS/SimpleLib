@@ -14,11 +14,13 @@ $.fn.showIfScroll = function( i_options ){
 	var options = $.extend( true, defaults, i_options );
 	
 	var $this = $(this);
-	$(window).resize(function(){
+	
+	function _onResize() {
 		if ( $(document).height() + options.offset <= $(window).height() ) $this.hide();
 		else $this.show();
-	});
-	$(window).resize();
+	}
+	
+	$(window).resize(_onResize);
 	return this;
 };
 

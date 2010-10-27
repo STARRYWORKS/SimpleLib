@@ -16,6 +16,14 @@ ol li {
 	line-height:1.4em;
 }
 
+pre {
+  white-space: -moz-pre-wrap; /* Mozilla */
+  white-space: -pre-wrap;     /* Opera 4-6 */
+  white-space: -o-pre-wrap;   /* Opera 7 */
+  white-space: pre-wrap;      /* CSS3 */
+  word-wrap: break-word;      /* IE 5.5+ */
+}
+
 /* Document */
 
 html,body {
@@ -29,7 +37,7 @@ html,body {
 
 div#Wrapper {
 	padding:20px;
-	max-width:800px;
+	width:800px;
 	margin:0 auto;
 	text-align:left;
 }
@@ -95,6 +103,53 @@ em { font-style:italic; }
 
 
 input.blur, textarea.blur { color:#cccccc; }
+
+/* checkAll */
+
+#checkAll .sample ul {
+	margin:10px;
+}
+
+/* tab */
+
+div.tabSet ul {
+	display:block;
+}
+div.tabSet ul li {
+	display:block;
+	float:left;
+	margin:0px;
+	padding:0px;
+}
+
+div.tabSet ul li a {
+	display:block;
+	padding:5px;
+	background-color: #ccc;
+	color:#333;
+	margin-right:5px;
+}
+
+div.tabSet ul li a:hover {
+	background-color: #666;
+	color:#fff;
+}
+
+div.tabSet ul li a.selected,
+div.tabSet ul li a.selected:hover {
+	background-color: #fff;
+	color:#333;
+}
+
+div.tabSet div.panel {
+	background-color: #fff;
+	padding:15px;
+}
+
+div.tabSet div.panel img {
+	float:left;
+	padding-right:10px;
+}
 
 
 /* Download */
