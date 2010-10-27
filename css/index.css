@@ -82,6 +82,8 @@ dd p { padding:0 5 5 5; }
 
 em { font-style:italic; }
 
+.alR{ text-align: right; }
+
 
 
 /* Plugins */
@@ -152,4 +154,13 @@ div#download form div {
 {
 	display: block;
 }
+
+.topsy_widget_data{
+	display:inline;
+	width:70px;
+	float:right;
+	margin-left:10px;
+}
+	
+	
 

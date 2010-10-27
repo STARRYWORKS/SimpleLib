@@ -32,8 +32,8 @@ $.fn.trimmedScroll = function( i_options ) {
 		}
 		var w = $i.width();
 		var h = $i.height();
-		var $wrapper = $('<span style="display:block;width:'+w+'px;height:'+h+'px;overflow:hidden;position:absolute;"></span>').insertBefore($i);
-		var $img = $('<img />').attr("src",scroll).addClass(options.scrollImgClass).appendTo($wrapper);
+		var $wrapper = $('<span style="display:block;position:absolute;margin:0px;padding:0px;overflow:hidden"></span>').prependTo($i.parent());
+		var $img = $('<img style="margin:0px;padding:0px;border:none;" />').attr("src",scroll).addClass(options.scrollImgClass).appendTo($wrapper);
 		$("<img />").attr("src",scroll);
 		$wrapper.hide();
 		$(this).css("cursor","pointer");
@@ -44,9 +44,14 @@ $.fn.trimmedScroll = function( i_options ) {
 				$img.css({marginTop:"0"});
 				$wrapper.animate({opacity:0},0);
 			}
+			$wrapper.css("left",$i.offset().left+"px");
+			$wrapper.css("top",$i.offset().top+"px");
+			$wrapper.width($i.attr("width") ? parseInt($i.attr("width")) : $i.width());
+			$wrapper.height($i.attr("height") ? parseInt($i.attr("height")) : $i.height());
 			$wrapper.stop().show().animate( {opacity:1}, options.fadeTime );
 			$img.css("width","auto").css("height","auto");
 			var mt = $i.height() - $img.height();
+			$img.css("margin-top",0);
 			var time = ( mt - parseInt($img.css("margin-top")) ) * options.scrollTimePerPixcel * -1;
 			if ( $img.css("margin-top") == mt+"px" ) mt = 0;
 			$img.stop().animate( {marginTop:mt}, time, "linear" );
@@ -61,7 +66,6 @@ $.fn.trimmedScroll = function( i_options ) {
 	return this;
 
 }
-
 
 
 /* SimpleLib Plugin */
