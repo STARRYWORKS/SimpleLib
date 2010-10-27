@@ -40,6 +40,23 @@ SimpleLib = $.extend( true, {
 	//isIE6
 	isIE6: function() { return ( '\v'=='v' ); },
 	
+	//loadCSS
+	loadCSS: function( i_url ) {
+		if ( SimpleLib.isIE() ) document.createStyleSheet( i_url );
+		else $("head").append('<link rel="stylesheet" type="text/css" href="'+i_url+'" />');
+	},
+	
+	//loadJS
+	loadJS: function( i_url ) {
+		$.ajax({
+			type: "GET",
+			url: i_url,
+			dataType: "script",
+			success:function(d) {},
+			error: SimpleLib._onLoadError
+		});
+	},
+	
 	//Init
 	init: function( i_plugins, i_settings ){
 		if ( !i_plugins ) return;
@@ -70,13 +87,7 @@ SimpleLib = $.extend( true, {
 	//Load
 	_load: function( i_plugin ) {
 		var file = SimpleLib.jsDir + "plugins/"+i_plugin+".js";
-		$.ajax({
-			type: "GET",
-			url: file,
-			dataType: "script",
-			success:function(d) {},
-			error: SimpleLib._onLoadError
-		});
+		SimpleLib.loadJS( file );
 	},
 	
 	//onLoadError
@@ -96,6 +107,7 @@ SimpleLib = $.extend( true, {
 		SimpleLib[i_plugin] = $.extend( true, i_info, SimpleLib[i_plugin]);
 		if ( typeof(SimpleLib[i_plugin].init) == "function" ) SimpleLib[i_plugin].init();
 	}
+	
 	
 }, SimpleLib);
 
