@@ -12,7 +12,7 @@
 <link type="text/css" rel="stylesheet" href="css/SyntaxHighlighter.css" />
 
 <script type="text/javascript" src="js/jquery-1.4.1.min.js"></script>
-<script type="text/javascript" src="src/simplelib.js?accordion,rollOver,scroll,rollOver,tab,toolTip,imgSwap,lightBox,ie6PositionFixed,fixHeight,ie6PngFix,textHint,overlayOthers,showIfScroll,trimmedScroll,checkAll"></script>
+<script type="text/javascript" src="build/simplelib.js?accordion,rollOver,scroll,rollOver,tab,toolTip,imgSwap,lightBox,ie6PositionFixed,fixHeight,ie6PngFix,textHint,overlayOthers,showIfScroll,trimmedScroll,checkAll"></script>
 <script type="text/javascript" src="js/syntaxHighlighter/shCore.js"></script>
 <script type="text/javascript" src="js/syntaxHighlighter/shBrushJScript.js"></script>
 <script type="text/javascript" src="js/syntaxHighlighter/shBrushXml.js"></script>
@@ -23,8 +23,6 @@ $(window).load(function(){
 	dp.SyntaxHighlighter.ClipboardSwf = 'js/syntaxHighlighter/clipboard.swf';
 	dp.SyntaxHighlighter.HighlightAll('code');
 });
-
-
 </script>
 
 <style type="text/css">
@@ -119,10 +117,12 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 						<th><a href="#textHint" class="scroll">textHint</a></th>
 						<td>未入力で非選択時のテキストボックスにヒントを表示する</td>
 					</tr>
+					<!--
 					<tr>
-						<th>toolTip</th>
+						<th><a href="#toolTip" class="scroll">toolTip</a></th>
 						<td>シンプルなツールチップ</td>
 					</tr>
+					-->
 					<tr>
 						<th><a href="#trimmedScroll" class="scroll">trimmedScroll</a></th>
 						<td>img要素を含むa要素にロールオーバーすると別の画像をそのimg要素のサイズにトリミングしてスクロールしながら表示する</td>
@@ -488,13 +488,13 @@ var SimpleLibSettings = {
 			<h4>サンプル</h4>
 			<div class="sample">
 				このページの中央下にあるこの画像（<img src="./images/pagetop.gif" alt="このページの先頭へ" width="20" height="20" />）のようになります。
-				<div style="position:fixed; bottom:0px; left:50%;" class="fixed">
+				<div style="position:fixed; bottom:0px; left:50%;" class="fixed showIfScroll">
 					<a href="#" class="scroll rollover"><img src="./images/pagetop.gif" alt="このページの先頭へ" width="40" height="40" /></a>
 				</div>
 			</div>
 			<h4>サンプルコード</h4>
 			<pre name="code" class="xml">
-&lt;div style=&quot;position:fixed; bottom:0px; left:50%;&quot; class=&quot;fixed&quot;&gt;
+&lt;div style=&quot;position:fixed; bottom:0px; left:50%;&quot; class=&quot;fixed showIfScroll&quot;&gt;
 	&lt;a href=&quot;#&quot; class=&quot;scroll rollover&quot;&gt;&lt;img src=&quot;images/pagetop.gif&quot; alt=&quot;&#12371;&#12398;&#12506;&#12540;&#12472;&#12398;&#20808;&#38957;&#12408;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;
 &lt;/div&gt;
 			</pre>
@@ -1031,6 +1031,43 @@ div.tabSet div.panel img {
 		<!-- /div#tab -->
 
 
+		<!-- div#toolTip 
+		<div class="plugin" id="toolTip">
+			<h3>toolTip</h3>
+			<p>
+				シンプルなツールチップです。
+			</p>
+			<h4>基本的な使い方</h4>
+			<ol>
+				<li></li>
+				<li></li>
+			</ol>
+			<h4>オプション設定</h4>
+			<table>
+				<thead>
+					<tr>
+						<th>オプション</th>
+						<th>デフォルト</th>
+						<th>設定内容</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>selector</th>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+			<h4>サンプル</h4>
+			<div class="sample">
+			</div>
+			<h4>サンプルコード：HTML</h4>
+			<pre name="code" class="xml">
+			</pre>
+		</div>
+		 /div#toolTip -->
+
 		<!-- div#trimmedScroll -->
 		<div class="plugin" id="trimmedScroll">
 			<h3>trimmedScroll</h3>
@@ -1101,7 +1138,10 @@ div.tabSet div.panel img {
 				<p>必要なプラグインを選択してダウンロードボタンをクリックしてください。 <label><input type="checkbox" class="checkAll" /> 全て選択</label></p>
 					<ul class="clearfix">
 						<li><label><input type="checkbox" name="plugins[]" value="accordion" /> accordion</label></li>
+						<li><label><input type="checkbox" name="plugins[]" value="checkAll" /> checkAll</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="fixHeight" /> fixHeight</label></li>
+						<li><label><input type="checkbox" name="plugins[]" value="ie6PngFix" /> ie6PngFix</label></li>
+						<li><label><input type="checkbox" name="plugins[]" value="ie6PositionFixed" /> ie6PositionFixed</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="imgSwap" /> imgSwap</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="lightBox" /> lightBox</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="overlayOthers" /> overlayOthers</label></li>
@@ -1110,7 +1150,6 @@ div.tabSet div.panel img {
 						<li><label><input type="checkbox" name="plugins[]" value="showIfScroll" /> showIfScroll</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="tab" /> tab</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="textHint" /> textHint</label></li>
-						<li><label><input type="checkbox" name="plugins[]" value="tooltip" /> tooltip</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="trimmedScroll" /> trimmedScroll</label></li>
 					</ul>
 					<div>

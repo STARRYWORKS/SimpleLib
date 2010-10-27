@@ -8,8 +8,7 @@
  *
  */
 
-$.fn.showIfScroll=function(b){var c=$.extend(true,{offset:0},b),a=$(this);$(window).resize(function(){$(document).height()+c.offset<=$(window).height()?a.hide():a.show()});$(window).resize();return this};
+(function(a){a.fn.showIfScroll=function(d){function b(){a(document).height()+e.offset<=a(window).height()?c.hide():c.show()}var e=a.extend(true,{offset:0},d),c=a(this);a(window).resize(b);b();return this}})(jQuery);
 
 /* SimpleLib Plugin */
-
-SimpleLib.extend("showIfScroll",{settings:{selector:".showIfScroll"},init:function(){$(function(){$(SimpleLib.showIfScroll.settings.selector).showIfScroll(SimpleLib.showIfScroll.settings)})}});
+SimpleLib&&SimpleLib.extend("showIfScroll",{settings:{selector:".showIfScroll"},init:function(){$(function(){$(SimpleLib.showIfScroll.settings.selector).showIfScroll(SimpleLib.showIfScroll.settings)})}});

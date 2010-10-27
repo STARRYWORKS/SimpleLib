@@ -5,6 +5,7 @@
 //----------------------------------------
 $jsDir = "../build/";
 $pluginsDir = "{$jsDir}plugins/";
+$setup = "SimpleLib.setup();";
 $thirdPartyPlugins = array("lightBox","ie6PngFix","ie6PositionFixed");
 
 //----------------------------------------
@@ -49,11 +50,11 @@ if ( !count($o_plugins) ) {
 //----------------------------------------
 //	Generate output script
 //----------------------------------------
-$o_str = "";
+$o_str = "/*\nSimpleLib & plugins\n\n".join(",\n",$i_plugins)."\n\n*/\n\n";
 
 //まずSimpleLib本体のコードを挿入
 if( file_exists($jsDir."simplelib.js") ) {
-	$o_str = file_get_contents( $jsDir."simplelib.js" );
+	$o_str .= str_replace($setup, "", file_get_contents( $jsDir."simplelib.js" ) )."\n";
 } else {
 	echo("SimpleLib is not found");
 	exit;
@@ -64,10 +65,13 @@ foreach ( $o_plugins as $p ) {
 	$js = file_get_contents($pluginsDir.$p.".js");
 	//サードパーティ製のものでなければ重複するライセンス表記を消す
 	if ( !in_array( $p, $thirdPartyPlugins ) ) {
-		$js = preg_replace( "/\/\*.*?\*\//", "", str_replace( "\r", "", str_replace( "\n", "", $js ) ) )."\n";
+		$js = preg_replace( "/^\/\*.*?\*\//", "", str_replace( "\r", "", str_replace( "\n", "", $js ) ) )."\n";
+		//$js = preg_replace( "/^\/\*.*?\*\//ms", "", $js )."\n";
 	}
 	$o_str .= $js;
 }
+
+$o_str .= "\n\n/*SimpleLib SetUp*/\n{$setup}";
 
 //----------------------------------------
 //	Output

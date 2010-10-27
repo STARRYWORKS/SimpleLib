@@ -78,8 +78,7 @@ SimpleLib = $.extend( true, {
 			if ( SimpleLib[i_plugins[i]].settings ) settings = $.extend( SimpleLib[i_plugins[i]].settings, settings );
 			SimpleLib[i_plugins[i]].settings = settings;
 			
-			if ( SimpleLib[i_plugins[i]] && SimpleLib[i_plugins[i]].init ) SimpleLib[i_plugins[i]].init();
-			else SimpleLib._load( i_plugins[i] );
+			if ( !SimpleLib[i_plugins[i]] || !SimpleLib[i_plugins[i]].init ) SimpleLib._load( i_plugins[i] );
 			
 		}
 	},

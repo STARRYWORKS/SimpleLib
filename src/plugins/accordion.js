@@ -8,69 +8,73 @@
  *
  */
 
-$.fn.simpleAccordion = function( i_options ) {
 
-	var defaults = {
-		selector:".accordion",
-		handleSelector:".handle",
-		selectedClass:"selected",
-		time:300
-	};
-	var options = $.extend( true, defaults, i_options );
+(function($){
+	$.fn.simpleAccordion = function( i_options ) {
 	
-	
-	$(this).each(function(){
-		var $parent = $(this);
-		var handles = [];
+		var defaults = {
+			selector:".accordion",
+			handleSelector:".handle",
+			selectedClass:"selected",
+			time:300
+		};
+		var options = $.extend( true, defaults, i_options );
 		
-		$parent.find( options.handleSelector ).each( function() {
-			if ( $(this).parents(options.selector).get(0) == $parent.get(0) ) handles.push(this);
-		});
 		
-		var $handles = $(handles);
-		
-		$handles.each(function() {
-			var $slave;
-			var key = $(this).attr("href");
+		$(this).each(function(){
+			var $parent = $(this);
+			var handles = [];
 			
-			if(key == "#") $slave = $(this).next();
-			else $slave = $(key);
-				
-			$(this).data("slave", $slave);
-			if( !$(this).hasClass(options.selectedClass) ) $slave.hide();
-				
-			$(this).click(function() {
-				if($(this).hasClass(options.selectedClass)) {
-					$slave.css("height","auto").slideUp( options.time );
-					$(this).removeClass(options.selectedClass);
-				} else {
-					$slave.show().css("height","auto").height($slave.height()).hide().slideDown( options.time );
-					$handles.each(function() {
-						if($(this).hasClass(options.selectedClass)) {
-							$(this).removeClass(options.selectedClass);
-							$(this).data("slave").slideUp( options.time );
-						}
-					});
-					$(this).addClass(options.selectedClass);
-				}
-				return false;
+			$parent.find( options.handleSelector ).each( function() {
+				if ( $(this).parents(options.selector).get(0) == $parent.get(0) ) handles.push(this);
 			});
+			
+			var $handles = $(handles);
+			
+			$handles.each(function() {
+				var $slave;
+				var key = $(this).attr("href");
+				
+				if(key == "#") $slave = $(this).next();
+				else $slave = $(key);
+					
+				$(this).data("slave", $slave);
+				if( !$(this).hasClass(options.selectedClass) ) $slave.hide();
+					
+				$(this).click(function() {
+					if($(this).hasClass(options.selectedClass)) {
+						$slave.css("height","auto").slideUp( options.time );
+						$(this).removeClass(options.selectedClass);
+					} else {
+						$slave.show().css("height","auto").height($slave.height()).hide().slideDown( options.time );
+						$handles.each(function() {
+							if($(this).hasClass(options.selectedClass)) {
+								$(this).removeClass(options.selectedClass);
+								$(this).data("slave").slideUp( options.time );
+							}
+						});
+						$(this).addClass(options.selectedClass);
+					}
+					return false;
+				});
+			});
+		
 		});
+		
+		return this;
 	
-	});
+	}
 	
-	return this;
-
-}
-
+})(jQuery);
 
 /* SimpleLib Plugin */
-
-SimpleLib.extend( "accordion", {
-		settings: {
-			selector:".accordion"
-		},
-		init: function() {
-			$( function(){ $(SimpleLib.accordion.settings.selector).simpleAccordion( SimpleLib.accordion.settings ) } );
-		}
-});
+if ( SimpleLib ) {
+	SimpleLib.extend( "accordion", {
+			settings: {
+				selector:".accordion"
+			},
+			init: function() {
+				$( function(){ $(SimpleLib.accordion.settings.selector).simpleAccordion( SimpleLib.accordion.settings ) } );
+			}
+	});
+}

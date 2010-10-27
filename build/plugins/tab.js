@@ -8,8 +8,9 @@
  *
  */
 
-$.fn.simpleTab=function(d){var a=$.extend(true,{tabSelector:"a.tab",selectedClass:"selected",trigger:"click"},d),b=this.find(a.tabSelector),c=null;b.bind(a.trigger,function(){b.each(function(){$($(this).attr("href")).hide();$(this).removeClass(a.selectedClass)});$($(this).attr("href")).show();$(this).addClass(a.selectedClass);return false});b.each(function(){if($(this).hasClass(a.selectedClass)){c=$(this);$(this).trigger(a.trigger)}});if(c==null)c=$(b[0]).trigger(a.trigger);return this};
+(function(a){a.fn.simpleTab=function(f){var b=a.extend(true,{tabSelector:"a.tab",selectedClass:"selected",trigger:"click"},f),c=this.find(b.tabSelector),d=null;c.bind(b.trigger,function(){var e=a(this);c.each(function(){if(this!=e[0]){a(a(this).attr("href")).hide();a(this).removeClass(b.selectedClass)}});a(e.attr("href")).show();e.addClass(b.selectedClass);return false});c.each(function(){if(a(this).hasClass(b.selectedClass)){d=a(this);a(this).trigger(b.trigger)}});if(d==null)d=a(c[0]).trigger(b.trigger);
+return this}})(jQuery);
 
 /* SimpleLib Plugin */
 
-SimpleLib.extend("tab",{settings:{selector:".tabSet"},init:function(){$(function(){$(SimpleLib.tab.settings.selector).simpleTab(SimpleLib.tab.settings)})}});
+SimpleLib&&SimpleLib.extend("tab",{settings:{selector:".tabSet"},init:function(){$(function(){$(SimpleLib.tab.settings.selector).simpleTab(SimpleLib.tab.settings)})}});

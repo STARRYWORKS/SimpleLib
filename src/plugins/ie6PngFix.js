@@ -27,6 +27,7 @@
  * @param		Object
  * @return		Array
  */
+
 (function($) {
 	
 	$.fn.pngfix = function(options) {
@@ -127,11 +128,13 @@
 
 /* SimpleLib Plugin */
 
-SimpleLib.extend( "ie6PngFix", {
-	settings: {
-		selector: "img[src$=png],input[src$=png],.pngfix"
-	},
-	init: function() {
-		$(window).load( function(){ $(SimpleLib.ie6PngFix.settings.selector).pngfix(); });
-	}
-});
+if ( SimpleLib ) {
+	SimpleLib.extend( "ie6PngFix", {
+		settings: {
+			selector: "img[src$=png],input[src$=png],.pngfix"
+		},
+		init: function() {
+			$(window).load( function(){ $(SimpleLib.ie6PngFix.settings.selector).pngfix(); });
+		}
+	});
+}

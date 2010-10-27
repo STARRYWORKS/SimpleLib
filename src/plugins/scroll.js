@@ -10,35 +10,41 @@
  *
  */
 
-$.fn.simpleScroll = function( i_options ){
-	
-	var defaults = {
-		time:600
+(function($){
+
+	$.fn.simpleScroll = function( i_options ){
+		
+		var defaults = {
+			time:600
+		};
+		var options = $.extend( true, defaults, i_options );
+		
+		$(this).click(function(){ 
+			var key = $(this).attr('href');
+			var dest = 0;
+			if(key != "#") {
+				if ( $(key).length == 0 ) return false;
+				dest = $(key).offset().top;
+			}
+			$("html,body").animate( {scrollTop:dest}, options.time );
+			return false;
+		});
+		
+		return this;
 	};
-	var options = $.extend( true, defaults, i_options );
-	
-	$(this).click(function(){ 
-		var key = $(this).attr('href');
-		var dest = 0;
-		if(key != "#") {
-			if ( $(key).length == 0 ) return false;
-			dest = $(key).offset().top;
-		}
-		$("html,body").animate( {scrollTop:dest}, options.time );
-		return false;
-	});
-	
-	return this;
-};
+
+})(jQuery);
 
 
 /* SimpleLib Plugin */
 
-SimpleLib.extend( "scroll", {
-	settings: {
-		selector:".scroll"
-	},
-	init: function() {
-		$( function(){ $(SimpleLib.scroll.settings.selector).simpleScroll( SimpleLib.scroll.settings ) } );
-	}
-});
+if ( SimpleLib ) {
+	SimpleLib.extend( "scroll", {
+		settings: {
+			selector:".scroll"
+		},
+		init: function() {
+			$( function(){ $(SimpleLib.scroll.settings.selector).simpleScroll( SimpleLib.scroll.settings ) } );
+		}
+	});
+}

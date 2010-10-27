@@ -8,8 +8,7 @@
  *
  */
 
-$.fn.imgSwap=function(g){var a=$.extend(true,{trigger:"click",attribute:"href",scrolling:false,scrollingTime:400},g);$(this).each(function(){var b=String($(this).attr(a.attribute)),d=b.match(/#(.+)$/);if(d){var e=$("#"+d[1]);$("<img>").attr("src",b);$(this).bind(a.trigger,function(){e.attr("src",b).css({width:"auto",height:"auto"});if(a.scrolling){var c=e.offset().top,f=$(window).scrollTop(),h=$(window).height();if(f+h<c||f>c)$("html,body").animate({scrollTop:c},a.scrollingTime)}return false})}})};
+(function(a){a.fn.imgSwap=function(h){var b=a.extend(true,{trigger:"click",attribute:"href",scrolling:false,scrollingTime:400},h);a(this).each(function(){var c=String(a(this).attr(b.attribute)),e=c.match(/#(.+)$/);if(e){var f=a("#"+e[1]);a("<img>").attr("src",c);a(this).bind(b.trigger,function(){f.attr("src",c).css({width:"auto",height:"auto"});if(b.scrolling){var d=f.offset().top,g=a(window).scrollTop(),i=a(window).height();if(g+i<d||g>d)a("html,body").animate({scrollTop:d},b.scrollingTime)}return false})}})}})(jQuery);
 
 /* SimpleLib Plugin */
-
-SimpleLib.extend("imgSwap",{settings:{selector:".imgswap, .imgSwap"},init:function(){$(function(){$(SimpleLib.imgSwap.settings.selector).imgSwap(SimpleLib.imgSwap.settings)})}});
+SimpleLib&&SimpleLib.extend("imgSwap",{settings:{selector:".imgswap, .imgSwap"},init:function(){$(function(){$(SimpleLib.imgSwap.settings.selector).imgSwap(SimpleLib.imgSwap.settings)})}});
