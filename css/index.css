@@ -11,6 +11,11 @@ li a {
 	text-decoration:none;
 }
 
+ol li {
+	margin-left:2em;
+	line-height:1.4em;
+}
+
 /* Document */
 
 html,body {

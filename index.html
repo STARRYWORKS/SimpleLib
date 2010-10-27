@@ -7,22 +7,29 @@
 
 <title>simplelib with jQuery</title>
 
-<link rel="stylesheet" type="text/css" href="examples/css/reset.css" media="all" />
-<link rel="stylesheet" type="text/css" href="examples/css/index.css" media="all" />
-<link type="text/css" rel="stylesheet" href="examples/css/SyntaxHighlighter.css" />
+<link rel="stylesheet" type="text/css" href="css/reset.css" media="all" />
+<link rel="stylesheet" type="text/css" href="css/index.css" media="all" />
+<link type="text/css" rel="stylesheet" href="css/SyntaxHighlighter.css" />
 
-<script type="text/javascript" src="examples/js/jquery-1.4.1.min.js"></script>
-<script type="text/javascript" src="./src/simplelib.js?accordion,rollOver,scroll,rollOver,tab,toolTip,imgSwap,lightBox,ie6PositionFixed,fixHeight,ie6PngFix,textHint,overlayOthers,showIfScroll,trimmedScroll"></script>
-<script type="text/javascript" src="examples/js/syntaxHighlighter/shCore.js"></script>
-<script type="text/javascript" src="examples/js/syntaxHighlighter/shBrushJScript.js"></script>
-<script type="text/javascript" src="examples/js/syntaxHighlighter/shBrushXml.js"></script>
-<script type="text/javascript" src="examples"/js/syntaxHighlighter/shBrushCss.js"></script>
+<script type="text/javascript" src="js/jquery-1.4.1.min.js"></script>
+<script type="text/javascript" src="src/simplelib.js?accordion,rollOver,scroll,rollOver,tab,toolTip,imgSwap,lightBox,ie6PositionFixed,fixHeight,ie6PngFix,textHint,overlayOthers,showIfScroll,trimmedScroll"></script>
+<script type="text/javascript" src="js/syntaxHighlighter/shCore.js"></script>
+<script type="text/javascript" src="js/syntaxHighlighter/shBrushJScript.js"></script>
+<script type="text/javascript" src="js/syntaxHighlighter/shBrushXml.js"></script>
+<script type="text/javascript" src="js/syntaxHighlighter/shBrushCss.js"></script>
 	
 <script type="text/javascript">
+$(document).ready(function(){
+	$("#SelectAll").change(function(){
+		$("#DownLoadForm").find("input").attr("checked", $(this).is(':checked') ? "checked" : "" );
+	});
+});
+
 $(window).load(function(){
 	dp.SyntaxHighlighter.ClipboardSwf = 'js/syntaxHighlighter/clipboard.swf';
 	dp.SyntaxHighlighter.HighlightAll('code');
 });
+
 
 </script>
 
@@ -42,8 +49,8 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 <!-- mixi check -->
 <meta property="og:title" content="simplelib with jQuery | STARRYWORKS inc." />
 <meta property="og:description" content="SimpleLibとはjQueryを利用した様々なプラグインを動的にロードして、ウェブサイトを構築する上でよく使う機能を一元管理しするためのツールです。" />
-<meta property="og:image" content="/js/simplelib/examples/images/logo.gif" />
-<meta property="mixi:image" content="/js/simplelib/examples/images/logo.gif" />
+<meta property="og:image" content="/js/simplelib/images/logo.gif" />
+<meta property="mixi:image" content="/js/simplelib/images/logo.gif" />
 
 <!-- topsy -->
 <script type="text/javascript" src="http://cdn.topsy.com/topsy.js?init=topsyWidgetCreator"></script>
@@ -53,16 +60,16 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 
 <body>
 <div id="Wrapper">
-	<h1><img src="./examples/images/logo.gif" alt="simplelib with jQuery" width="300" height="80" /></h1>
+	<h1><img src="./images/logo.gif" alt="simplelib with jQuery" width="300" height="80" /></h1>
 	<div class="funcs">
-		<h2><img src="./examples/images/title-outline.gif" alt="概要" width="800" height="85" /></h2>
+		<h2><img src="./images/title-outline.gif" alt="概要" width="800" height="85" /></h2>
 		<div class="func">
-			<h3><img src="./examples/images/title-outline-01.gif" alt="title-outline-01" width="800" height="20" /></h3>
+			<h3><img src="./images/title-outline-01.gif" alt="title-outline-01" width="800" height="20" /></h3>
 			<p>
 				SimpleLibとはjQueryを利用した様々なプラグインを動的にロードして、ウェブサイトを構築する上でよく使う機能を一元管理しするためのツールです。<br />
 				各プラグインを別ファイルにし、必要なファイルだけをロードします。<a href="#download" class="scroll">ダウンロード</a>はこのページの一番下にあります。
 			</p>
-			<h3><img src="./examples/images/title-outline-02.gif" alt="title-outline-02" width="800" height="20" /></h3>
+			<h3><img src="./images/title-outline-02.gif" alt="title-outline-02" width="800" height="20" /></h3>
 			<p>現在、以下のようなプラグインがあります。</p>
 			<table>
 				<tbody>
@@ -126,10 +133,10 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 			</table>
 		</div>
 		
-		<h2><img src="./examples/images/title-usage.gif" alt="使い方" width="800" height="85" /></h2>
+		<h2><img src="./images/title-usage.gif" alt="使い方" width="800" height="85" /></h2>
 		
 		<div class="func">
-			<h3 id="usage01"><img src="./examples/images/title-usage-01.gif" alt="title-usage-01" width="800" height="20" /></h3>
+			<h3 id="usage01"><img src="./images/title-usage-01.gif" alt="title-usage-01" width="800" height="20" /></h3>
 			<p>scriptタグでjQueryを読み込んだ後に、simplelib.jsを読み込みます。その際、src属性にsimplelib.jsのパス指定のあとに「?」（半角クエスチョンマーク）をつけて、読み込むプラグインを「,」（半角カンマ）区切りで指定します。</p>
 			<h4>例</h4>
 			<pre name="code" class="xml">
@@ -141,7 +148,7 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 				コンソールはSafariの開発メニューやFirefoxのプラグインFirebugなどを利用すると確認できます。
 			</p>
 			
-			<h3 id="usage02"><img src="./examples/images/title-usage-02.gif" alt="title-usage-02" width="800" height="20" /></h3>
+			<h3 id="usage02"><img src="./images/title-usage-02.gif" alt="title-usage-02" width="800" height="20" /></h3>
 			<p>
 				SimpleLibでは各プラグインのオプション設定を一元管理して設定することができます。<br />
 				設定をカスタマイズするにはsimplelib.jsを読み込む前にJavaScriptで「SimpleLibSettings」というオブジェクトを定義して、オプション設定を記述します。<br />
@@ -162,7 +169,7 @@ var SimpleLibSettings = {
 			</pre>
 		</div>
 		
-		<h2 id="plugins"><img src="./examples/images/title-plugins.gif" alt="プラグイン" width="800" height="85" /></h2>
+		<h2 id="plugins"><img src="./images/title-plugins.gif" alt="プラグイン" width="800" height="85" /></h2>
 		
 		<!-- div#accordion -->
 		<div class="plugin" id="accordion">
@@ -377,14 +384,14 @@ var SimpleLibSettings = {
 			</table>
 			<h4>サンプル</h4>
 			<div class="sample">
-				<div style="background-image:url(./examples/images/ie6pngfix-bg.gif); padding:90px 80px 60px 80px;">
-					<img src="./examples/images/ie6pngfix-img.png" alt="PNG" width="600" height="100" class="pngfix" />
+				<div style="background-image:url(./images/ie6pngfix-bg.gif); padding:90px 80px 60px 80px;">
+					<img src="./images/ie6pngfix-img.png" alt="PNG" width="600" height="100" class="pngfix" />
 				</div>
 			</div>
 			<h4>サンプルコード</h4>
 			<pre name="code" class="xml">
-&lt;div style=&quot;background-image:url(examples/images/ie6pngfix-bg.gif); padding:90px 80px 60px 80px;&quot;&gt;
-	&lt;img src=&quot;examples/images/ie6pngfix-img.png&quot; alt=&quot;PNG&quot; width=&quot;600&quot; height=&quot;100&quot; class=&quot;pngfix&quot; /&gt;
+&lt;div style=&quot;background-image:url(images/ie6pngfix-bg.gif); padding:90px 80px 60px 80px;&quot;&gt;
+	&lt;img src=&quot;images/ie6pngfix-img.png&quot; alt=&quot;PNG&quot; width=&quot;600&quot; height=&quot;100&quot; class=&quot;pngfix&quot; /&gt;
 &lt;/div&gt;
 			</pre>
 		</div>
@@ -420,15 +427,15 @@ var SimpleLibSettings = {
 			</table>
 			<h4>サンプル</h4>
 			<div class="sample">
-				このページの中央下にあるこの画像（<img src="./examples/images/pagetop.gif" alt="このページの先頭へ" width="20" height="20" />）のようになります。
+				このページの中央下にあるこの画像（<img src="./images/pagetop.gif" alt="このページの先頭へ" width="20" height="20" />）のようになります。
 				<div style="position:fixed; bottom:0px; left:50%;" class="exfixed">
-					<a href="#" class="scroll rollover"><img src="./examples/images/pagetop.gif" alt="このページの先頭へ" width="40" height="40" /></a>
+					<a href="#" class="scroll rollover"><img src="./images/pagetop.gif" alt="このページの先頭へ" width="40" height="40" /></a>
 				</div>
 			</div>
 			<h4>サンプルコード</h4>
 			<pre name="code" class="xml">
 &lt;div style=&quot;position:fixed; bottom:0px; left:50%;&quot; class=&quot;exfixed&quot;&gt;
-	&lt;a href=&quot;#&quot; class=&quot;scroll rollover&quot;&gt;&lt;img src=&quot;examples/images/pagetop.gif&quot; alt=&quot;&#12371;&#12398;&#12506;&#12540;&#12472;&#12398;&#20808;&#38957;&#12408;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;
+	&lt;a href=&quot;#&quot; class=&quot;scroll rollover&quot;&gt;&lt;img src=&quot;images/pagetop.gif&quot; alt=&quot;&#12371;&#12398;&#12506;&#12540;&#12472;&#12398;&#20808;&#38957;&#12408;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;
 &lt;/div&gt;
 			</pre>
 		</div>
@@ -492,27 +499,27 @@ var SimpleLibSettings = {
 			<h4>サンプル</h4>
 			<div class="sample">
 				<ul class="clearfix">
-					<li><a href="./examples/images/sanei-pict01.jpg#MainImg" class="imgSwap"><img src="./examples/images/sanei-pict01m.jpg" alt="" width="40" height="40" /></a></li>
-					<li><a href="./examples/images/sanei-pict02.jpg#MainImg" class="imgSwap"><img src="./examples/images/sanei-pict02m.jpg" alt="" width="40" height="40" /></a></li>
-					<li><a href="./examples/images/sanei-pict03.jpg#MainImg" class="imgSwap"><img src="./examples/images/sanei-pict03m.jpg" alt="" width="40" height="40" /></a></li>
-					<li><a href="./examples/images/sanei-pict04.jpg#MainImg" class="imgSwap"><img src="./examples/images/sanei-pict04m.jpg" alt="" width="40" height="40" /></a></li>
-					<li><a href="./examples/images/sanei-pict05.jpg#MainImg" class="imgSwap"><img src="./examples/images/sanei-pict05m.jpg" alt="" width="40" height="40" /></a></li>
+					<li><a href="./images/sanei-pict01.jpg#MainImg" class="imgSwap"><img src="./images/sanei-pict01m.jpg" alt="" width="40" height="40" /></a></li>
+					<li><a href="./images/sanei-pict02.jpg#MainImg" class="imgSwap"><img src="./images/sanei-pict02m.jpg" alt="" width="40" height="40" /></a></li>
+					<li><a href="./images/sanei-pict03.jpg#MainImg" class="imgSwap"><img src="./images/sanei-pict03m.jpg" alt="" width="40" height="40" /></a></li>
+					<li><a href="./images/sanei-pict04.jpg#MainImg" class="imgSwap"><img src="./images/sanei-pict04m.jpg" alt="" width="40" height="40" /></a></li>
+					<li><a href="./images/sanei-pict05.jpg#MainImg" class="imgSwap"><img src="./images/sanei-pict05m.jpg" alt="" width="40" height="40" /></a></li>
 				</ul>
 				<div>
-					<img src="./examples/images/sanei-pict01.jpg" alt="" id="MainImg" width="600" height="992" />
+					<img src="./images/sanei-pict01.jpg" alt="" id="MainImg" width="600" height="600" />
 				</div>
 			</div>
 			<h4>サンプルコード：HTML</h4>
 			<pre name="code" class="xml">
 &lt;ul class=&quot;clearfix&quot;&gt;
-	&lt;li&gt;&lt;a href=&quot;examples/images/sanei-pict01.jpg#MainImg&quot; class=&quot;imgSwap&quot;&gt;&lt;img src=&quot;examples/images/sanei-pict01m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a href=&quot;examples/images/sanei-pict02.jpg#MainImg&quot; class=&quot;imgSwap&quot;&gt;&lt;img src=&quot;examples/images/sanei-pict02m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a href=&quot;examples/images/sanei-pict03.jpg#MainImg&quot; class=&quot;imgSwap&quot;&gt;&lt;img src=&quot;examples/images/sanei-pict03m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a href=&quot;examples/images/sanei-pict04.jpg#MainImg&quot; class=&quot;imgSwap&quot;&gt;&lt;img src=&quot;examples/images/sanei-pict04m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a href=&quot;examples/images/sanei-pict05.jpg#MainImg&quot; class=&quot;imgSwap&quot;&gt;&lt;img src=&quot;examples/images/sanei-pict05m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;images/sanei-pict01.jpg#MainImg&quot; class=&quot;imgSwap&quot;&gt;&lt;img src=&quot;images/sanei-pict01m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;images/sanei-pict02.jpg#MainImg&quot; class=&quot;imgSwap&quot;&gt;&lt;img src=&quot;images/sanei-pict02m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;images/sanei-pict03.jpg#MainImg&quot; class=&quot;imgSwap&quot;&gt;&lt;img src=&quot;images/sanei-pict03m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;images/sanei-pict04.jpg#MainImg&quot; class=&quot;imgSwap&quot;&gt;&lt;img src=&quot;images/sanei-pict04m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;images/sanei-pict05.jpg#MainImg&quot; class=&quot;imgSwap&quot;&gt;&lt;img src=&quot;images/sanei-pict05m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div&gt;
-	&lt;img src=&quot;examples/images/sanei-pict01.jpg&quot; alt=&quot;&quot; id=&quot;MainImg&quot; width=&quot;600&quot; height=&quot;992&quot; /&gt;
+	&lt;img src=&quot;images/sanei-pict01.jpg&quot; alt=&quot;&quot; id=&quot;MainImg&quot; width=&quot;600&quot; height=&quot;992&quot; /&gt;
 &lt;/div&gt;
 			</pre>
 		</div>
@@ -525,7 +532,8 @@ var SimpleLibSettings = {
 		<div class="plugin" id="lightBox">
 			<h3>lightBox</h3>
 			<p>
-				<a href="http://leandrovieira.com/projects/jquery/lightbox/" target="_blank">jQuery lightBoxプラグイン</a>を読み込みます。
+				<a href="http://leandrovieira.com/projects/jquery/lightbox/" target="_blank">jQuery lightBoxプラグイン</a>を読み込みます。<br />
+				SimpleLibの「plugins」→「lightBox」ディレクトリ内にある「jquery.lightbox-0.5.css」を自動的に読み込み、同ディレクトリ内にある各画像が利用されます。
 			</p>
 			<h4>基本的な使い方</h4>
 			<ol>
@@ -554,11 +562,11 @@ var SimpleLibSettings = {
 			</table>
 			<h4>サンプル</h4>
 			<div class="sample">
-				<a href="./examples/images/sanei-pict01.jpg" class="lightBox"><img src="./examples/images/sanei-pict01m.jpg" alt="" width="40" height="40" /></a>
+				<a href="./images/sanei-pict01.jpg" class="lightBox"><img src="./images/sanei-pict01m.jpg" alt="" width="40" height="40" /></a>
 			</div>
 			<h4>サンプルコード：HTML</h4>
 			<pre name="code" class="xml">
-&lt;a href=&quot;examples/images/sanei-pict01.jpg&quot; class=&quot;lightBox&quot;&gt;&lt;img src=&quot;examples/images/sanei-pict01m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;images/sanei-pict01.jpg&quot; class=&quot;lightBox&quot;&gt;&lt;img src=&quot;images/sanei-pict01m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;
 			</pre>
 		</div>
 		<!-- /div#lightBox -->
@@ -630,21 +638,21 @@ var SimpleLibSettings = {
 			<h4>サンプル</h4>
 			<div class="sample">
 				<ul class="overlayOthers clearfix">
-					<li><a href="#"><img src="./examples/images/sanei-pict01m.jpg" alt="" width="40" height="40" /></a></li>
-					<li><a href="#"><img src="./examples/images/sanei-pict02m.jpg" alt="" width="40" height="40" /></a></li>
-					<li><a href="#"><img src="./examples/images/sanei-pict03m.jpg" alt="" width="40" height="40" /></a></li>
-					<li><a href="#"><img src="./examples/images/sanei-pict04m.jpg" alt="" width="40" height="40" /></a></li>
-					<li><a href="#"><img src="./examples/images/sanei-pict05m.jpg" alt="" width="40" height="40" /></a></li>
+					<li><a href="#"><img src="./images/sanei-pict01m.jpg" alt="" width="40" height="40" /></a></li>
+					<li><a href="#"><img src="./images/sanei-pict02m.jpg" alt="" width="40" height="40" /></a></li>
+					<li><a href="#"><img src="./images/sanei-pict03m.jpg" alt="" width="40" height="40" /></a></li>
+					<li><a href="#"><img src="./images/sanei-pict04m.jpg" alt="" width="40" height="40" /></a></li>
+					<li><a href="#"><img src="./images/sanei-pict05m.jpg" alt="" width="40" height="40" /></a></li>
 				</ul>
 			</div>
 			<h4>サンプルコード：HTML</h4>
 			<pre name="code" class="xml">
 &lt;ul class=&quot;overlayOthers&quot;&gt;
-	&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;examples/images/sanei-pict01m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;examples/images/sanei-pict02m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;examples/images/sanei-pict03m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;examples/images/sanei-pict04m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;examples/images/sanei-pict05m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/sanei-pict01m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/sanei-pict02m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/sanei-pict03m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/sanei-pict04m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;img src=&quot;images/sanei-pict05m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 			</pre>
 			<h4>サンプルコード：CSS</h4>
@@ -686,11 +694,11 @@ var SimpleLibSettings = {
 			</table>
 			<h4>サンプル</h4>
 			<div class="sample">
-				<a href="#" class="scroll rollover"><img src="./examples/images/pagetop.gif" alt="このページの先頭へ" width="40" height="40" /></a>
+				<a href="#" class="scroll rollover"><img src="./images/pagetop.gif" alt="このページの先頭へ" width="40" height="40" /></a>
 			</div>
 			<h4>サンプルコード</h4>
 			<pre name="code" class="xml">
-&lt;a href=&quot;#&quot; class=&quot;scroll rollover&quot;&gt;&lt;img src=&quot;examples/images/pagetop.gif&quot; alt=&quot;&#12371;&#12398;&#12506;&#12540;&#12472;&#12398;&#20808;&#38957;&#12408;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;#&quot; class=&quot;scroll rollover&quot;&gt;&lt;img src=&quot;images/pagetop.gif&quot; alt=&quot;&#12371;&#12398;&#12506;&#12540;&#12472;&#12398;&#20808;&#38957;&#12408;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;
 			</pre>
 		</div>
 		<!-- /div#rollOver -->
@@ -861,29 +869,29 @@ input.blur, textarea.blur { color:#cccccc; }
 			</table>
 			<h4>サンプル</h4>
 			<div class="sample">
-				<a href="#" class="trimmedScroll"><img src="./examples/images/tonan01-thumbnail.jpg" alt="" width="300" height="60" /></a>
+				<a href="#" class="trimmedScroll"><img src="./images/tonan01-thumbnail.jpg" alt="" width="300" height="60" /></a>
 			</div>
 			<h4>サンプルコード：HTML</h4>
 			<pre name="code" class="xml">
-&lt;a href=&quot;#&quot; class=&quot;trimmedScroll&quot;&gt;&lt;img src=&quot;examples/images/tonan01-thumbnail.jpg&quot; alt=&quot;&quot; width=&quot;300&quot; height=&quot;60&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;#&quot; class=&quot;trimmedScroll&quot;&gt;&lt;img src=&quot;images/tonan01-thumbnail.jpg&quot; alt=&quot;&quot; width=&quot;300&quot; height=&quot;60&quot; /&gt;&lt;/a&gt;
 			</pre>
 		</div>
 		<!-- /div#textHint -->
 
 		<!-- div#download -->
 		<div id="download">
-			<h2><img src="examples/images/title-download.gif" alt="ダウンロード" width="800" height="85" /></h2>
+			<h2><img src="images/title-download.gif" alt="ダウンロード" width="800" height="85" /></h2>
 			<div class="func">
 				<p>ライセンスはMITライセンスです。プラグインで取り込んでいる外部のライブラリについてはそれぞれのライセンスをご確認ください。</p>
 				<p>現在準備中ですが、開発中のものは<a href="http://wiki.github.com/STARRYWORKS/SimpleLib/" target="_blank">github</a>からダウンロードしたりフォークしたりできます。</p>
-				<h3><img src="examples/images/title-download-01.gif" alt="simplelib.js本体と全てのプラグインをまとめてダウンロード" width="800" height="20" /></h3>
+				<h3><img src="images/title-download-01.gif" alt="simplelib.js本体と全てのプラグインをまとめてダウンロード" width="800" height="20" /></h3>
 				<p>
 					こちらからダウンロードしてください。<br />
 					<a href="./build/simplelib.zip">simplelib.zip [ 29KB ]</a>
 				</p>
-				<h3><img src="examples/images/title-download-02.gif" alt="指定したプラグインを１つのjsファイルとしてダウンロード" width="800" height="20" /></h3>
-				<p>必要なプラグインを選択してダウンロードボタンをクリックしてください。</p>
-				<form action="./compiler/" method="post">
+				<h3><img src="images/title-download-02.gif" alt="指定したプラグインを１つのjsファイルとしてダウンロード" width="800" height="20" /></h3>
+				<p>必要なプラグインを選択してダウンロードボタンをクリックしてください。 <label><input type="checkbox" id="SelectAll" /> 全て選択</label></p>
+				<form action="./compiler/" method="post" id="DownLoadForm">
 					<ul class="clearfix">
 						<li><label><input type="checkbox" name="plugins[]" value="accordion" /> accordion</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="fixHeight" /> fixHeight</label></li>
