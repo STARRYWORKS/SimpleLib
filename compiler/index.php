@@ -76,7 +76,7 @@ $o_str .= "\n\n/*SimpleLib SetUp*/\n{$setup}";
 //----------------------------------------
 //	Output
 //----------------------------------------
-//header('Content-Disposition: attachment; filename="simplelib.min.js"');
+header('Content-Disposition: attachment; filename="simplelib.min.js"');
 header("Content-type: application/x-javascript");
 echo $o_str;
 
