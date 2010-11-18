@@ -12,7 +12,7 @@
 <link type="text/css" rel="stylesheet" href="css/SyntaxHighlighter.css" />
 
 <script type="text/javascript" src="js/jquery-1.4.1.min.js"></script>
-<script type="text/javascript" src="build/simplelib.js?accordion,rollOver,scroll,rollOver,tab,toolTip,imgSwap,lightBox,ie6PositionFixed,fixHeight,ie6PngFix,textHint,overlayOthers,showIfScroll,trimmedScroll,checkAll"></script>
+<script type="text/javascript" src="build/simplelib.js?accordion,rollOver,fadeRollOver,scroll,tab,toolTip,imgSwap,lightBox,ie6PositionFixed,fixHeight,ie6PngFix,textHint,overlayOthers,showIfScroll,trimmedScroll,checkAll"></script>
 <script type="text/javascript" src="js/syntaxHighlighter/shCore.js"></script>
 <script type="text/javascript" src="js/syntaxHighlighter/shBrushJScript.js"></script>
 <script type="text/javascript" src="js/syntaxHighlighter/shBrushXml.js"></script>
@@ -100,6 +100,10 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 					<tr>
 						<th><a href="#rollOver" class="scroll">rollOver</a></th>
 						<td>マウスオーバー／マウスアウトで画像を切り替える</td>
+					</tr>
+					<tr>
+						<th><a href="#fadeRollOver" class="scroll">fadeRollOver</a></th>
+						<td>マウスオーバー／マウスアウトでフェードイン／フェードアウトで画像を切り替える</td>
 					</tr>
 					<tr>
 						<th><a href="#scroll" class="scroll">scroll</a></th>
@@ -768,6 +772,60 @@ var SimpleLibSettings = {
 
 
 
+		<!-- div#fadeRollOver -->
+		<div class="plugin" id="fadeRollOver">
+			<h3>fadeRollOver - ロールオーバーで画像切り替え</h3>
+			<p>
+				マウスオーバーで画像を切り替えます。
+			</p>
+			<h4>基本的な使い方</h4>
+			<ol>
+				<li>切り替えたい画像を含むa要素の「fadeRollOver」というクラスを付与し、元の画像ファイル名に「-over」を付けたマウスオーバー用の画像を用意しておきます。</li>
+			</ol>
+			<h4>オプション設定</h4>
+			<table>
+				<thead>
+					<tr>
+						<th>オプション</th>
+						<th>デフォルト</th>
+						<th>設定内容</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>selector</th>
+						<td>.fadeRollOver, .faderollover</td>
+						<td>プラグインを発動させる要素のセレクタ</td>
+					</tr>
+					<tr>
+						<th>fadeInTime</th>
+						<td>0</td>
+						<td>フェードインする時間（ミリ秒）</td>
+					</tr>
+					<tr>
+						<th>fadeOutTime</th>
+						<td>300</td>
+						<td>フェードアウトする時間（ミリ秒）</td>
+					</tr>
+				</tbody>
+			</table>
+			<h4>サンプル</h4>
+			<div class="sample">
+				<a href="#" class="scroll fadeRollOver"><img src="./images/pagetop.gif" alt="このページの先頭へ" width="40" height="40" /></a>
+				<a href="#" class="scroll fadeRollOver"><img src="./images/pagetop.gif" alt="このページの先頭へ" width="40" height="40" /></a>
+				<a href="#" class="scroll fadeRollOver"><img src="./images/pagetop.gif" alt="このページの先頭へ" width="40" height="40" /></a>
+			</div>
+			<h4>サンプルコード</h4>
+			<pre name="code" class="xml">
+&lt;a href=&quot;#&quot; class=&quot;scroll fadeRollOver&quot;&gt;&lt;img src=&quot;images/pagetop.gif&quot; alt=&quot;&#12371;&#12398;&#12506;&#12540;&#12472;&#12398;&#20808;&#38957;&#12408;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;#&quot; class=&quot;scroll fadeRollOver&quot;&gt;&lt;img src=&quot;images/pagetop.gif&quot; alt=&quot;&#12371;&#12398;&#12506;&#12540;&#12472;&#12398;&#20808;&#38957;&#12408;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;
+&lt;a href=&quot;#&quot; class=&quot;scroll fadeRollOver&quot;&gt;&lt;img src=&quot;images/pagetop.gif&quot; alt=&quot;&#12371;&#12398;&#12506;&#12540;&#12472;&#12398;&#20808;&#38957;&#12408;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;
+			</pre>
+		</div>
+		<!-- /div#fadeRollOver -->
+
+
+
 		<!-- div#scroll -->
 		<div class="plugin" id="scroll">
 			<h3>scroll - スムーススクロール</h3>
@@ -1153,6 +1211,7 @@ div.tabSet div.panel img {
 						<li><label><input type="checkbox" name="plugins[]" value="lightBox" /> lightBox</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="overlayOthers" /> overlayOthers</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="rollOver" /> rollOver</label></li>
+						<li><label><input type="checkbox" name="plugins[]" value="rollOver" /> fadeRollOver</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="scroll" /> scroll</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="showIfScroll" /> showIfScroll</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="tab" /> tab</label></li>
