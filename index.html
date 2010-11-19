@@ -47,7 +47,7 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 <!-- topsy -->
 <script src="http://cdn.topsy.com/topsy.js?init=topsyWidgetCreator" type="text/javascript"></script>
 
-
+<link rel="shortcut icon" href="http://wwww.starryworks.co.jp/starryworks.ico" />
 </head>
 
 <body>
@@ -99,11 +99,11 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 					</tr>
 					<tr>
 						<th><a href="#rollOver" class="scroll">rollOver</a></th>
-						<td>マウスオーバー／マウスアウトで画像を切り替える</td>
+						<td>マウスオーバー／ロールアウトで画像を切り替える</td>
 					</tr>
 					<tr>
 						<th><a href="#fadeRollOver" class="scroll">fadeRollOver</a></th>
-						<td>マウスオーバー／マウスアウトでフェードイン／フェードアウトで画像を切り替える</td>
+						<td>マウスオーバー／ロールアウトでフェードイン／フェードアウトで画像を切り替える</td>
 					</tr>
 					<tr>
 						<th><a href="#scroll" class="scroll">scroll</a></th>
@@ -134,8 +134,18 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 				</tbody>
 			</table>
 		</div>
-		
-		<h2><img src="./images/title-usage.gif" alt="使い方" width="800" height="85" /></h2>
+		<div class="social">
+			<div class="facebookBtn"><script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="http://lab.starryworks.jp/js/simplelib/" layout="button_count" width="80" font="arial"></fb:like></div>
+			<div class="topsy_widget_data"><!--
+			  {
+			    "url": "http://lab.starryworks.jp/js/simplelib/",
+			    "title": "simplelib with jQuery"
+			  }
+			--></div>		
+			<a href="http://mixi.jp/share.pl" class="mixi-check-button" data-key="230318c125f2739193b7d2fe9950a21c67194408" data-button="button-4" data-url="http://lab.starryworks.jp/js/simplelib/?utm_campaign=pp&utm_medium=mixi&utm_source=check">Check</a>
+			<script type="text/javascript" src="http://static.mixi.jp/js/share.js"></script>
+		</div>
+		<h2 class="top"><img src="./images/title-usage.gif" alt="使い方" width="800" height="85" /></h2>
 		
 		<div class="func">
 			<h3 id="usage01"><img src="./images/title-usage-01.gif" alt="title-usage-01" width="800" height="20" /></h3>
@@ -163,7 +173,7 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 var SimpleLibSettings = {
 	//rollOverプラグインを発動させるセレクタを変更
 	rollOver: { selector:".hover" },
-	//imgSwapプラグインをクリックではなく、マウスオーバーで発動させるように変更
+	//imgSwapプラグインをクリックではなく、ロールオーバーで発動させるように変更
 	imgSwap: { trigger:"mouseover" }
 };
 &lt;/script&gt;
@@ -736,11 +746,11 @@ var SimpleLibSettings = {
 		<div class="plugin" id="rollOver">
 			<h3>rollOver - ロールオーバーで画像切り替え</h3>
 			<p>
-				マウスオーバーで画像を切り替えます。
+				ロールオーバーで画像を切り替えます。
 			</p>
 			<h4>基本的な使い方</h4>
 			<ol>
-				<li>切り替えたい画像を含むa要素の「rollOver」というクラスを付与し、元の画像ファイル名に「-over」を付けたマウスオーバー用の画像を用意しておきます。</li>
+				<li>切り替えたい画像を含むa要素の「rollOver」というクラスを付与し、元の画像ファイル名に「-over」を付けたロールオーバー用の画像を用意しておきます。</li>
 			</ol>
 			<h4>オプション設定</h4>
 			<table>
@@ -776,11 +786,13 @@ var SimpleLibSettings = {
 		<div class="plugin" id="fadeRollOver">
 			<h3>fadeRollOver - ロールオーバーで画像切り替え</h3>
 			<p>
-				マウスオーバーで画像を切り替えます。
+				ロールオーバー／ロールアウトでフェードイン／フェードアウトしながらで画像を切り替えます。<br />
+				ただし、画像がPNGで、ブラウザがInternet Explorer（全バージョン）の場合だけフェードしません。
+				（IEでは透過PNG画像にアルファフィルターをかけると黒くなってしまうため）
 			</p>
 			<h4>基本的な使い方</h4>
 			<ol>
-				<li>切り替えたい画像を含むa要素の「fadeRollOver」というクラスを付与し、元の画像ファイル名に「-over」を付けたマウスオーバー用の画像を用意しておきます。</li>
+				<li>切り替えたい画像を含むa要素の「fadeRollOver」というクラスを付与し、元の画像ファイル名に「-over」を付けたロールオーバー用の画像を用意しておきます。</li>
 			</ol>
 			<h4>オプション設定</h4>
 			<table>
@@ -1227,7 +1239,8 @@ div.tabSet div.panel img {
 		<!-- /div#download -->
 	</div>
 	
-	<div style="text-align:right;">
+	<div class="social clearfix">
+		<div class="facebookBtn"><script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="http://lab.starryworks.jp/js/simplelib/" layout="button_count" width="80" font="arial"></fb:like></div>
 		<div class="topsy_widget_data"><!--
 		  {
 		    "url": "http://lab.starryworks.jp/js/simplelib/",
@@ -1237,8 +1250,14 @@ div.tabSet div.panel img {
 		<a href="http://mixi.jp/share.pl" class="mixi-check-button" data-key="230318c125f2739193b7d2fe9950a21c67194408" data-button="button-4" data-url="http://lab.starryworks.jp/js/simplelib/?utm_campaign=pp&utm_medium=mixi&utm_source=check">Check</a>
 		<script type="text/javascript" src="http://static.mixi.jp/js/share.js"></script>
 	</div>
+
+	
+	<script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like-box href="http://www.facebook.com/pages/Simplelib/142019722515393" width="800"></fb:like-box>
+	
 	
 	<div id="Copyright"><p>Copyright 2010 <a href="http://www.starryworks.co.jp/" target="_blank">STARRYWORKS inc</a>. All rights reserved.</p></div>
+	
+	
 </div>
 
 <script type="text/javascript">
