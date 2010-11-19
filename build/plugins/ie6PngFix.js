@@ -128,13 +128,4 @@
 
 /* SimpleLib Plugin */
 
-if ( SimpleLib ) {
-	SimpleLib.extend( "ie6PngFix", {
-		settings: {
-			selector: "img[src$=png],input[src$=png],.pngfix"
-		},
-		init: function() {
-			$(window).load( function(){ $(SimpleLib.ie6PngFix.settings.selector).pngfix(); });
-		}
-	});
-}
+SimpleLib&&SimpleLib.extend("ie6PngFix",{settings:{selector:"img[src$=png],input[src$=png],.pngfix"},init:function(){$(window).load(function(){$(SimpleLib.ie6PngFix.settings.selector).pngfix()})}});
