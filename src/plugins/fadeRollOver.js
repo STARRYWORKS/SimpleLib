@@ -10,6 +10,8 @@
 
 (function($){
 
+	var isIE = navigator.userAgent.indexOf("MSIE") != -1;
+
 	$.fn.fadeRollOver = function( i_options ){
 		
 		var defaults = {
@@ -26,13 +28,20 @@
 			if(!$i.length) return;
 			
 			var up = $i.attr("src");
+			var isPNG = up.match(/\.png$/) != "";
 			var over = up.replace(/\.([a-zA-Z0-9]+)$/,options.postfix+".$1");
 			
-			var $o = $('<img style="display:block;position:absolute;" class="over" />').attr("src",over);
-			$i.before($o);
-			$o.hide();
+			if ( !isIE || !isPNG ) {
+				var $o = $('<img style="display:block;position:absolute;" class="over" />').attr("src",over);
+				$i.before($o);
+				$o.hide();
+			}
 			$a.hover(
 				function(){
+					if ( isIE && isPNG ) {
+						$i.attr("src",over);
+						return;
+					}
 					if ( !$o.is(":visible") ) $o.css({opacity:0}).show();
 					$o.css("top",$i.offset().top+"px");
 					$o.css("left",$i.offset().left+"px");
@@ -40,6 +49,10 @@
 					$i.stop().animate({opacity:0},options.fadeInTime);
 				},
 				function(){
+					if ( isIE && isPNG ) {
+						$i.attr("src",up);
+						return;
+					}
 					$o.stop().animate({opacity:0},options.fadeOutTime);
 					$i.stop().animate({opacity:1},options.fadeOutTime, function(){ $o.hide(); });
 				}
