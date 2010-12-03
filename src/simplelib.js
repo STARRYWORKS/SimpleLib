@@ -16,7 +16,7 @@ var SimpleLibSettings = SimpleLibSettings || {};
 SimpleLib = $.extend( true, {
 	
 	debug: false,
-	jsDir: $("script[src*='simplelib.js']").attr('src').replace(/simplelib\.js.*?$/,""),
+	jsDir: $("script[src*='simplelib.js'],script[src*='simplelib.min.js']").attr('src').replace(/simplelib\.js.*?$/,""),
 	
 	//Check if the passed value exsits in the array
 	containsInArray: function( i_value, i_array ) {
