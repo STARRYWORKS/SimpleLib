@@ -16,6 +16,7 @@
 		
 		var defaults = {
 			postfix:"-over",
+			crossFade:false,
 			fadeInTime:0,
 			fadeOutTime:300
 		};
@@ -32,29 +33,39 @@
 			var over = up.replace(/\.([a-zA-Z0-9]+)$/,options.postfix+".$1");
 			
 			if ( !isIE || !isPNG ) {
-				var $o = $('<img style="display:block;position:absolute;" class="over" />').attr("src",over);
+				var $dummy = $('<img width="'+$i.width()+'" height="'+$i.height()+'" class="dummy" />');
+				$i.before($dummy);
+				$dummy.hide();
+				var $o = $('<img style="display:block;position:absolute;" class="over" />').attr("src",up);
 				$i.before($o);
 				$o.hide();
+				var position = $i.css("position");
 			}
 			$a.hover(
 				function(){
-					if ( isIE && isPNG ) {
-						$i.attr("src",over);
-						return;
-					}
-					if ( !$o.is(":visible") ) $o.css({opacity:0}).show();
-					$o.css("top",$i.offset().top+"px");
-					$o.css("left",$i.offset().left+"px");
-					$o.stop().animate({opacity:1},options.fadeInTime);
-					$i.stop().animate({opacity:0},options.fadeInTime);
+					$i.attr("src",over);
+					if ( isIE && isPNG ) return;
+					if ( !$o.is(":visible") ) $o.show();
+					$i.css("position","absolute");
+					$dummy.show();
+					$o.css("top",$dummy.offset().top+"px");
+					$o.css("left",$dummy.offset().left+"px");
+					$i.css("top",$dummy.offset().top+"px");
+					$i.css("left",$dummy.offset().left+"px");
+					$i.stop().css({opacity:0}).animate({opacity:1},options.fadeInTime);
+					if ( options.crossFade ) $o.stop().animate({opacity:0},options.fadeInTime);
 				},
 				function(){
 					if ( isIE && isPNG ) {
 						$i.attr("src",up);
 						return;
 					}
-					$o.stop().animate({opacity:0},options.fadeOutTime);
-					$i.stop().animate({opacity:1},options.fadeOutTime, function(){ $o.hide(); });
+					$i.stop().animate({opacity:0},options.fadeOutTime, function(){
+						$o.hide();
+						$dummy.hide();
+						$i.attr("src",up).css({ position:position, opacity:1 });
+					});
+					if ( options.crossFade ) $o.stop().animate({opacity:1},options.fadeOutTime);
 				}
 			);
 		});
