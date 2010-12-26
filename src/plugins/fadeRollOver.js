@@ -33,13 +33,15 @@
 			var over = up.replace(/\.([a-zA-Z0-9]+)$/,options.postfix+".$1");
 			
 			if ( !isIE || !isPNG ) {
+				var position = $i.css("position");
 				var $dummy = $('<img width="'+$i.width()+'" height="'+$i.height()+'" class="dummy" />');
 				$i.before($dummy);
+				$dummy.css("position",position);
+				$dummy.css("display",$i.css("display"));
 				$dummy.hide();
 				var $o = $('<img style="display:block;position:absolute;" class="over" />').attr("src",up);
 				$i.before($o);
 				$o.hide();
-				var position = $i.css("position");
 			}
 			$a.hover(
 				function(){
