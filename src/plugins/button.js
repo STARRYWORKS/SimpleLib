@@ -159,6 +159,8 @@ var selected = $("#selector").button("selected"); //same as hasClass("selected")
 		//clear
 		function clear( $i_button ) {
 			var $img = getImage( $i_button );
+			var d = $img.data("button_default");
+			if ( d ) $img.attr("src",d);
 			var i;
 			for ( i in statuses ) {
 				$img.data( "button_"+statuses[i], "" );
