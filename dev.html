@@ -12,16 +12,15 @@
 <link type="text/css" rel="stylesheet" href="css/SyntaxHighlighter.css" />
 
 <script type="text/javascript" src="js/jquery-1.4.1.min.js"></script>
-<script type="text/javascript" src="src/simplelib.js?accordion,rollOver,fadeRollOver,scroll,tab,toolTip,imgSwap,lightBox,ie6PositionFixed,fixHeight,ie6PngFix,textHint,overlayOthers,showIfScroll,trimmedScroll,checkAll"></script>
+<script type="text/javascript" src="src/simplelib.js?accordion,button,scroll,tab,toolTip,imgSwap,lightBox,ie6PositionFixed,fixHeight,ie6PngFix,textHint,overlayOthers,showIfScroll,trimmedScroll,checkAll"></script>
 <script type="text/javascript" src="js/syntaxHighlighter/shCore.js"></script>
 <script type="text/javascript" src="js/syntaxHighlighter/shBrushJScript.js"></script>
 <script type="text/javascript" src="js/syntaxHighlighter/shBrushXml.js"></script>
 <script type="text/javascript" src="js/syntaxHighlighter/shBrushCss.js"></script>
 	
 <script type="text/javascript">
-$(window).load(function(){
-	dp.SyntaxHighlighter.ClipboardSwf = 'js/syntaxHighlighter/clipboard.swf';
-	dp.SyntaxHighlighter.HighlightAll('code');
+$(function(){
+	$("#button .sample a.button").click( function(){ return false; } );
 });
 </script>
 
@@ -70,6 +69,10 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 						<td>シンプルなアコーディオンナビゲーション</td>
 					</tr>
 					<tr>
+						<th><a href="#button" class="scroll">button</a></th>
+						<td>マウスオーバーやマウスダウンで画像を切り替えたり、選択状態と非選択状態によって画像を切り替える</td>
+					</tr>
+					<tr>
 						<th><a href="#checkAll" class="scroll">checkAll</a></th>
 						<td>チェックボックスの一括選択</td>
 					</tr>
@@ -95,15 +98,21 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 					</tr>
 					<tr>
 						<th><a href="#overlayOthers" class="scroll">overlayOthers</a></th>
-						<td>指定した要素の子のa要素にロールオーバーすると他のa要素にcssで背景色や背景画像を指定できる半透明の要素をかぶせる</td>
+						<td>指定した要素の子のa要素にマウスオーバーすると他のa要素にcssで背景色や背景画像を指定できる半透明の要素をかぶせる</td>
 					</tr>
 					<tr>
-						<th><a href="#rollOver" class="scroll">rollOver</a></th>
-						<td>マウスオーバー／ロールアウトで画像を切り替える</td>
+						<th>rollOver</th>
+						<td>
+							<s>マウスオーバー／ロールアウトで画像を切り替える</s><br />
+							このプラグインは廃止されました。<a href="#button" class="scroll">button</a>をご利用ください。
+						</td>
 					</tr>
 					<tr>
-						<th><a href="#fadeRollOver" class="scroll">fadeRollOver</a></th>
-						<td>マウスオーバー／ロールアウトでフェードイン／フェードアウトで画像を切り替える</td>
+						<th>fadeRollOver</th>
+						<td>
+							<s>マウスオーバー／ロールアウトでフェードイン／フェードアウトで画像を切り替える</s>
+							このプラグインは廃止されました。<a href="#button" class="scroll">button</a>をご利用ください。
+						</td>
 					</tr>
 					<tr>
 						<th><a href="#scroll" class="scroll">scroll</a></th>
@@ -129,7 +138,7 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 					-->
 					<tr>
 						<th><a href="#trimmedScroll" class="scroll">trimmedScroll</a></th>
-						<td>img要素を含むa要素にロールオーバーすると別の画像をそのimg要素のサイズにトリミングしてスクロールしながら表示する</td>
+						<td>img要素を含むa要素にマウスオーバーすると別の画像をそのimg要素のサイズにトリミングしてスクロールしながら表示する</td>
 					</tr>
 				</tbody>
 			</table>
@@ -171,13 +180,13 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 &lt;script type=&quot;text/javascript&quot; src=&quot;js/jquery-1.4.1.js&quot;&gt;&lt;/script&gt;
 &lt;script type=&quot;text/javascript&quot;&gt;
 var SimpleLibSettings = {
-	//rollOverプラグインを発動させるセレクタを変更
-	rollOver: { selector:".hover" },
+	//buttonプラグインのfadeオプションを設定
+	button: { fade:true },
 	//imgSwapプラグインをクリックではなく、ロールオーバーで発動させるように変更
 	imgSwap: { trigger:"mouseover" }
 };
 &lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot; src=&quot;js/simplelib.js?rollOver,imgSwap&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;js/simplelib.js?button,imgSwap&quot;&gt;&lt;/script&gt;
 			</pre>
 		</div>
 		
@@ -300,7 +309,111 @@ var SimpleLibSettings = {
 		<!-- /div#accordion -->
 
 
-		<!-- div#accordion -->
+		<!-- div#button -->
+		<div class="plugin" id="button">
+			<h3>button - マウスイベントに合わせて画像を切り替え</h3>
+			<p>
+				マウスオーバーやマウスダウンで画像を切り替えたり、選択状態と非選択状態によって画像を切り替えます。
+			</p>
+			<h4>基本的な使い方</h4>
+			<ol>
+				<li>切り替えたい画像を含むa要素やinput要素にの「button」というクラスを付与し、元の画像ファイル名に「-over」を付けたマウスオーバー用の画像と、「-down」を付けたマウスダウン時用の画像を用意しておきます。</li>
+				<li>切り替えたい画像を含むa要素やinput要素に「rollOver」というクラスを付与し、元の画像ファイル名に「-over」を付けたマウスオーバー用の画像を用意しておきます。</li>
+			</ol>
+			<h4>オプション設定</h4>
+			<table>
+				<thead>
+					<tr>
+						<th>オプション</th>
+						<th>デフォルト</th>
+						<th>設定内容</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>buttonSelector</th>
+						<td>a.button, input.button</td>
+						<td>マウスオーバー／マウスダウンの画像切り替えを発動させる要素のセレクタ</td>
+					</tr>
+					<tr>
+						<th>rollOverSelector</th>
+						<td>a.rollover, a.rollOver, input.rollover, input.rollOver</td>
+						<td>マウスオーバーの画像切り替えを発動させる要素のセレクタ</td>
+					</tr>
+					<tr>
+						<th>fade</th>
+						<td>true</td>
+						<td>画像の切り替え時にフェードイン／フェードアウトさせるかどうか。（&lt;a&gt;要素のみ）</td>
+					</tr>
+					<tr>
+						<th>fadeTime</th>
+						<td>300</td>
+						<td>フェードイン／フェードアウト時間</td>
+					</tr>
+				</tbody>
+			</table>
+			<h4>サンプル</h4>
+			<div class="sample">
+				<a href="#" class="button"><img src="./images/button.gif" alt="button" width="120" height="55" /></a>
+			</div>
+			<h4>サンプルコード：HTML</h4>
+			<pre name="code" class="xml">
+&lt;a href=&quot;#&quot; class=&quot;button&quot;&gt;&lt;img src=&quot;./images/button.gif&quot; alt=&quot;button&quot; width=&quot;120&quot; height=&quot;55&quot; /&gt;&lt;/a&gt;
+			</pre>
+			<h4>JavaScriptからの呼び出し</h4>
+			<p>
+				JavaScriptから利用する場合、jQueryのプラグインとして、 $("#Selector").button( options ) のようにして呼び出すことができます。
+			</p>
+			<p>
+				また、タブメニューなどで使えるように選択状態の管理もできるようになっています。<br />
+				選択状態の機能を利用する場合は「-selected」や「-selected-over」などのファイル名の付いた画像を用意しておく必要があります。選択状態の時のマウスイベントによる画像切り替えをOFFにする場合は「enableMouseEventsSelected」オプションをfalseに設定します。
+				
+			</p>
+			<pre name="code" class="javascript">
+//マウスオーバー、マウスダウン、選択状態、フェードイン／フェードアウトを有効にする
+$("#Selector").button( { over:true, down:true, selected:true, fade:true } );
+
+//画像の状態を切り替える
+$("#Selector").button( "over" );
+$("#Selector").button( "out" );
+$("#Selector").button( "down" );
+$("#Selector").button( "up" );
+
+//選択状態にする
+$("#Selector").button( "selected", true );
+//選択状態を解除
+$("#Selector").button( "selected", true );
+//選択状態を交互に切り替え
+$("#Selector").button( "selected", "toggle" );
+				
+			</pre>
+			<h4>サンプル</h4>
+			<div class="sample">
+				<a href="#" class="customButton"><img src="./images/button.gif" alt="button" width="120" height="55" /></a>
+				<script type="text/javascript">
+					$(".customButton").button( { over:true, down:true, selected:true, fade:true } );
+					$(".customButton").click( function(){
+						$(this).button( "selected", "toggle" );
+						return false;
+					});
+				</script>
+			</div>
+			<h4>サンプルコード</h4>
+			<pre name="code" class="xml">
+&lt;a href=&quot;#&quot; class=&quot;customButton&quot;&gt;&lt;img src=&quot;./images/button.gif&quot; alt=&quot;button&quot; width=&quot;120&quot; height=&quot;55&quot; /&gt;&lt;/a&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+	$(&quot;.customButton&quot;).button( { over:true, down:true, selected:true, fade:true } );
+	$(&quot;.customButton&quot;).click( function(){
+		$(this).button( &quot;selected&quot;, &quot;toggle&quot; );
+		return false;
+	});
+&lt;/script&gt;
+			</pre>
+		</div>
+		<!-- /div#button -->
+		
+		
+		<!-- div#checkAll -->
 		<div class="plugin" id="checkAll">
 			<h3>checkAll - チェックボックスの一括選択</h3>
 			<p>
@@ -742,7 +855,7 @@ var SimpleLibSettings = {
 
 
 
-		<!-- div#rollOver -->
+		<!-- div#rollOver
 		<div class="plugin" id="rollOver">
 			<h3>rollOver - ロールオーバーで画像切り替え</h3>
 			<p>
@@ -782,7 +895,7 @@ var SimpleLibSettings = {
 
 
 
-		<!-- div#fadeRollOver -->
+		<!-- div#fadeRollOver
 		<div class="plugin" id="fadeRollOver">
 			<h3>fadeRollOver - ロールオーバーで画像切り替え</h3>
 			<p>
@@ -1264,6 +1377,11 @@ div.tabSet div.panel img {
 	
 	
 </div>
+
+<script type="text/javascript">
+dp.SyntaxHighlighter.ClipboardSwf = 'js/syntaxHighlighter/clipboard.swf';
+dp.SyntaxHighlighter.HighlightAll('code');
+</script>
 
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
