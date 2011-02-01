@@ -382,7 +382,7 @@ $("#Selector").button( "up" );
 //選択状態にする
 $("#Selector").button( "selected", true );
 //選択状態を解除
-$("#Selector").button( "selected", true );
+$("#Selector").button( "selected", false );
 //選択状態を交互に切り替え
 $("#Selector").button( "selected", "toggle" );
 				
@@ -391,23 +391,24 @@ $("#Selector").button( "selected", "toggle" );
 			<div class="sample">
 				<a href="#" class="customButton"><img src="./images/button.gif" alt="button" width="120" height="55" /></a>
 				<script type="text/javascript">
-					$(".customButton").button( { over:true, down:true, selected:true, fade:true } );
-					$(".customButton").click( function(){
-						$(this).button( "selected", "toggle" );
-						return false;
+					$(function(){
+						$(".customButton").button( { over:true, down:true, selected:true, fade:true } );
+						$(".customButton").click( function(){
+							$(this).button( "selected", "toggle" );
+							return false;
+						});
 					});
 				</script>
 			</div>
 			<h4>サンプルコード</h4>
 			<pre name="code" class="xml">
-&lt;a href=&quot;#&quot; class=&quot;customButton&quot;&gt;&lt;img src=&quot;./images/button.gif&quot; alt=&quot;button&quot; width=&quot;120&quot; height=&quot;55&quot; /&gt;&lt;/a&gt;
-&lt;script type=&quot;text/javascript&quot;&gt;
+$(function(){
 	$(&quot;.customButton&quot;).button( { over:true, down:true, selected:true, fade:true } );
 	$(&quot;.customButton&quot;).click( function(){
 		$(this).button( &quot;selected&quot;, &quot;toggle&quot; );
 		return false;
 	});
-&lt;/script&gt;
+});
 			</pre>
 		</div>
 		<!-- /div#button -->
@@ -1325,7 +1326,7 @@ div.tabSet div.panel img {
 				<h3><img src="images/title-download-01.gif" alt="simplelib.js本体と全てのプラグインをまとめてダウンロード" width="800" height="20" /></h3>
 				<p>
 					こちらからダウンロードしてください。<br />
-					<a href="./build/simplelib.zip">simplelib.zip [ 29KB ]</a><br />
+					<a href="./build/simplelib.zip">simplelib.zip [ 33KB ]</a><br />
 					<a href="http://jquery.com/" target="_blank">jQueryのダウンロードはこちら</a>
 				</p>
 				<h3><img src="images/title-download-02.gif" alt="指定したプラグインを１つのjsファイルとしてダウンロード" width="800" height="20" /></h3>
@@ -1333,6 +1334,7 @@ div.tabSet div.panel img {
 				<p>必要なプラグインを選択してダウンロードボタンをクリックしてください。 <label><input type="checkbox" class="checkAll" /> 全て選択</label></p>
 					<ul class="clearfix">
 						<li><label><input type="checkbox" name="plugins[]" value="accordion" /> accordion</label></li>
+						<li><label><input type="checkbox" name="plugins[]" value="button" /> button</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="checkAll" /> checkAll</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="fixHeight" /> fixHeight</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="ie6PngFix" /> ie6PngFix</label></li>
@@ -1340,8 +1342,6 @@ div.tabSet div.panel img {
 						<li><label><input type="checkbox" name="plugins[]" value="imgSwap" /> imgSwap</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="lightBox" /> lightBox</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="overlayOthers" /> overlayOthers</label></li>
-						<li><label><input type="checkbox" name="plugins[]" value="rollOver" /> rollOver</label></li>
-						<li><label><input type="checkbox" name="plugins[]" value="rollOver" /> fadeRollOver</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="scroll" /> scroll</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="showIfScroll" /> showIfScroll</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="tab" /> tab</label></li>
