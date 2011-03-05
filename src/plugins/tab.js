@@ -1,7 +1,7 @@
 /*
- * simpleTab - jQuery plugin
+ * tab - jQuery plugin
  *
- * Author Kazuo Uratani @ STARRYWORKS inc.
+ * Author Kazuo Uratani, Koji Kimura @ STARRYWORKS inc.
  * http://www.starryworks.co.jp/
  *
  * Licensed under the MIT License
@@ -10,12 +10,22 @@
 
 (function($){
 
-	$.fn.simpleTab = function( i_options ){
+	$.fn.tab = function( i_options ){
 		
 		var defaults = {
 			tabSelector:"a.tab",
 			selectedClass:"selected",
-			trigger:"click"
+			trigger:"click",
+			over:true,
+			out:true,
+			down:false,
+			up:false,
+			selected:false,
+			enableMouseEvents:true,
+			enableMouseEventsSelected:false,
+			postfix: { over:"-over", out:"", down:"-down", up:"", selected:"-selected" },
+			fade:false,
+			fadeTime:300
 		};
 		var options = $.extend( true, defaults, i_options );
 		
@@ -27,10 +37,16 @@
 			$tabs.each(function(){
 				if ( this == $this[0] ) return;
 				$($(this).attr("href")).hide();
-				$(this).removeClass(options.selectedClass);
 			});
 			$($this.attr("href")).show();
-			$this.addClass(options.selectedClass);
+			$selected = $this;
+			if ( typeof( $tabs.button ) == "function" ) {
+				$tabs.button("selected",false);
+				$selected.button("selected",true);
+			} else {
+				$tabs.removeClass(options.selectedClass);
+				$selected.addClass(options.selectedClass);
+			}
 			return false;
 		});
 		
@@ -41,7 +57,23 @@
 			}
 		});
 		
-		if($selected == null) $selected = $($tabs[0]).trigger( options.trigger );
+		if ( typeof( $tabs.button ) == "function" ) {
+			$tabs.button( {
+				over:options.over,
+				out:options.out,
+				down:options.down,
+				up:options.up,
+				selected:options.selected,
+				enableMouseEvents:options.enableMouseEvents,
+				enableMouseEventsSelected:options.enableMouseEventsSelected,
+				postfix: options.postfix,
+				fade:options.fade,
+				fadeTime:options.fadeTime
+			} );
+		}
+		
+		if($selected == null) $selected = $($tabs[0]);
+		$selected.trigger( options.trigger );
 		
 		return this;
 	};
@@ -55,8 +87,9 @@ if ( SimpleLib ) {
 		settings: {
 			selector:".tabSet"
 		},
+		dependsOn: ["button"],
 		init: function() {
-			$( function(){ $(SimpleLib.tab.settings.selector).simpleTab( SimpleLib.tab.settings ) } );
+			$( function(){ $(SimpleLib.tab.settings.selector).tab( SimpleLib.tab.settings ) } );
 		}
 	});
 }

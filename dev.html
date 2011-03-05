@@ -39,14 +39,14 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 
 <!-- mixi check -->
 <meta property="og:title" content="simplelib with jQuery | STARRYWORKS inc." />
-<meta property="og:description" content="SimpleLibとはjQueryを利用した様々なプラグインを動的にロードして、ウェブサイトを構築する上でよく使う機能を一元管理するためのツールです。" />
+<meta property="og:description" content="simplelibとはjQueryを利用した様々なプラグインを動的にロードして、ウェブサイトを構築する上でよく使う機能を一元管理するためのツールです。" />
 <meta property="og:image" content="/js/simplelib/images/logo.gif" />
 <meta property="mixi:image" content="/js/simplelib/images/logo.gif" />
 
 <!-- topsy -->
 <script src="http://cdn.topsy.com/topsy.js?init=topsyWidgetCreator" type="text/javascript"></script>
 
-<link rel="shortcut icon" href="http://wwww.starryworks.co.jp/starryworks.ico" />
+<link rel="shortcut icon" href="http://www.starryworks.co.jp/starryworks.ico" />
 </head>
 
 <body>
@@ -55,12 +55,12 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 	<div class="funcs">
 		<h2><img src="./images/title-outline.gif" alt="概要" width="800" height="85" /></h2>
 		<div class="func">
-			<h3><img src="./images/title-outline-01.gif" alt="title-outline-01" width="800" height="20" /></h3>
+			<h3>1.simplelibとは</h3>
 			<p>
-				SimpleLibとは<a href="http://jquery.com/" target="_blank">jQuery</a>を利用した様々なプラグインを動的にロードして、ウェブサイトを構築する上でよく使う機能を一元管理するためのツールです。<br />
+				simplelibとは<a href="http://jquery.com/" target="_blank">jQuery</a>を利用した様々なプラグインを動的にロードして、ウェブサイトを構築する上でよく使う機能を一元管理するためのツールです。<br />
 				各プラグインを別ファイルにし、必要なファイルだけをロードします。<a href="#download" class="scroll">ダウンロード</a>はこのページの一番下にあります。
 			</p>
-			<h3><img src="./images/title-outline-02.gif" alt="title-outline-02" width="800" height="20" /></h3>
+			<h3>2.プラグイン一覧</h3>
 			<p>現在以下のようなプラグインがあり、HTMLに１行追加するだけでこれら全ての機能を追加できます。</p>
 			<table>
 				<tbody>
@@ -157,7 +157,7 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 		<h2 class="top"><img src="./images/title-usage.gif" alt="使い方" width="800" height="85" /></h2>
 		
 		<div class="func">
-			<h3 id="usage01"><img src="./images/title-usage-01.gif" alt="title-usage-01" width="800" height="20" /></h3>
+			<h3 id="usage01">1.デフォルトの設定で簡単に使う</h3>
 			<p>scriptタグで<a href="http://jquery.com/" target="_blank">jQuery</a>を読み込んだ後に、simplelib.jsを読み込みます。その際、src属性にsimplelib.jsのパス指定のあとに「?」（半角クエスチョンマーク）をつけて、読み込むプラグインを「,」（半角カンマ）区切りで指定します。</p>
 			<h4>例</h4>
 			<pre name="code" class="xml">
@@ -169,9 +169,9 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 				コンソールはSafariの開発メニューやFirefoxのプラグインFirebugなどを利用すると確認できます。
 			</p>
 			
-			<h3 id="usage02"><img src="./images/title-usage-02.gif" alt="title-usage-02" width="800" height="20" /></h3>
+			<h3 id="usage02">2.設定をカスタマイズして使う</h3>
 			<p>
-				SimpleLibでは各プラグインのオプション設定を一元管理して設定することができます。<br />
+				simplelibでは各プラグインのオプション設定を一元管理して設定することができます。<br />
 				設定をカスタマイズするにはsimplelib.jsを読み込む前にJavaScriptで「SimpleLibSettings」というオブジェクトを定義して、オプション設定を記述します。<br />
 				プラグインごとのオプション設定は<a href="#plugins" class="scroll">各プラグインの使い方</a>で説明します。
 			</p>
@@ -342,7 +342,7 @@ var SimpleLibSettings = {
 					</tr>
 					<tr>
 						<th>fade</th>
-						<td>true</td>
+						<td>false</td>
 						<td>画像の切り替え時にフェードイン／フェードアウトさせるかどうか。（&lt;a&gt;要素のみ）</td>
 					</tr>
 					<tr>
@@ -391,24 +391,28 @@ $("#Selector").button( "selected", "toggle" );
 			<div class="sample">
 				<a href="#" class="customButton"><img src="./images/button.gif" alt="button" width="120" height="55" /></a>
 				<script type="text/javascript">
-					$(function(){
-						$(".customButton").button( { over:true, down:true, selected:true, fade:true } );
-						$(".customButton").click( function(){
-							$(this).button( "selected", "toggle" );
-							return false;
+					SimpleLib.bind( "init_button", function(){
+						$(function(){
+							$(".customButton").button( { over:true, down:true, selected:true, fade:true } );
+							$(".customButton").click( function(){
+								$(this).button( "selected", "toggle" );
+								return false;
+							});
 						});
-					});
+					}, true );
 				</script>
 			</div>
 			<h4>サンプルコード</h4>
 			<pre name="code" class="xml">
-$(function(){
-	$(&quot;.customButton&quot;).button( { over:true, down:true, selected:true, fade:true } );
-	$(&quot;.customButton&quot;).click( function(){
-		$(this).button( &quot;selected&quot;, &quot;toggle&quot; );
-		return false;
+SimpleLib.bind( &quot;init_button&quot;, function(){
+	$(function(){
+		$(&quot;.customButton&quot;).button( { over:true, down:true, selected:true, fade:true } );
+		$(&quot;.customButton&quot;).click( function(){
+			$(this).button( &quot;selected&quot;, &quot;toggle&quot; );
+			return false;
+		});
 	});
-});
+}, true );
 			</pre>
 		</div>
 		<!-- /div#button -->
@@ -724,7 +728,7 @@ $(function(){
 			<h3>lightBox</h3>
 			<p>
 				<a href="http://leandrovieira.com/projects/jquery/lightbox/" target="_blank">jQuery lightBoxプラグイン</a>を読み込みます。<br />
-				SimpleLibの「plugins」→「lightBox」ディレクトリ内にある「jquery.lightbox-0.5.css」を自動的に読み込み、同ディレクトリ内にある各画像が利用されます。
+				simplelibの「plugins」→「lightBox」ディレクトリ内にある「jquery.lightbox-0.5.css」を自動的に読み込み、同ディレクトリ内にある各画像が利用されます。
 			</p>
 			<h4>基本的な使い方</h4>
 			<ol>
@@ -1093,6 +1097,12 @@ input.blur, textarea.blur { color:#cccccc; }
 				</li>
 				<li>タブに「selected」というクラスを付与すると、そのタブがあらかじめ選択状態になります。</li>
 			</ol>
+			<h4>依存関係</h4>
+			<p>
+				<a href="#button">button</a>プラグインが必要です。<br />
+				このプラグインは自動的にbuttonプラグインをロードします。plubinsディレクトリにbutton.jsがない場合は正しく動作しません。
+				明示的にbuttonプラグインをロードしても2重にロードすることはありません。
+			</p>
 			<h4>オプション設定</h4>
 			<table>
 				<thead>
@@ -1114,16 +1124,16 @@ input.blur, textarea.blur { color:#cccccc; }
 						<td>タブ要素のセレクタ</td>
 					</tr>
 					<tr>
-						<th>selectedClass</th>
-						<td>selected</td>
-						<td>選択されたタブに付与するクラス</td>
-					</tr>
-					<tr>
 						<th>trigger</th>
 						<td>click</td>
 						<td>
 							タブ切り替えのトリガー<br />
 							（click/mouseover/focusなどjQueryで扱えるイベント）
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							他に<a href="#buton" class="scroll">button</a>プラグインと同様のオプションが利用できます。
 						</td>
 					</tr>
 				</tbody>

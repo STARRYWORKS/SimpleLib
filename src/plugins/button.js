@@ -80,7 +80,7 @@ var selected = $("#selector").button("selected"); //same as hasClass("selected")
 			var options = $i_button.data("button_options");
 			var selected = $i_button.hasClass("selected");
 			clear( $i_button );
-			initStatus( $i_button );
+			if ( !initStatus( $i_button ) ) return false;
 			var i;
 			if ( ( selected && options.enableMouseEventsSelected ) || ( !selected && options.enableMouseEvents ) ) {
 				for ( i in statuses ) {
@@ -95,7 +95,8 @@ var selected = $("#selector").button("selected"); //same as hasClass("selected")
 		function initStatus( $i_button ) {
 			var options = $i_button.data("button_options");
 			var $img = getImage( $i_button );
-			if ( $img.data( "button_default" ) && $img.data( "button_selected" ) ) return;
+			if ( $img.length <= 0 ) return false;
+			if ( $img.data( "button_default" ) && $img.data( "button_selected" ) ) return true;
 			var src = $img.attr("src");
 			src = src.replace(postfixReg,".$2").replace(postfixReg,".$2");
 			var selected_src = src.replace(/\.([a-zA-Z0-9]+)$/,options.postfix["selected"]+".$1");
@@ -120,6 +121,7 @@ var selected = $("#selector").button("selected"); //same as hasClass("selected")
 				$fade.css( { position:"absolute", display:"none" } );
 				$img.data( "$button_fade", $fade );
 			}
+			return true;
 		}
 		
 		//add status
@@ -127,11 +129,12 @@ var selected = $("#selector").button("selected"); //same as hasClass("selected")
 			var selected = $i_button.hasClass("selected");
 			var options = $i_button.data("button_options");
 			if ( ( selected && !options.enableMouseEventsSelected ) || ( !selected && !options.enableMouseEvents ) ) return false;
-			initStatus($i_button);
+			if ( !initStatus($i_button) ) return false;
 			var options = $i_button.data("button_options");
 			if ( !options || !options[i_status] || !options.postfix || !options.postfix.hasOwnProperty(i_status) ) return false;
 			var data_key = "button_"+i_status;
 			var $img = getImage( $i_button );
+			if ( $img.length <= 0 ) return;
 			if ( $img.data(data_key) ) return true;
 			
 			//set data
@@ -168,7 +171,7 @@ var selected = $("#selector").button("selected"); //same as hasClass("selected")
 			}
 			$img.data("button_selected","");
 			$img.data("button_default","");
-			$img.data("button_status","");
+			$i_button.data("button_status","");
 			$i_button.find("img.buttonFade").remove();
 		}
 		
@@ -264,9 +267,7 @@ if ( SimpleLib ) {
 	SimpleLib.extend( "button", {
 		settings: {
 			buttonSelector:"a.button, input.button",
-			rollOverSelector:"a.rollover, a.rollOver, input.rollover, input.rollOver",
-			fade:false,
-			fadeTime:300
+			rollOverSelector:"a.rollover, a.rollOver, input.rollover, input.rollOver"
 		},
 		init: function() {
 			var fade = SimpleLib.button.settings.fade;

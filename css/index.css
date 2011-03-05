@@ -58,6 +58,12 @@ h3 { margin:50px 0px 20px 0px; }
 p { line-height:1.3em; }
 
 div.func { margin:25px 0px; }
+div.func h3 {
+	font-size:16px;
+	font-weight:bold;
+	color:#000000;
+	margin:40px 0px 20px 0px;
+}
 div.sample { padding:20px; background-color:#f6f6f6; }
 div.plugin { margin:25px 0px 100px 0px; }
 div.plugin h3 {
