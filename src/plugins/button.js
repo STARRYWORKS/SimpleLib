@@ -48,7 +48,7 @@ var selected = $("#selector").button("selected"); //same as hasClass("selected")
 	/*-----------------------------------
 	jQuery Plugin
 	-----------------------------------*/
-	$.fn.button = function() {
+	$.fn.button = function( i_options ) {
 		
 		
 		/*-----------------------------------
@@ -99,8 +99,8 @@ var selected = $("#selector").button("selected"); //same as hasClass("selected")
 			if ( $img.data( "button_default" ) && $img.data( "button_selected" ) ) return true;
 			var src = $img.attr("src");
 			src = src.replace(postfixReg,".$2").replace(postfixReg,".$2");
-			var selected_src = src.replace(/\.([a-zA-Z0-9]+)$/,options.postfix["selected"]+".$1");
-			var isPNG = ( src.match(/\.png$/) != "" );
+			var selected_src = src.replace(/¥.([a-zA-Z0-9]+)$/,options.postfix["selected"]+".$1");
+			var isPNG = ( src.match(/¥.png$/) != "" );
 			$img.data( "isPNG", isPNG );
 			$img.data( "button_default", src );
 			$img.data( "button_selected", selected_src );
@@ -139,9 +139,9 @@ var selected = $("#selector").button("selected"); //same as hasClass("selected")
 			
 			//set data
 			var selected = $i_button.hasClass("selected");
-			var url = $img.data("button_default").replace(/\.([a-zA-Z0-9]+)$/,options.postfix[i_status]+".$1");;
-			var selected_url = $img.data("button_selected").replace(/\.([a-zA-Z0-9]+)$/,options.postfix[i_status]+".$1");;
-			$img.data( data_key, selected ? selected_url : url );
+			var url = $img.data("button_default").replace(/¥.([a-zA-Z0-9]+)$/,options.postfix[i_status]+".$1");;
+			var selected_url = $img.data("button_selected").replace(/¥.([a-zA-Z0-9]+)$/,options.postfix[i_status]+".$1");;
+			$img.data( data_key, ( selected && options.postfix[i_status] != options.postfix["selected"] ) ? selected_url : url );
 			
 			//preload image
 			if ( url != $img.data("button_default") ) $("<img />").attr("src",url);
@@ -247,11 +247,15 @@ var selected = $("#selector").button("selected"); //same as hasClass("selected")
 		}
 		
 		i_options = arguments.length && typeof( arguments[0] ) != "String" > 0 ? arguments[0] : {};
+		console.log("i_options");
+		console.log(i_options);
 		var options = $.extend( true, defaults, i_options );
+		console.log("ptions");
+		console.log(options);
 		//
 		var postfixes = [];
 		for ( var p in options.postfix ) if ( options.postfix[p] ) postfixes.push( options.postfix[p] );
-		postfixReg = new RegExp( "("+postfixes.join("|")+")\.([a-zA-Z0-9]+)$", "g" );
+		postfixReg = new RegExp( "("+postfixes.join("|")+")¥.([a-zA-Z0-9]+)$", "g" );
 		//
 		$(this).data( "button_options", options );
 		return $(this).each(function(){ init( $(this) ); });
@@ -270,11 +274,11 @@ if ( SimpleLib ) {
 			rollOverSelector:"a.rollover, a.rollOver, input.rollover, input.rollOver"
 		},
 		init: function() {
-			var fade = SimpleLib.button.settings.fade;
-			var time = SimpleLib.button.settings.fadeTime;
+			var buttonSettings = $.extend( true, SimpleLib.button.settings, { over:true, down:true, up:true } );
+			var rollOverSettings = $.extend( true, SimpleLib.button.settings, { over:true, down:false, up:false } );
 			$( function(){ 
-				$(SimpleLib.button.settings.buttonSelector).button( { over:true, down:true, up:true, fade:fade, fadeTime:time } );
-				$(SimpleLib.button.settings.rollOverSelector).button( { over:true, down:false, up:false, fade:fade, fadeTime:time } );
+				$(SimpleLib.button.settings.buttonSelector).button( buttonSettings );
+				$(SimpleLib.button.settings.rollOverSelector).button( rollOverSettings );
 			});
 		}
 	});
