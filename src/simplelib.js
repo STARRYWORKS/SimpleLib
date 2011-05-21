@@ -81,6 +81,7 @@ SimpleLib = $.extend( true, {
 			type: "GET",
 			url: i_url,
 			dataType: "script",
+			cache:true,
 			success:SimpleLib._sccess,
 			error: SimpleLib._loadError
 		});
@@ -202,14 +203,14 @@ SimpleLib = $.extend( true, {
 		if ( typeof(SimpleLib[i_plugin]) == "undefined" ) SimpleLib[i_plugin] = {};
 		SimpleLib[i_plugin] = $.extend( true, i_info, SimpleLib[i_plugin]);
 		SimpleLib.trigger("load_"+i_plugin);
-		//依存関係チェック
+		//check dependency
 		if ( SimpleLib[i_plugin]["dependsOn"] ) {
 			SimpleLib.numPluginsWaitingForInit++;
 			var p;
 			for ( var i in SimpleLib[i_plugin]["dependsOn"] ) {
 				p = SimpleLib[i_plugin]["dependsOn"][i];
 				SimpleLib.bind( "init_"+p, function(){
-					//全ての依存するプラグインがreadyになったらinit実行
+					//init wher all depended plugins are ready.
 					for ( var j in SimpleLib[i_plugin]["dependsOn"] ) {
 						if ( !SimpleLib[SimpleLib[i_plugin]["dependsOn"][j]]["ready"] ) return;
 					}
@@ -236,4 +237,3 @@ SimpleLib = $.extend( true, {
 }, SimpleLib);
 
 SimpleLib.setup();
-
