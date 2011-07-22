@@ -22,6 +22,12 @@ $("#selector").button("out");
 $("#selector").button("down");
 $("#selector").button("up");
 
+//
+$("#selector").button("enable");
+$("#selector").button("disable");
+$("#selector").button("clear");
+
+
 //selected
 $("#selector").button("selected",true); //add "selected" class, and change image source ( if selected option is true )
 $("#selector").button("selected","toggle"); //toggle "selected"
@@ -64,7 +70,7 @@ var selected = $("#selector").button("selected"); //same as hasClass("selected")
 			enableMouseEventsSelected:true,
 			postfix: { over:"-over", out:"", down:"-down", up:"", selected:"-selected" },
 			fade:false,
-			fadeTime:300
+			fadeTime:200
 		};
 		
 		var events = { over:"mouseenter", out:"mouseleave", down:"mousedown", up:"mouseup" }
@@ -82,13 +88,27 @@ var selected = $("#selector").button("selected"); //same as hasClass("selected")
 			clear( $i_button );
 			if ( !initStatus( $i_button ) ) return false;
 			var i;
+			var button_statuses = [];
 			if ( ( selected && options.enableMouseEventsSelected ) || ( !selected && options.enableMouseEvents ) ) {
 				for ( i in statuses ) {
 					if ( options[statuses[i]] ) {
-						if ( addStatus( $i_button, statuses[i] )  ) $i_button.bind( events[statuses[i]], listeners[statuses[i]] );
+						if ( addStatus( $i_button, statuses[i] )  ) button_statuses.push(statuses[i]);
 					}
 				}
 			}
+			$i_button.data("button_statuses",button_statuses);
+			enableMouseEvents( $i_button );
+		}
+		
+		//mouse enabled
+		function enableMouseEvents( $i_button ) {
+			var button_statuses = $i_button.data("button_statuses");
+			for ( var i in button_statuses ) $i_button.bind( events[button_statuses[i]], listeners[button_statuses[i]] );
+		}
+		
+		function disableMouseEvents( $i_button ) {
+			var button_statuses = $i_button.data("button_statuses");
+			for ( var i in button_statuses ) $i_button.unbind( events[button_statuses[i]], listeners[button_statuses[i]] );
 		}
 		
 		//init status
@@ -99,8 +119,8 @@ var selected = $("#selector").button("selected"); //same as hasClass("selected")
 			if ( $img.data( "button_default" ) && $img.data( "button_selected" ) ) return true;
 			var src = $img.attr("src");
 			src = src.replace(postfixReg,".$2").replace(postfixReg,".$2");
-			var selected_src = src.replace(/¥.([a-zA-Z0-9]+)$/,options.postfix["selected"]+".$1");
-			var isPNG = ( src.match(/¥.png$/) != "" );
+			var selected_src = src.replace(/\.([a-zA-Z0-9]+)$/,options.postfix["selected"]+".$1");
+			var isPNG = ( src.match(/\.png$/) != "" );
 			$img.data( "isPNG", isPNG );
 			$img.data( "button_default", src );
 			$img.data( "button_selected", selected_src );
@@ -139,8 +159,8 @@ var selected = $("#selector").button("selected"); //same as hasClass("selected")
 			
 			//set data
 			var selected = $i_button.hasClass("selected");
-			var url = $img.data("button_default").replace(/¥.([a-zA-Z0-9]+)$/,options.postfix[i_status]+".$1");;
-			var selected_url = $img.data("button_selected").replace(/¥.([a-zA-Z0-9]+)$/,options.postfix[i_status]+".$1");;
+			var url = $img.data("button_default").replace(/\.([a-zA-Z0-9]+)$/,options.postfix[i_status]+".$1");;
+			var selected_url = $img.data("button_selected").replace(/\.([a-zA-Z0-9]+)$/,options.postfix[i_status]+".$1");;
 			$img.data( data_key, ( selected && options.postfix[i_status] != options.postfix["selected"] ) ? selected_url : url );
 			
 			//preload image
@@ -153,7 +173,7 @@ var selected = $("#selector").button("selected"); //same as hasClass("selected")
 		//get image
 		function getImage( $i_button ) {
 			if ( $i_button.data( "$button_img" ) ) return $i_button.data( "$button_img" );
-			var $img = $i_button.children("img");
+			var $img = $i_button.children("img:not(img.buttonFade)");
 			if(!$img.length && $i_button.attr("src")) $img = $i_button;
 			$i_button.data( "$button_img", $img );
 			return $img;
@@ -169,6 +189,7 @@ var selected = $("#selector").button("selected"); //same as hasClass("selected")
 				$img.data( "button_"+statuses[i], "" );
 				$i_button.unbind( events[statuses[i]], listeners[statuses[i]] );
 			}
+			$i_button.data( "$button_img","" );
 			$img.data("button_selected","");
 			$img.data("button_default","");
 			$i_button.data("button_status","");
@@ -190,11 +211,19 @@ var selected = $("#selector").button("selected"); //same as hasClass("selected")
 			//
 			var options = $i_button.data("button_options");
 			var isPNG = $img.data("isPNG");
-			if ( options.fade && $i_button.is("a") && $i_button.find("img.buttonFade").length && ( !isIE || !isPNG ) ) {
+			if ( options.fade && $i_button.is("a") && $i_button.find("img.buttonFade").length && !( isIE && isPNG ) ) {
 				if ( options.postfix[i_status] ) {
 					$img.attr( "src", $img.data("button_"+before_status) );
 					var $fade = $img.data( "$button_fade" );
 					var o = $img.offset();
+					$fade.parents().each(function(){
+						var p = $(this).css("position");
+						if ( p == "fixed" || p == "absolute" ) {
+							var po = $(this).offset();
+							o.top -= po.top;
+							o.left -= po.left;
+						}
+					});
 					$fade.css( { top:o.top+"px", left:o.left+"px" } );
 					$fade.attr( "src", $img.data( data_key ) );
 					$fade.stop( true, true ).fadeIn( options.fadeTime );
@@ -205,6 +234,11 @@ var selected = $("#selector").button("selected"); //same as hasClass("selected")
 				}
 			} else {
 				$img.attr( "src", $img.data( data_key ) );
+				if ( options.postfix[i_status] ) {
+					$img.css( "background-image", "url("+$img.data("button_default")+")" );
+				} else {
+					$img.css( "background-image", "none" );
+				}
 			}
 			
 			return true;
@@ -239,6 +273,10 @@ var selected = $("#selector").button("selected"); //same as hasClass("selected")
 					return $(this).hasClass("selected");
 				}
 				
+			} else if ( status == "enable" ) {
+				return $(this).each( function(){ enableMouseEvents( $(this) ); } );
+			} else if ( status == "disable" ) {
+				return $(this).each( function(){ disableMouseEvents( $(this) ); } );
 			} else if ( status == "clear" ) {
 				return $(this).each( function(){ clear( $(this) ); } );
 			} else {
@@ -247,15 +285,11 @@ var selected = $("#selector").button("selected"); //same as hasClass("selected")
 		}
 		
 		i_options = arguments.length && typeof( arguments[0] ) != "String" > 0 ? arguments[0] : {};
-		console.log("i_options");
-		console.log(i_options);
 		var options = $.extend( true, defaults, i_options );
-		console.log("ptions");
-		console.log(options);
 		//
 		var postfixes = [];
 		for ( var p in options.postfix ) if ( options.postfix[p] ) postfixes.push( options.postfix[p] );
-		postfixReg = new RegExp( "("+postfixes.join("|")+")¥.([a-zA-Z0-9]+)$", "g" );
+		postfixReg = new RegExp( "("+postfixes.join("|")+")\.([a-zA-Z0-9]+)$", "g" );
 		//
 		$(this).data( "button_options", options );
 		return $(this).each(function(){ init( $(this) ); });
