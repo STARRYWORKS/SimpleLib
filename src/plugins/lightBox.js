@@ -15,7 +15,7 @@ eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a
 /* SimpleLib Plugin */
 SimpleLib.extend( "lightBox", {
 	settings: {
-		selector: ".lightBox",
+		selector: "body .lightBox, body .lightbox",
 		imageLoading: SimpleLib.jsDir + "plugins/lightBox/lightbox-ico-loading.gif",
 		imageBtnClose: SimpleLib.jsDir + "plugins/lightBox/lightbox-btn-close.gif",
 		imageBtnPrev: SimpleLib.jsDir + "plugins/lightBox/lightbox-btn-prev.gif",
