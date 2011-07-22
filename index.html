@@ -20,7 +20,7 @@
 	
 <script type="text/javascript">
 $(function(){
-	$("#button .sample a.button").click( function(){ return false; } );
+	$("#button .sample a.button, #overlayOthers .sample a").click( function(){ return false; } );
 });
 </script>
 
@@ -28,7 +28,6 @@ $(function(){
 .overlay { background-color:#ffffff; }
 .overlayOthers li { display:block; float:left; padding-right:10px; }
 .overlayOthers a { display:block; text-decoration:none; }
-div#imgSwap div.sample ul li { float:left; padding-right:10px; }
 
 div#fixHeight div.fixHeight div { display:inline; float:left; width:230px; margin:10px; background-color:#e0e0e0; }
 div#fixHeight div.fixHeight div strong { display:block; font-size:120%; line-height:1.4em; border-bottom:1px solid #ccc; margin:10px; }
@@ -101,27 +100,15 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 						<td>指定した要素の子のa要素にマウスオーバーすると他のa要素にcssで背景色や背景画像を指定できる半透明の要素をかぶせる</td>
 					</tr>
 					<tr>
-						<th>rollOver</th>
-						<td>
-							<s>マウスオーバー／ロールアウトで画像を切り替える</s><br />
-							このプラグインは廃止されました。<a href="#button" class="scroll">button</a>をご利用ください。
-						</td>
-					</tr>
-					<tr>
-						<th>fadeRollOver</th>
-						<td>
-							<s>マウスオーバー／ロールアウトでフェードイン／フェードアウトで画像を切り替える</s>
-							このプラグインは廃止されました。<a href="#button" class="scroll">button</a>をご利用ください。
-						</td>
-					</tr>
-					<tr>
 						<th><a href="#scroll" class="scroll">scroll</a></th>
 						<td>スムーススクロール</td>
 					</tr>
+					<!--
 					<tr>
 						<th>showIfScroll</th>
 						<td>指定した要素をスクロールバーが表示されるとき（ドキュメントの高さがウィンドウの高さを超えるとき）だけ表示する</td>
 					</tr>
+					-->
 					<tr>
 						<th><a href="#tab" class="scroll">tab</a></th>
 						<td>シンプルなタブナビゲーション</td>
@@ -143,17 +130,16 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 				</tbody>
 			</table>
 		</div>
-		<div class="social">
-			<div class="facebookBtn"><script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="http://lab.starryworks.jp/js/simplelib/" layout="button_count" width="80" font="arial"></fb:like></div>
-			<div class="topsy_widget_data"><!--
-			  {
-			    "url": "http://lab.starryworks.jp/js/simplelib/",
-			    "title": "simplelib with jQuery"
-			  }
-			--></div>		
-			<a href="http://mixi.jp/share.pl" class="mixi-check-button" data-key="230318c125f2739193b7d2fe9950a21c67194408" data-button="button-4" data-url="http://lab.starryworks.jp/js/simplelib/?utm_campaign=pp&utm_medium=mixi&utm_source=check">Check</a>
-			<script type="text/javascript" src="http://static.mixi.jp/js/share.js"></script>
-		</div>
+		
+        <!-- div.socical -->
+    	<div class="social clearfix">
+    		
+    		<div class="mixi"><a href="http://mixi.jp/share.pl" class="mixi-check-button" data-key="230318c125f2739193b7d2fe9950a21c67194408" data-url="http://lab.starryworks.jp/js/simplelib/" data-button="button-1">mixiチェック</a><script type="text/javascript" src="http://static.mixi.jp/js/share.js"></script></div>
+    		<div class="twitter"><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-lang="ja">ツイート</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></div>
+    		<div class="facebook"><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Flab.starryworks.jp%2Fjs%2Fsimplelib%2F&amp;send=false&amp;layout=button_count&amp;width=100&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe></div>
+    	</div>
+        <!-- /div.socical -->
+
 		<h2 class="top"><img src="./images/title-usage.gif" alt="使い方" width="800" height="85" /></h2>
 		
 		<div class="func">
@@ -339,6 +325,41 @@ var SimpleLibSettings = {
 						<th>rollOverSelector</th>
 						<td>a.rollover, a.rollOver, input.rollover, input.rollOver</td>
 						<td>マウスオーバーの画像切り替えを発動させる要素のセレクタ</td>
+					</tr>
+					<tr>
+						<th>over</th>
+						<td>true</td>
+						<td>
+							マウスオーバーに反応させるかどうか<br />
+							trueにするとマウスオーバー時に元の画像ファイル名に-overを付けた画像が表示されます。<br />
+							画像は自動的にプリロードされます。
+						</td>
+					</tr>
+					<tr>
+						<th>down</th>
+						<td>true</td>
+						<td>
+							マウスダウンに反応させるかどうか<br />
+							trueにするとマウスダウン時に元の画像ファイル名に-downを付けた画像が表示されます。<br />
+							画像は自動的にプリロードされます。
+						</td>
+					</tr>
+					<tr>
+						<th>selected</th>
+						<td>true</td>
+						<td>
+							選択状態を有効にして、必要な画像をプリロードするかどうか<br />
+							以下のようにスクリプトで選択状態を変更できます。<br />
+							$("selector").button("selected",true);<br />
+							$("selector").button("selected",false);<br />
+						</td>
+					</tr>
+					<tr>
+						<th>enableMouseEventsSelected</th>
+						<td>true</td>
+						<td>
+							選択状態になったときにもマウスオーバー／マウスダウンの画像切り替えを発動させるかどうか
+						</td>
 					</tr>
 					<tr>
 						<th>fade</th>
@@ -551,7 +572,7 @@ SimpleLib.bind( &quot;init_button&quot;, function(){
 		<div class="plugin" id="ie6PngFix">
 			<h3>ie6PngFix - IE6でPNG透過</h3>
 			<p>
-				jQueryの<a href="http://plugins.jquery.com/project/iepngfix" target="_blank">IE PNG FIX</a>というプラグインを読み込んで、Internet Explorer 6でも透過PNGを利用できるようにします。
+				<a href="http://www.dillerdesign.com/experiment/DD_belatedPNG/" target="_blank">DD_belatedPNG</a>というスクリプトを読み込んで、Internet Explorer 6でも透過PNGを利用できるようにします。
 			</p>
 			<h4>基本的な使い方</h4>
 			<ol>
@@ -746,7 +767,7 @@ SimpleLib.bind( &quot;init_button&quot;, function(){
 				<tbody>
 					<tr>
 						<th>selector</th>
-						<td>.lightBox</td>
+						<td>body .lightBox, body .lightbox</td>
 						<td>プラグインを発動させる要素のセレクタ</td>
 					</tr>
 					<tr>
@@ -757,11 +778,23 @@ SimpleLib.bind( &quot;init_button&quot;, function(){
 			</table>
 			<h4>サンプル</h4>
 			<div class="sample">
-				<a href="./images/sanei-pict01.jpg" class="lightBox"><img src="./images/sanei-pict01m.jpg" alt="" width="40" height="40" /></a>
+				<ul class="clearfix">
+					<li><a href="./images/sanei-pict01.jpg" class="lightBox"><img src="./images/sanei-pict01m.jpg" alt="" width="40" height="40" /></a></li>
+					<li><a href="./images/sanei-pict02.jpg" class="lightBox"><img src="./images/sanei-pict02m.jpg" alt="" width="40" height="40" /></a></li>
+					<li><a href="./images/sanei-pict03.jpg" class="lightBox"><img src="./images/sanei-pict03m.jpg" alt="" width="40" height="40" /></a></li>
+					<li><a href="./images/sanei-pict04.jpg" class="lightBox"><img src="./images/sanei-pict04m.jpg" alt="" width="40" height="40" /></a></li>
+					<li><a href="./images/sanei-pict05.jpg" class="lightBox"><img src="./images/sanei-pict05m.jpg" alt="" width="40" height="40" /></a></li>
+				</ul>
 			</div>
 			<h4>サンプルコード：HTML</h4>
 			<pre name="code" class="xml">
-&lt;a href=&quot;images/sanei-pict01.jpg&quot; class=&quot;lightBox&quot;&gt;&lt;img src=&quot;images/sanei-pict01m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;
+&lt;ul class=&quot;clearfix&quot;&gt;
+	&lt;li&gt;&lt;a href=&quot;./images/sanei-pict01.jpg&quot; class=&quot;lightBox&quot;&gt;&lt;img src=&quot;./images/sanei-pict01m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;./images/sanei-pict02.jpg&quot; class=&quot;lightBox&quot;&gt;&lt;img src=&quot;./images/sanei-pict02m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;./images/sanei-pict03.jpg&quot; class=&quot;lightBox&quot;&gt;&lt;img src=&quot;./images/sanei-pict03m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;./images/sanei-pict04.jpg&quot; class=&quot;lightBox&quot;&gt;&lt;img src=&quot;./images/sanei-pict04m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;./images/sanei-pict05.jpg&quot; class=&quot;lightBox&quot;&gt;&lt;img src=&quot;./images/sanei-pict05m.jpg&quot; alt=&quot;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 			</pre>
 		</div>
 		<!-- /div#lightBox -->
@@ -1132,8 +1165,9 @@ input.blur, textarea.blur { color:#cccccc; }
 						</td>
 					</tr>
 					<tr>
-						<td colspan="3">
-							他に<a href="#buton" class="scroll">button</a>プラグインと同様のオプションが利用できます。
+						<th>その他</th>
+						<td colspan="2">
+							他に<a href="#button" class="scroll">button</a>プラグインと同様のオプションが利用できます。
 						</td>
 					</tr>
 				</tbody>
@@ -1367,17 +1401,14 @@ div.tabSet div.panel img {
 		<!-- /div#download -->
 	</div>
 	
+    <!-- div.socical -->
 	<div class="social clearfix">
-		<div class="facebookBtn"><script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like href="http://lab.starryworks.jp/js/simplelib/" layout="button_count" width="80" font="arial"></fb:like></div>
-		<div class="topsy_widget_data"><!--
-		  {
-		    "url": "http://lab.starryworks.jp/js/simplelib/",
-		    "title": "simplelib with jQuery"
-		  }
-		--></div>		
-		<a href="http://mixi.jp/share.pl" class="mixi-check-button" data-key="230318c125f2739193b7d2fe9950a21c67194408" data-button="button-4" data-url="http://lab.starryworks.jp/js/simplelib/?utm_campaign=pp&utm_medium=mixi&utm_source=check">Check</a>
-		<script type="text/javascript" src="http://static.mixi.jp/js/share.js"></script>
+		
+		<div class="mixi"><a href="http://mixi.jp/share.pl" class="mixi-check-button" data-key="230318c125f2739193b7d2fe9950a21c67194408" data-url="http://lab.starryworks.jp/js/simplelib/" data-button="button-1">mixiチェック</a><script type="text/javascript" src="http://static.mixi.jp/js/share.js"></script></div>
+		<div class="twitter"><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-lang="ja">ツイート</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></div>
+		<div class="facebook"><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Flab.starryworks.jp%2Fjs%2Fsimplelib%2F&amp;send=false&amp;layout=button_count&amp;width=100&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe></div>
 	</div>
+    <!-- /div.socical -->
 
 	
 	<script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like-box href="http://www.facebook.com/pages/Simplelib/142019722515393" width="800"></fb:like-box>

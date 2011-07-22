@@ -57,6 +57,17 @@ h2	{ margin:80px 0px 50px 0px; }
 h3 { margin:50px 0px 20px 0px; }
 p { line-height:1.3em; }
 
+div.social {
+    padding-bottom:10px;
+}
+
+div.social div.mixi,
+div.social div.facebook,
+div.social div.twitter {
+    float:left;
+    padding-right:10px;
+}
+
 div.func { margin:25px 0px; }
 div.func h3 {
 	font-size:16px;
@@ -159,6 +170,15 @@ div.tabSet div.panel img {
 	float:left;
 	padding-right:10px;
 }
+
+/* imgSwap */
+
+div#imgSwap div.sample ul li { float:left; padding-right:10px; }
+
+
+/* lightBox */
+
+div#lightBox div.sample ul li { float:left; padding-right:10px; }
 
 
 /* Download */
