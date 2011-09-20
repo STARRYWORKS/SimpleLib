@@ -39,7 +39,7 @@
 				$($(this).attr("href")).hide();
 			});
 			$($this.attr("href")).show();
-			$selected = $this;
+			$selected = $tabs.filter("*[href="+$this.attr("href")+"]");
 			if ( typeof( $tabs.button ) == "function" ) {
 				$tabs.button("selected",false);
 				$selected.button("selected",true);
