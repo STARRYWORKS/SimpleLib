@@ -47,6 +47,9 @@
 				$tabs.removeClass(options.selectedClass);
 				$selected.addClass(options.selectedClass);
 			}
+			
+			if ( typeof($.checkFixHeight) == "function" ) $.checkFixHeight();
+			
 			return false;
 		});
 		

@@ -48,6 +48,7 @@
 	
 	//フォントサイズの変更時やウィンドウのリサイズ時に高さを揃える処理を実行
 	$.checkFixHeight = function( i_force ) {
+		if ( typeof($fontSizeDiv) == "undefined" ) return;
 		if ( $fontSizeDiv.height() == textHeight && i_force !== true ) return;
 		textHeight = $fontSizeDiv.height();
 		$(parents).fixHeight();
