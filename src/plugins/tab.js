@@ -48,7 +48,13 @@
 				$selected.addClass(options.selectedClass);
 			}
 			
-			if ( typeof($.checkFixHeight) == "function" ) $.checkFixHeight();
+			if ( typeof($.checkFixHeight) == "function" ) {
+				$.checkFixHeight();
+				var timer = setTimeout(function(){
+					clearTimeout(timer);
+					$.checkFixHeight();
+				},200);
+			}
 			
 			return false;
 		});
