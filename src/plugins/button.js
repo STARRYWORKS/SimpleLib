@@ -305,14 +305,18 @@ if ( SimpleLib ) {
 	SimpleLib.extend( "button", {
 		settings: {
 			buttonSelector:"a.button, input.button",
-			rollOverSelector:"a.rollover, a.rollOver, input.rollover, input.rollOver"
+			rollOverSelector:"a.rollover, a.rollOver, input.rollover, input.rollOver",
+			fadeRollOverSelector:"a.faderollover, a.fadeRollOver, input.faderollover, input.fadeRollOver"
 		},
 		init: function() {
-			var buttonSettings = $.extend( true, SimpleLib.button.settings, { over:true, down:true, up:true } );
-			var rollOverSettings = $.extend( true, SimpleLib.button.settings, { over:true, down:false, up:false } );
+			var buttonSettings = {}, rollOverSettings = {}, fadeRollOverSettings = {};
+			$.extend( true, buttonSettings, SimpleLib.button.settings, { over:true, down:true, up:true } );
+			$.extend( true, rollOverSettings, SimpleLib.button.settings, { over:true, down:false, up:false, fade:false } );
+			$.extend( true, fadeRollOverSettings, SimpleLib.button.settings, { over:true, down:false, up:false, fade:true } );
 			$( function(){ 
 				$(SimpleLib.button.settings.buttonSelector).button( buttonSettings );
 				$(SimpleLib.button.settings.rollOverSelector).button( rollOverSettings );
+				$(SimpleLib.button.settings.fadeRollOverSelector).button( fadeRollOverSettings );
 			});
 		}
 	});

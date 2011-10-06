@@ -81,7 +81,7 @@ SimpleLib = $.extend( true, {
 			type: "GET",
 			url: i_url,
 			dataType: "script",
-			cache:false,
+			cache:true,
 			success:SimpleLib._sccess,
 			error: SimpleLib._loadError
 		});
