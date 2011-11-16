@@ -21,7 +21,11 @@ if ( SimpleLib && ( jQuery.browser.msie && parseInt( jQuery.browser.version ) ==
 		},
 		init: function() {
 			$(window).load( function(){
-				$(SimpleLib.ie6PngFix.settings.selector).addClass("pngfix");
+				var $targets = $(SimpleLib.ie6PngFix.settings.selector);
+				if ( SimpleLib.ie6Png2Gif && SimpleLib.ie6Png2Gif.settings ) {
+					$targets = $targets.not( SimpleLib.ie6Png2Gif.settings.selector );
+				}
+				$targets.addClass("pngfix");
 				DD_belatedPNG.fix(".pngfix");
 			});
 		}

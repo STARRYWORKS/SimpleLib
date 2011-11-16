@@ -12,7 +12,7 @@
 <link type="text/css" rel="stylesheet" href="css/SyntaxHighlighter.css" />
 
 <script type="text/javascript" src="js/jquery-1.4.1.min.js"></script>
-<script type="text/javascript" src="src/simplelib.js?accordion,button,scroll,tab,toolTip,imgSwap,lightBox,ie6PositionFixed,fixHeight,ie6PngFix,textHint,overlayOthers,showIfScroll,trimmedScroll,checkAll"></script>
+<script type="text/javascript" src="src/simplelib.js?accordion,button,scroll,tab,toolTip,imgSwap,lightBox,ie6PositionFixed,fixHeight,ie6PngFix,ie6Png2Gif,textHint,overlayOthers,showIfScroll,trimmedScroll,checkAll,gaEventTracker"></script>
 <script type="text/javascript" src="js/syntaxHighlighter/shCore.js"></script>
 <script type="text/javascript" src="js/syntaxHighlighter/shBrushJScript.js"></script>
 <script type="text/javascript" src="js/syntaxHighlighter/shBrushXml.js"></script>
@@ -78,6 +78,10 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 					<tr>
 						<th><a href="#fixHeight" class="scroll">fixHeight</a></th>
 						<td>要素の高さを揃える</td>
+					</tr>
+					<tr>
+						<th><a href="#ie6Png2Gif" class="scroll">ie6Png2Gif</a></th>
+						<td>Internet Explorer 6で、PNGをGIFに置換する</td>
 					</tr>
 					<tr>
 						<th><a href="#ie6PngFix" class="scroll">ie6PngFix</a></th>
@@ -567,6 +571,51 @@ SimpleLib.bind( &quot;init_button&quot;, function(){
 		</div>
 		<!-- /div#accordion -->
 
+		
+		<!-- div#ie6Png2Gif -->
+		<div class="plugin" id="ie6Png2Gif">
+			<h3>ie6Png2Gif - IE6でPNGをGIFに置換</h3>
+			<p>
+				IE6で閲覧された場合だけ、PNG画像（&lt;img&gt;のsrc属性やCSSのbackground-image）をGIFに置換します。
+			</p>
+			<h4>基本的な使い方</h4>
+			<ol>
+				<li>画像を置換したい要素に「png2gif」というクラスを付与してください。クラスを付与された要素の、拡張子が「png」のsrc属性や、background-imageの値が置換されます。</li>
+			</ol>
+			<h4>オプション設定</h4>
+			<table>
+				<thead>
+					<tr>
+						<th>オプション</th>
+						<th>デフォルト</th>
+						<th>設定内容</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>selector</th>
+						<td>.png2gif, .ie6Png2Gif</td>
+						<td>
+							プラグインを発動させる要素のセレクタ
+							<br />（jQueryを利用しているので一部のCSS3セレクタが利用できます）
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<h4>サンプル</h4>
+			<div class="sample">
+				<div style="background-image:url(./images/ie6pngfix-bg.gif); padding:90px 80px 60px 80px;">
+					<img src="./images/ie6pngfix-img.png" alt="PNG" width="600" height="100" class="png2gif" />
+				</div>
+			</div>
+			<h4>サンプルコード</h4>
+			<pre name="code" class="xml">
+&lt;div style=&quot;background-image:url(images/ie6pngfix-bg.gif); padding:90px 80px 60px 80px;&quot;&gt;
+	&lt;img src=&quot;images/ie6pngfix-img.png&quot; alt=&quot;PNG&quot; width=&quot;600&quot; height=&quot;100&quot; class=&quot;png2gif&quot; /&gt;
+&lt;/div&gt;
+			</pre>
+		</div>
+		<!-- /div#ie6Png2Gif -->
 		
 		<!-- div#ie6PngFix -->
 		<div class="plugin" id="ie6PngFix">
@@ -1372,7 +1421,7 @@ div.tabSet div.panel img {
 					全てのプラグインをダウンロードして、利用する際に&lt;script&gt;タグで必要なプラグインだけを指定して利用できます。<br />
 					新たなプラグインを使いたくなったら&lt;script&gt;でプラグインの指定を増やすだけで使えるので、制作中に使うのはこちらをお勧めします。
 					こちらからダウンロードしてください。<br />
-					<a href="./build/simplelib.zip">simplelib.zip [ 33KB ]</a><br />
+					<a href="./build/simplelib.zip" class="gaBanner" id="AllDownloadButton">simplelib.zip [ 33KB ]</a><br />
 					<a href="http://jquery.com/" target="_blank">jQueryのダウンロードはこちら</a>
 				</p>
 				<h3><img src="images/title-download-02.gif" alt="指定したプラグインを１つのjsファイルとしてダウンロード" width="800" height="20" /></h3>
@@ -1386,6 +1435,7 @@ div.tabSet div.panel img {
 						<li><label><input type="checkbox" name="plugins[]" value="button" /> button</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="checkAll" /> checkAll</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="fixHeight" /> fixHeight</label></li>
+						<li><label><input type="checkbox" name="plugins[]" value="ie6Png2Gif" /> ie6Png2Gif</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="ie6PngFix" /> ie6PngFix</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="ie6PositionFixed" /> ie6PositionFixed</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="imgSwap" /> imgSwap</label></li>
@@ -1398,7 +1448,7 @@ div.tabSet div.panel img {
 						<li><label><input type="checkbox" name="plugins[]" value="trimmedScroll" /> trimmedScroll</label></li>
 					</ul>
 					<div>
-						<input type="submit" value="ダウンロード" />
+						<input type="submit" value="ダウンロード" class="gaBanner" id="CustomDownloadButton" />
 					</div>
 				</form>
 			</div>
