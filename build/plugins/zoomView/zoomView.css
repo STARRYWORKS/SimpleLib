@@ -1,0 +1,26 @@
+#ZoomView {
+	position:absolute;
+	width:350px;
+	height:350px;
+	background-color:#000000;
+}
+
+#ZoomViewInner {
+	padding:5px;
+}
+
+#ZoomViewMask {
+	position:relative;
+	width:340px;
+	height:340px;
+	overflow:hidden;
+	background-color:#ffffff;
+	background-image:url(zoomViewLoader.gif);
+	background-repeat:no-repeat;
+	background-position: center center;
+}
+
+#ZoomViewMask img {
+	display:block;
+	position:absolute;
+}

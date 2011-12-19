@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
-
+<script type="text/javascript">var gaLoadingStartedOn = new Date().getTime();</script>
 <title>simplelib with jQuery</title>
 
 <link rel="stylesheet" type="text/css" href="css/reset.css" media="all" />
@@ -12,7 +12,8 @@
 <link type="text/css" rel="stylesheet" href="css/SyntaxHighlighter.css" />
 
 <script type="text/javascript" src="js/jquery-1.4.1.min.js"></script>
-<script type="text/javascript" src="src/simplelib.js?accordion,button,scroll,tab,toolTip,imgSwap,lightBox,ie6PositionFixed,fixHeight,ie6PngFix,ie6Png2Gif,textHint,overlayOthers,showIfScroll,trimmedScroll,checkAll,gaEventTracker"></script>
+
+<script type="text/javascript" src="src/simplelib.js?accordion,button,scroll,tab,toolTip,imgSwap,lightBox,ie6PositionFixed,fixHeight,ie6PngFix,ie6Png2Gif,textHint,overlayOthers,showIfScroll,trimmedScroll,checkAll,gaEventTracker,zoomView"></script>
 <script type="text/javascript" src="js/syntaxHighlighter/shCore.js"></script>
 <script type="text/javascript" src="js/syntaxHighlighter/shBrushJScript.js"></script>
 <script type="text/javascript" src="js/syntaxHighlighter/shBrushXml.js"></script>
@@ -46,6 +47,25 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 <script src="http://cdn.topsy.com/topsy.js?init=topsyWidgetCreator" type="text/javascript"></script>
 
 <link rel="shortcut icon" href="http://www.starryworks.co.jp/starryworks.ico" />
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1800512-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<!-- /Google Analytics -->
+
+
 </head>
 
 <body>
@@ -78,6 +98,10 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 					<tr>
 						<th><a href="#fixHeight" class="scroll">fixHeight</a></th>
 						<td>要素の高さを揃える</td>
+					</tr>
+					<tr>
+						<th><a href="#gaEventTracker" class="scroll">gaEventTracker</a></th>
+						<td>Google Analyticsでローディング時間、スクロール量、バナーに対するアクションを取得</td>
 					</tr>
 					<tr>
 						<th><a href="#ie6Png2Gif" class="scroll">ie6Png2Gif</a></th>
@@ -130,6 +154,10 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 					<tr>
 						<th><a href="#trimmedScroll" class="scroll">trimmedScroll</a></th>
 						<td>img要素を含むa要素にマウスオーバーすると別の画像をそのimg要素のサイズにトリミングしてスクロールしながら表示する</td>
+					</tr>
+					<tr>
+						<th><a href="#zoomView" class="scroll">zoomView</a></th>
+						<td>img要素にマウスオーバーすると拡大画像を表示する</td>
 					</tr>
 				</tbody>
 			</table>
@@ -572,6 +600,71 @@ SimpleLib.bind( &quot;init_button&quot;, function(){
 		<!-- /div#accordion -->
 
 		
+		<!-- div#gaEventTracker -->
+		<div class="plugin" id="gaEventTracker">
+			<h3>gaEventTracker - Google Analyticsでユーザーのアクションを解析</h3>
+			<div class="clearfix">
+				<img src="images/gaEventTracker/ga.png" alt="ga" width="220" height="252" />
+				<p>
+					ローディング時間の計測、スクロールバーの有無やスクロール量の計測、バナーのインプレッション、表示（実際に見える位置までスクロールされたかどうか）、マウスオーバー、クリックなどのアクションなどをGoogle Analyticsのカスタムイベントとして解析できるようにします。
+				</p>
+				<p>
+					Google Analyticsの「イベントのトラッキング」で、「Loading」「Scrolling」「Banner」のカテゴリが作成されます。
+				</p>
+				<p>
+					※新しいトラッキングコード（ga.js）にのみ対応しています。
+				</p>
+			</div>
+			<h4>基本的な使い方</h4>
+			<ol>
+				<li>
+					ローディング時間：プラグインを読み込むだけで使えますが、ローディングの開始時刻をより正確に計るために、HTMLのできるだけ始めの方に「var gaLoadingStartedOn = new Date().getTime();」の１行のJavaScriptを追加してください。「Load」というアクションが登録され、ミリ秒単位のローディング時間が登録されます。合計値は役に立たないので、平均値を見てください。1,000で1秒です。<br />
+					<img src="images/gaEventTracker/load.png" alt="load" width="377" height="63" />
+				</li>
+				<li>
+					スクロールバーの有無：プラグインを読み込むだけで使えます。スクロールバーが表示された場合（コンテンツのサイズよりウィンドウのサイズが小さいとき）、縦方向は「VerticalScrollbarExists」、横方向は「HorizontalScrollbarExists」というアクションが登録されます。<br />
+					<img src="images/gaEventTracker/scrollbar.png" alt="scrollbar" width="377" height="88" />
+				</li>
+				<li>
+					スクロール：プラグインを読み込むだけで使えます。スクロールしたかどうかを解析します。スクロールした場合に、「Scroll」というアクションが1回だけ登録されます。<br />
+					<img src="images/gaEventTracker/scroll.png" alt="scroll" width="377" height="63" />
+				</li>
+				<li>
+					スクロール量：1番下までスクロールした場合、「ScrollTop100」、80%までスクロールした場合「ScrollTop80」というように20%刻みでアクションが登録されます。<br />
+					<img src="images/gaEventTracker/scrolltop.png" alt="scroll" width="377" height="167" />
+				</li>
+				<li>
+					バナーのアクション：バナーに「gaBanner」というクラスを付与して、id属性を設定してください。id属性の文字列をラベルとして、「Impression」「RealImpression」「MouseOver」「Click」の各アクションを登録します。「RealImpression」はページが表示されただけでなく、そのバナーが表示される位置までスクロールしたことを示します。<br />
+					<img src="images/gaEventTracker/banner.png" alt="banner" width="377" height="141" />
+				</li>
+			</ol>
+			<h4>オプション設定</h4>
+			<table>
+				<thead>
+					<tr>
+						<th>オプション</th>
+						<th>デフォルト</th>
+						<th>設定内容</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>bannerSelector</th>
+						<td>.gaBanner</td>
+						<td>
+							バナーとしてアクションを解析する要素のセレクタ
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<h4>サンプルコード</h4>
+			<p>ローディング時間をより正確に計測するためには、以下のコードを&lt;head&gt;内の一番始めの方に記述してください。</p>
+			<pre name="code" class="xml">
+&lt;script type=&quot;text/javascript&quot;&gt;var gaLoadingStartedOn = new Date().getTime();&lt;/script&gt;
+			</pre>
+		</div>
+		<!-- /div#gaEventTracker -->
+		
 		<!-- div#ie6Png2Gif -->
 		<div class="plugin" id="ie6Png2Gif">
 			<h3>ie6Png2Gif - IE6でPNGをGIFに置換</h3>
@@ -940,109 +1033,6 @@ SimpleLib.bind( &quot;init_button&quot;, function(){
 		<!-- /div#overlayOthers -->
 
 
-
-
-		<!-- div#rollOver
-		<div class="plugin" id="rollOver">
-			<h3>rollOver - ロールオーバーで画像切り替え</h3>
-			<p>
-				ロールオーバーで画像を切り替えます。
-			</p>
-			<h4>基本的な使い方</h4>
-			<ol>
-				<li>切り替えたい画像を含むa要素の「rollOver」というクラスを付与し、元の画像ファイル名に「-over」を付けたロールオーバー用の画像を用意しておきます。</li>
-			</ol>
-			<h4>オプション設定</h4>
-			<table>
-				<thead>
-					<tr>
-						<th>オプション</th>
-						<th>デフォルト</th>
-						<th>設定内容</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th>selector</th>
-						<td>.rollover, .rollOver</td>
-						<td>プラグインを発動させる要素のセレクタ</td>
-					</tr>
-				</tbody>
-			</table>
-			<h4>サンプル</h4>
-			<div class="sample">
-				<a href="#" class="scroll rollover"><img src="./images/pagetop.gif" alt="このページの先頭へ" width="40" height="40" /></a>
-			</div>
-			<h4>サンプルコード</h4>
-			<pre name="code" class="xml">
-&lt;a href=&quot;#&quot; class=&quot;scroll rollover&quot;&gt;&lt;img src=&quot;images/pagetop.gif&quot; alt=&quot;&#12371;&#12398;&#12506;&#12540;&#12472;&#12398;&#20808;&#38957;&#12408;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;
-			</pre>
-		</div>
-		<!-- /div#rollOver -->
-
-
-
-		<!-- div#fadeRollOver
-		<div class="plugin" id="fadeRollOver">
-			<h3>fadeRollOver - ロールオーバーで画像切り替え</h3>
-			<p>
-				ロールオーバー／ロールアウトでフェードイン／フェードアウトしながらで画像を切り替えます。<br />
-				ただし、画像がPNGで、ブラウザがInternet Explorer（全バージョン）の場合だけフェードしません。
-				（IEでは透過PNG画像にアルファフィルターをかけると黒くなってしまうため）
-			</p>
-			<h4>基本的な使い方</h4>
-			<ol>
-				<li>切り替えたい画像を含むa要素の「fadeRollOver」というクラスを付与し、元の画像ファイル名に「-over」を付けたロールオーバー用の画像を用意しておきます。</li>
-			</ol>
-			<h4>オプション設定</h4>
-			<table>
-				<thead>
-					<tr>
-						<th>オプション</th>
-						<th>デフォルト</th>
-						<th>設定内容</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th>selector</th>
-						<td>.fadeRollOver, .faderollover</td>
-						<td>プラグインを発動させる要素のセレクタ</td>
-					</tr>
-					<tr>
-						<th>crossFade</th>
-						<td>false</td>
-						<td>元の画像をフェードアウトさせるかどうか</td>
-					</tr>
-					<tr>
-						<th>fadeInTime</th>
-						<td>0</td>
-						<td>フェードインする時間（ミリ秒）</td>
-					</tr>
-					<tr>
-						<th>fadeOutTime</th>
-						<td>300</td>
-						<td>フェードアウトする時間（ミリ秒）</td>
-					</tr>
-				</tbody>
-			</table>
-			<h4>サンプル</h4>
-			<div class="sample">
-				<a href="#" class="scroll fadeRollOver"><img src="./images/pagetop.gif" alt="このページの先頭へ" width="40" height="40" /></a>
-				<a href="#" class="scroll fadeRollOver"><img src="./images/pagetop.gif" alt="このページの先頭へ" width="40" height="40" /></a>
-				<a href="#" class="scroll fadeRollOver"><img src="./images/pagetop.gif" alt="このページの先頭へ" width="40" height="40" /></a>
-			</div>
-			<h4>サンプルコード</h4>
-			<pre name="code" class="xml">
-&lt;a href=&quot;#&quot; class=&quot;scroll fadeRollOver&quot;&gt;&lt;img src=&quot;images/pagetop.gif&quot; alt=&quot;&#12371;&#12398;&#12506;&#12540;&#12472;&#12398;&#20808;&#38957;&#12408;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;
-&lt;a href=&quot;#&quot; class=&quot;scroll fadeRollOver&quot;&gt;&lt;img src=&quot;images/pagetop.gif&quot; alt=&quot;&#12371;&#12398;&#12506;&#12540;&#12472;&#12398;&#20808;&#38957;&#12408;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;
-&lt;a href=&quot;#&quot; class=&quot;scroll fadeRollOver&quot;&gt;&lt;img src=&quot;images/pagetop.gif&quot; alt=&quot;&#12371;&#12398;&#12506;&#12540;&#12472;&#12398;&#20808;&#38957;&#12408;&quot; width=&quot;40&quot; height=&quot;40&quot; /&gt;&lt;/a&gt;
-			</pre>
-		</div>
-		<!-- /div#fadeRollOver -->
-
-
-
 		<!-- div#scroll -->
 		<div class="plugin" id="scroll">
 			<h3>scroll - スムーススクロール</h3>
@@ -1355,9 +1345,9 @@ div.tabSet div.panel img {
 
 		<!-- div#trimmedScroll -->
 		<div class="plugin" id="trimmedScroll">
-			<h3>trimmedScroll - ロールオーバーで画像をスクロール</h3>
+			<h3>trimmedScroll - マウスオーバーで画像をスクロール</h3>
 			<p>
-				img要素を含むa要素にロールオーバーすると別の画像を元のimg要素のサイズにトリミングしてスクロールしながら表示します。
+				img要素を含むa要素にマウスオーバーすると別の画像を元のimg要素のサイズにトリミングしてスクロールしながら表示します。
 			</p>
 			<h4>基本的な使い方</h4>
 			<ol>
@@ -1405,7 +1395,67 @@ div.tabSet div.panel img {
 &lt;a href=&quot;#&quot; class=&quot;trimmedScroll&quot;&gt;&lt;img src=&quot;images/tonan01-thumbnail.jpg&quot; alt=&quot;&quot; width=&quot;300&quot; height=&quot;60&quot; /&gt;&lt;/a&gt;
 			</pre>
 		</div>
-		<!-- /div#textHint -->
+		<!-- /div#trimmedScroll -->
+
+		<!-- div#zoomView -->
+		<div class="plugin" id="zoomView">
+			<h3>zoomView - マウスオーバーで拡大画像を表示</h3>
+			<p>
+				img要素マウスオーバーすると、マウスポインタの位置に合わせた拡大画像を表示します。
+			</p>
+			<h4>基本的な使い方</h4>
+			<ol>
+				<li>img要素に「zoomView」というクラスを付与します。</li>
+				<li>元の画像と同じ比率の大きい画像を用意して、元の画像のファイル名の後に「-big」を付けた名前で同じディレクトリにアップします。</li>
+			</ol>
+			<h4>オプション設定</h4>
+			<table>
+				<thead>
+					<tr>
+						<th>オプション</th>
+						<th>デフォルト</th>
+						<th>設定内容</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>selector</th>
+						<td>.zoomView</td>
+						<td>プラグインを発動させる要素のセレクタ</td>
+					</tr>
+					<tr>
+						<th>viewParent</th>
+						<td>body</td>
+						<td>拡大画像の要素を追加する親要素</td>
+					</tr>
+					<tr>
+						<th>cssPath</th>
+						<td>【SimpleLibのplugins】/zoomView/zoomView.css</td>
+						<td>拡大画像の枠の大きさや色のスタイルを記述したCSSファイルのパス</td>
+					</tr>
+					<tr>
+						<th>margin</th>
+						<td>20</td>
+						<td>拡大画像の元のimg要素からの距離</td>
+					</tr>
+					<tr>
+						<th>fadeTime</th>
+						<td>200</td>
+						<td>マウスアウトで拡大画像をフェードアウトさせる時間（ミリ秒）</td>
+					</tr>
+					
+				</tbody>
+			</table>
+			<h4>サンプル</h4>
+			<div class="sample">
+				<img src="./images/sanei.jpg" alt="" width="120" height="200" class="zoomView" />
+			</div>
+			<h4>サンプルコード：HTML</h4>
+			<pre name="code" class="xml">
+&lt;img src=&quot;./images/sanei.jpg&quot; alt=&quot;&quot; width=&quot;120&quot; height=&quot;200&quot; class=&quot;zoomView&quot; /&gt;
+			</pre>
+		</div>
+		<!-- /div#zoomView -->
 
 		<!-- div#download -->
 		<div id="download">
@@ -1446,6 +1496,7 @@ div.tabSet div.panel img {
 						<li><label><input type="checkbox" name="plugins[]" value="tab" /> tab</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="textHint" /> textHint</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="trimmedScroll" /> trimmedScroll</label></li>
+						<li><label><input type="checkbox" name="plugins[]" value="zoomView" /> zoomView</label></li>
 					</ul>
 					<div>
 						<input type="submit" value="ダウンロード" class="gaBanner" id="CustomDownloadButton" />
@@ -1480,14 +1531,5 @@ dp.SyntaxHighlighter.ClipboardSwf = 'js/syntaxHighlighter/clipboard.swf';
 dp.SyntaxHighlighter.HighlightAll('code');
 </script>
 
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-1800512-4");
-pageTracker._trackPageview();
-} catch(err) {}</script>
 </body>
 </html>

@@ -9,7 +9,8 @@
  * Licensed under MIT lisence;
  *
  */
- 
+
+var gaLoadingStartedOn=gaLoadingStartedOn||new Date().getTime();
 var SimpleLib=SimpleLib||{},SimpleLibSettings=SimpleLibSettings||{},SimpleLib=$.extend(!0,{debug:!1,loaded:!1,numPlubinsToLoad:0,numPluginsLoaded:0,numPluginsWaitingForInit:0,_pluginsLoadStarted:{},_eventListeners:{},_onceEventListeners:{},_eventsOnceTriggered:{},jsDir:$("script[src*='simplelib.js'],script[src*='simplelib.min.js']").attr("src").replace(/simplelib\.(min\.)?js.*?$/,""),containsInArray:function(a,b){for(var c in b)if(b.hasOwnProperty(c)&&b[c]===a)return!0;return!1},queryToArray:function(a){var b=
 [],a=String(a).split("?");if(!a||a.length<2||!a[1])return b;a=String(a[1]).split(",");$.each(a,function(){this&&b.push(String(this))});return b},isIE:function(){return navigator.userAgent.indexOf("MSIE")!=-1},isIE6:function(){return ('\v'=='v')},loadCSS:function(a){SimpleLib.isIE()?document.createStyleSheet(a):$("head").append('<link rel="stylesheet" type="text/css" href="'+a+'" />')},loadJS:function(a){$.ajax({type:"GET",url:a,dataType:"script",cache:1,success:SimpleLib._sccess,error:SimpleLib._loadError})},
 init:function(a,b){if(a){b=b||{};if(SimpleLib.jsDir=="")SimpleLib.jsDir="./";var c,d,e=a.length;for(c=0;c<e;c++)if(!(a[c].substr(0,3)=="ie6"&&!SimpleLib.isIE6()&&!SimpleLib.debug))d=b[a[c]]||{},SimpleLib[a[c]]=SimpleLib[a[c]]||{},SimpleLib[a[c]].settings&&(d=$.extend(SimpleLib[a[c]].settings,d)),SimpleLib[a[c]].settings=d,(!SimpleLib[a[c]]||!SimpleLib[a[c]].init)&&SimpleLib.load(a[c])}},trigger:function(a){SimpleLib._eventsOnceTriggered[a]=!0;if(SimpleLib._eventListeners[a])for(var b in SimpleLib._eventListeners[a])SimpleLib._eventListeners[a][b]();

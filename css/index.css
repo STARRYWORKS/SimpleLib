@@ -117,6 +117,10 @@ em { font-style:italic; }
 
 .alR{ text-align: right; }
 
+/* gaEventTracker */
+
+#gaEventTracker div.clearfix img { float:right; padding-left:10px; }
+#gaEventTracker div.clearfix p { padding-bottom:10px; }
 
 
 /* Plugins */

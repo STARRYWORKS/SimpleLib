@@ -30,6 +30,7 @@ SimpleLib.bind( "load_button", function(){
 
 -------------------------------------------------------*/
 
+var gaLoadingStartedOn = gaLoadingStartedOn || new Date().getTime();
 var SimpleLib = SimpleLib || {};
 var SimpleLibSettings = SimpleLibSettings || {};
 
