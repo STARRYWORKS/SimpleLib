@@ -121,6 +121,7 @@ em { font-style:italic; }
 
 #gaEventTracker div.clearfix img { float:right; padding-left:10px; }
 #gaEventTracker div.clearfix p { padding-bottom:10px; }
+#gaEventTracker ol li img { padding-top:10px; padding-bottom:10px; }
 
 
 /* Plugins */

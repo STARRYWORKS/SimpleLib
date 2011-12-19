@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="Content-Script-Type" content="text/javascript" />
 <meta http-equiv="Content-Style-Type" content="text/css" />
-
+<script type="text/javascript">var gaLoadingStartedOn = new Date().getTime();</script>
 <title>simplelib with jQuery</title>
 
 <link rel="stylesheet" type="text/css" href="css/reset.css" media="all" />
@@ -98,6 +98,10 @@ div#fixHeight div.fixHeight div p { margin:10px; color:#666; }
 					<tr>
 						<th><a href="#fixHeight" class="scroll">fixHeight</a></th>
 						<td>要素の高さを揃える</td>
+					</tr>
+					<tr>
+						<th><a href="#gaEventTracker" class="scroll">gaEventTracker</a></th>
+						<td>Google Analyticsでローディング時間、スクロール量、バナーに対するアクションを取得</td>
 					</tr>
 					<tr>
 						<th><a href="#ie6Png2Gif" class="scroll">ie6Png2Gif</a></th>
@@ -595,6 +599,71 @@ SimpleLib.bind( &quot;init_button&quot;, function(){
 		</div>
 		<!-- /div#accordion -->
 
+		
+		<!-- div#gaEventTracker -->
+		<div class="plugin" id="gaEventTracker">
+			<h3>gaEventTracker - Google Analyticsでユーザーのアクションを解析</h3>
+			<div class="clearfix">
+				<img src="images/gaEventTracker/ga.png" alt="ga" width="220" height="252" />
+				<p>
+					ローディング時間の計測、スクロールバーの有無やスクロール量の計測、バナーのインプレッション、表示（実際に見える位置までスクロールされたかどうか）、マウスオーバー、クリックなどのアクションなどをGoogle Analyticsのカスタムイベントとして解析できるようにします。
+				</p>
+				<p>
+					Google Analyticsの「イベントのトラッキング」で、「Loading」「Scrolling」「Banner」のカテゴリが作成されます。
+				</p>
+				<p>
+					※新しいトラッキングコード（ga.js）にのみ対応しています。
+				</p>
+			</div>
+			<h4>基本的な使い方</h4>
+			<ol>
+				<li>
+					ローディング時間：プラグインを読み込むだけで使えますが、ローディングの開始時刻をより正確に計るために、HTMLのできるだけ始めの方に「var gaLoadingStartedOn = new Date().getTime();」の１行のJavaScriptを追加してください。「Load」というアクションが登録され、ミリ秒単位のローディング時間が登録されます。合計値は役に立たないので、平均値を見てください。1,000で1秒です。<br />
+					<img src="images/gaEventTracker/load.png" alt="load" width="377" height="63" />
+				</li>
+				<li>
+					スクロールバーの有無：プラグインを読み込むだけで使えます。スクロールバーが表示された場合（コンテンツのサイズよりウィンドウのサイズが小さいとき）、縦方向は「VerticalScrollbarExists」、横方向は「HorizontalScrollbarExists」というアクションが登録されます。<br />
+					<img src="images/gaEventTracker/scrollbar.png" alt="scrollbar" width="377" height="88" />
+				</li>
+				<li>
+					スクロール：プラグインを読み込むだけで使えます。スクロールしたかどうかを解析します。スクロールした場合に、「Scroll」というアクションが1回だけ登録されます。<br />
+					<img src="images/gaEventTracker/scroll.png" alt="scroll" width="377" height="63" />
+				</li>
+				<li>
+					スクロール量：1番下までスクロールした場合、「ScrollTop100」、80%までスクロールした場合「ScrollTop80」というように20%刻みでアクションが登録されます。<br />
+					<img src="images/gaEventTracker/scrolltop.png" alt="scroll" width="377" height="167" />
+				</li>
+				<li>
+					バナーのアクション：バナーに「gaBanner」というクラスを付与して、id属性を設定してください。id属性の文字列をラベルとして、「Impression」「RealImpression」「MouseOver」「Click」の各アクションを登録します。「RealImpression」はページが表示されただけでなく、そのバナーが表示される位置までスクロールしたことを示します。<br />
+					<img src="images/gaEventTracker/banner.png" alt="banner" width="377" height="141" />
+				</li>
+			</ol>
+			<h4>オプション設定</h4>
+			<table>
+				<thead>
+					<tr>
+						<th>オプション</th>
+						<th>デフォルト</th>
+						<th>設定内容</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th>bannerSelector</th>
+						<td>.gaBanner</td>
+						<td>
+							バナーとしてアクションを解析する要素のセレクタ
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<h4>サンプルコード</h4>
+			<p>ローディング時間をより正確に計測するためには、以下のコードを&lt;head&gt;内の一番始めの方に記述してください。</p>
+			<pre name="code" class="xml">
+&lt;script type=&quot;text/javascript&quot;&gt;var gaLoadingStartedOn = new Date().getTime();&lt;/script&gt;
+			</pre>
+		</div>
+		<!-- /div#gaEventTracker -->
 		
 		<!-- div#ie6Png2Gif -->
 		<div class="plugin" id="ie6Png2Gif">
@@ -1402,7 +1471,7 @@ div.tabSet div.panel img {
 					全てのプラグインをダウンロードして、利用する際に&lt;script&gt;タグで必要なプラグインだけを指定して利用できます。<br />
 					新たなプラグインを使いたくなったら&lt;script&gt;でプラグインの指定を増やすだけで使えるので、制作中に使うのはこちらをお勧めします。
 					こちらからダウンロードしてください。<br />
-					<a href="./build/simplelib.zip" class="gaBanner" id="AllDownloadButton">simplelib.zip [ 33KB ]</a><br />
+					<a href="./build/simplelib.zip" class="gaBanner" id="AllDownloadButton">simplelib.zip [ 36KB ]</a><br />
 					<a href="http://jquery.com/" target="_blank">jQueryのダウンロードはこちら</a>
 				</p>
 				<h3><img src="images/title-download-02.gif" alt="指定したプラグインを１つのjsファイルとしてダウンロード" width="800" height="20" /></h3>

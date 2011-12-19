@@ -634,7 +634,7 @@ SimpleLib.bind( &quot;init_button&quot;, function(){
 					<img src="images/gaEventTracker/scrolltop.png" alt="scroll" width="377" height="167" />
 				</li>
 				<li>
-					バナーのアクション：バナーに「gaBanner」というクラスを付与して、id属性を設定してください。id属性の文字列をラベルとして、「Impression」「RealImpression」「MouseOver」「Click」の各アクションを登録します。「RealImpression」はページが表示されただけでなく、そのバナーが表示される位置までスクロールしたことを示します。<br />
+					バナーのアクション：バナーの&lt;a&gt;要素に「gaBanner」というクラスを付与して、id属性を設定してください。id属性の文字列をラベルとして、「Impression」「RealImpression」「MouseOver」「Click」の各アクションを登録します。「RealImpression」はページが表示されただけでなく、そのバナーが表示される位置までスクロールしたことを示します。<br />
 					<img src="images/gaEventTracker/banner.png" alt="banner" width="377" height="141" />
 				</li>
 			</ol>
@@ -661,6 +661,17 @@ SimpleLib.bind( &quot;init_button&quot;, function(){
 			<p>ローディング時間をより正確に計測するためには、以下のコードを&lt;head&gt;内の一番始めの方に記述してください。</p>
 			<pre name="code" class="xml">
 &lt;script type=&quot;text/javascript&quot;&gt;var gaLoadingStartedOn = new Date().getTime();&lt;/script&gt;
+			</pre>
+			<h4>サンプル</h4>
+			<p>アクションを解析したいバナーの&lt;a&gt;要素に「gaBanner」というクラスとバナーを識別するidを設定してください。</p>
+			<div class="sample">
+				<a href="http://www.google.com/" class="gaBanner" id="SIDE_RECTANGLE"><img src="images/banner.gif" alt="banner" width="250" height="180" /></a>
+			</div>
+			<h4>サンプルコード</h4>
+			<pre name="code" class="xml">
+&lt;a href=&quot;http://www.google.com/&quot; class=&quot;gaBanner&quot; id=&quot;SIDE_RECTANGLE&quot;&gt;
+	&lt;img src=&quot;images/banner.gif&quot; alt=&quot;banner&quot; width=&quot;250&quot; height=&quot;180&quot; /&gt;
+&lt;/a&gt;
 			</pre>
 		</div>
 		<!-- /div#gaEventTracker -->
