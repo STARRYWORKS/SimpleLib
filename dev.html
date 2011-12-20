@@ -634,7 +634,7 @@ SimpleLib.bind( &quot;init_button&quot;, function(){
 					<img src="images/gaEventTracker/scrolltop.png" alt="scroll" width="377" height="167" />
 				</li>
 				<li>
-					バナーのアクション：バナーの&lt;a&gt;要素に「gaBanner」というクラスを付与して、id属性を設定してください。id属性の文字列をラベルとして、「Impression」「RealImpression」「MouseOver」「Click」の各アクションを登録します。「RealImpression」はページが表示されただけでなく、そのバナーが表示される位置までスクロールしたことを示します。<br />
+					バナーのアクション：バナーの&lt;a&gt;要素に「gaBanner」というクラスを付与して、id属性を設定してください。id属性の文字列をラベルとして、「Impression」「RealImpression」「MouseOver」「Click」の各アクションが登録されます。「RealImpression」はページが表示されただけでなく、そのバナーが表示される位置までスクロールしたことを示します。<br />
 					<img src="images/gaEventTracker/banner.png" alt="banner" width="377" height="141" />
 				</li>
 			</ol>
@@ -1418,6 +1418,7 @@ div.tabSet div.panel img {
 			<ol>
 				<li>img要素に「zoomView」というクラスを付与します。</li>
 				<li>元の画像と同じ比率の大きい画像を用意して、元の画像のファイル名の後に「-big」を付けた名前で同じディレクトリにアップします。</li>
+				<li>見た目をカスタマイズする場合は、plugins/zoomView/zoomView.css のファイルを参考にCSSを記述してください。デフォルトのCSSを読み込まないようにするには、「cssPath」オプションを空に設定します。</li>
 			</ol>
 			<h4>オプション設定</h4>
 			<table>
@@ -1496,6 +1497,7 @@ div.tabSet div.panel img {
 						<li><label><input type="checkbox" name="plugins[]" value="button" /> button</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="checkAll" /> checkAll</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="fixHeight" /> fixHeight</label></li>
+						<li><label><input type="checkbox" name="plugins[]" value="gaEventTracker" /> gaEventTracker</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="ie6Png2Gif" /> ie6Png2Gif</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="ie6PngFix" /> ie6PngFix</label></li>
 						<li><label><input type="checkbox" name="plugins[]" value="ie6PositionFixed" /> ie6PositionFixed</label></li>
